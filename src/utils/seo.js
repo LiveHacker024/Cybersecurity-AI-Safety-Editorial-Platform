@@ -2,18 +2,31 @@
  * SEO & Dynamic Meta/Schema Injector for HackWithKunal
  */
 
+const PRODUCTION_DOMAIN = "https://hackwithkunal.com";
+
 export function updateMetaTags({
   title = "HackWithKunal — Cybersecurity, AI Safety & Digital Intelligence",
   description = "Independent cybersecurity, AI safety, threat intelligence, and digital privacy publication founded by Kunal Rajput. Educational security research, vulnerability alerts, and defensive guides.",
-  keywords = "cybersecurity, AI safety, threat intelligence, data breaches, AI agents, deepfakes, phishing defense, privacy guides, Kunal Rajput, HackWithKunal",
+  keywords = "cybersecurity, AI safety, threat intelligence, data breaches, AI agents, deepfakes, phishing defense, privacy guides, Kunal Rajput, HackWithKunal, VANIX",
   image = "/assets/founder/founder-photo.png",
-  url = window.location.href,
+  url = null,
   type = "website",
   publishedTime = null,
   modifiedTime = null,
   author = "Kunal Rajput",
   schema = null
 }) {
+  // Normalize production URL
+  let pathname = typeof window !== 'undefined' ? window.location.pathname : '/';
+  if (!pathname.startsWith('/')) pathname = '/' + pathname;
+  const canonicalUrl = url && !url.includes('localhost') && !url.includes('127.0.0.1')
+    ? url
+    : `${PRODUCTION_DOMAIN}${pathname === '/' ? '' : pathname}`;
+
+  const absoluteImageUrl = image.startsWith('http')
+    ? image
+    : `${PRODUCTION_DOMAIN}${image.startsWith('/') ? image : '/' + image}`;
+
   // Update Document Title
   document.title = title;
 
@@ -36,14 +49,15 @@ export function updateMetaTags({
   // Open Graph
   setMeta('meta[property="og:title"]', 'property', 'og:title', title);
   setMeta('meta[property="og:description"]', 'property', 'og:description', description);
-  setMeta('meta[property="og:image"]', 'property', 'og:image', image.startsWith('http') ? image : `${window.location.origin}${image}`);
-  setMeta('meta[property="og:url"]', 'property', 'og:url', url);
+  setMeta('meta[property="og:image"]', 'property', 'og:image', absoluteImageUrl);
+  setMeta('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
   setMeta('meta[property="og:type"]', 'property', 'og:type', type);
 
   // Twitter Card
   setMeta('meta[property="twitter:title"]', 'property', 'twitter:title', title);
   setMeta('meta[property="twitter:description"]', 'property', 'twitter:description', description);
-  setMeta('meta[property="twitter:image"]', 'property', 'twitter:image', image.startsWith('http') ? image : `${window.location.origin}${image}`);
+  setMeta('meta[property="twitter:image"]', 'property', 'twitter:image', absoluteImageUrl);
+  setMeta('meta[property="twitter:card"]', 'property', 'twitter:card', 'summary_large_image');
 
   // Canonical Link
   let canonical = document.querySelector('link[rel="canonical"]');
@@ -52,7 +66,7 @@ export function updateMetaTags({
     canonical.setAttribute("rel", "canonical");
     document.head.appendChild(canonical);
   }
-  canonical.setAttribute("href", url);
+  canonical.setAttribute("href", canonicalUrl);
 
   // JSON-LD Structured Data Injection
   let schemaScript = document.getElementById("dynamic-jsonld-schema");
@@ -76,28 +90,28 @@ export function generateArticleSchema(article) {
     "headline": article.title,
     "description": article.subtitle || article.excerpt,
     "image": [
-      article.heroImage?.startsWith('http') ? article.heroImage : `https://hackwithkunal.com${article.heroImage}`
+      article.heroImage?.startsWith('http') ? article.heroImage : `${PRODUCTION_DOMAIN}${article.heroImage}`
     ],
     "datePublished": article.publishedAt,
     "dateModified": article.updatedAt || article.publishedAt,
     "author": [{
       "@type": "Person",
       "name": article.author?.name || "Kunal Rajput",
-      "jobTitle": "Cybersecurity Professional & Junior Penetration Tester",
+      "jobTitle": "Founder & Editor — HackWithKunal",
       "url": "https://www.linkedin.com/in/kunal-rajput-64b4002b4"
     }],
     "publisher": {
       "@type": "NewsMediaOrganization",
       "name": "HackWithKunal",
-      "url": "https://hackwithkunal.com",
+      "url": PRODUCTION_DOMAIN,
       "logo": {
         "@type": "ImageObject",
-        "url": "https://hackwithkunal.com/assets/founder/founder-photo.png"
+        "url": `${PRODUCTION_DOMAIN}/assets/founder/founder-photo.png`
       }
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://hackwithkunal.com/${article.category}/${article.slug}`
+      "@id": `${PRODUCTION_DOMAIN}/${article.category}/${article.slug}`
     }
   };
 }
@@ -126,7 +140,7 @@ export function generateBreadcrumbSchema(items) {
       "@type": "ListItem",
       "position": index + 1,
       "name": item.name,
-      "item": item.url
+      "item": item.url?.startsWith('http') ? item.url : `${PRODUCTION_DOMAIN}${item.url?.startsWith('/') ? item.url : '/' + item.url}`
     }))
   };
 }

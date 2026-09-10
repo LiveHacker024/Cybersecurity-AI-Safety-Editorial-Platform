@@ -18,12 +18,10 @@ export default function Navbar({ onNavigate, currentPath, onOpenSearch, onOpenSu
     { label: "Home", path: "/" },
     { label: "Cybersecurity", path: "/cybersecurity" },
     { label: "AI Safety", path: "/ai-safety" },
-    { label: "AI News", path: "/ai-news" },
-    { label: "Privacy", path: "/privacy" },
-    { label: "Technology", path: "/technology" },
-    { label: "Guides", path: "/guides" },
+    { label: "AI & Tech", path: "/technology" },
+    { label: "Security Guides", path: "/guides" },
     { label: "Tools", path: "/tools" },
-    { label: "News", path: "/news" }
+    { label: "About", path: "/about" }
   ];
 
   const handleNavClick = (path) => {

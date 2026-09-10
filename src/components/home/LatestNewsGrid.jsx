@@ -95,7 +95,8 @@ export default function LatestNewsGrid({ onNavigate }) {
               <div
                 style={{
                   position: 'relative',
-                  height: '210px',
+                  aspectRatio: '16 / 9',
+                  width: '100%',
                   overflow: 'hidden'
                 }}
               >
@@ -105,6 +106,7 @@ export default function LatestNewsGrid({ onNavigate }) {
                   style={{
                     width: '100%',
                     height: '100%',
+                    aspectRatio: '16 / 9',
                     objectFit: 'cover',
                     transition: 'transform 0.4s ease'
                   }}

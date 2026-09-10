@@ -192,6 +192,13 @@ mQGNBF+vL8wBDAC7/tK0mPqO7kL4vFk7L9Yp9J9...
                 </div>
 
                 <div>
+                  <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#64748b' }}>VANIX TECHNOLOGY CONTACT</div>
+                  <a href={`tel:${founderData.vanixContact}`} style={{ color: '#38bdf8', textDecoration: 'none', fontWeight: 600 }}>
+                    {founderData.vanixContact}
+                  </a>
+                </div>
+
+                <div>
                   <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#64748b' }}>YOUTUBE COMMUNITY</div>
                   <a href={founderData.socials.youtube} target="_blank" rel="noopener noreferrer" style={{ color: '#f87171', textDecoration: 'none', fontWeight: 600 }}>
                     {founderData.socials.youtubeHandle}
@@ -199,9 +206,9 @@ mQGNBF+vL8wBDAC7/tK0mPqO7kL4vFk7L9Yp9J9...
                 </div>
 
                 <div>
-                  <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#64748b' }}>LINKEDIN VERIFIED</div>
+                  <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#64748b' }}>PROFESSIONAL NETWORK</div>
                   <a href={founderData.socials.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: '#38bdf8', textDecoration: 'none', fontWeight: 600 }}>
-                    Kunal Rajput Profile
+                    Kunal Rajput LinkedIn
                   </a>
                 </div>
               </div>

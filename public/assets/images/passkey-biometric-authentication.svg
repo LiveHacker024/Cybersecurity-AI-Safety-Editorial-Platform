@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" style="background:#050811;">
+  <defs>
+    <linearGradient id="passkeyBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050811"/>
+      <stop offset="50%" stop-color="#0a1829"/>
+      <stop offset="100%" stop-color="#050811"/>
+    </linearGradient>
+    <linearGradient id="cyanBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f0ff"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <pattern id="secGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0, 240, 255, 0.06)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#passkeyBg)"/>
+  <rect width="1280" height="720" fill="url(#secGrid)"/>
+
+  <!-- Left: Client Device & Biometrics -->
+  <g transform="translate(120, 150)">
+    <rect width="290" height="420" rx="16" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(0, 240, 255, 0.3)" stroke-width="1.5"/>
+    <text x="24" y="45" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700">AUTHENTICATOR DEVICE</text>
+
+    <!-- Fingerprint Scanner Visual -->
+    <g transform="translate(65, 80)">
+      <circle cx="80" cy="80" r="70" fill="rgba(10, 15, 29, 0.9)" stroke="#00f0ff" stroke-width="2"/>
+      <path d="M 55 80 C 55 60 105 60 105 80 M 65 80 C 65 68 95 68 95 80 M 45 80 C 45 50 115 50 115 80 C 115 105 95 115 80 125" stroke="#00f0ff" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <text x="80" y="180" fill="#f8fafc" font-family="'Inter', sans-serif" font-size="13" text-anchor="middle" font-weight="600">Biometric Touch / Face ID</text>
+    </g>
+
+    <!-- Private Key Vault -->
+    <g transform="translate(20, 290)">
+      <rect width="250" height="90" rx="8" fill="rgba(30, 41, 59, 0.6)" stroke="rgba(56, 189, 248, 0.2)"/>
+      <text x="20" y="30" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700">LOCAL PRIVATE KEY</text>
+      <text x="20" y="55" fill="#cbd5e1" font-family="'JetBrains Mono', monospace" font-size="11">Stored in Secure Enclave</text>
+      <text x="20" y="75" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="11">Never leaves the device</text>
+    </g>
+  </g>
+
+  <!-- Center: FIDO2 / WebAuthn Cryptographic Handshake -->
+  <g transform="translate(470, 150)">
+    <rect width="340" height="420" rx="16" fill="rgba(15, 23, 42, 0.85)" stroke="rgba(16, 185, 129, 0.4)" stroke-width="2"/>
+    <text x="30" y="45" fill="#34d399" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700">FIDO2 / WEBAUTHN PROTOCOL</text>
+
+    <!-- Challenge - Response Steps -->
+    <g transform="translate(20, 75)">
+      <rect width="300" height="65" rx="8" fill="rgba(16, 185, 129, 0.1)" stroke="rgba(16, 185, 129, 0.3)"/>
+      <text x="15" y="28" fill="#ffffff" font-family="'Inter', sans-serif" font-size="12" font-weight="700">1. Server Issues Challenge</text>
+      <text x="15" y="48" fill="#a7f3d0" font-family="'JetBrains Mono', monospace" font-size="11">Cryptographic nonce generated</text>
+    </g>
+
+    <g transform="translate(20, 155)">
+      <rect width="300" height="65" rx="8" fill="rgba(0, 240, 255, 0.1)" stroke="rgba(0, 240, 255, 0.3)"/>
+      <text x="15" y="28" fill="#ffffff" font-family="'Inter', sans-serif" font-size="12" font-weight="700">2. Authenticator Signs Challenge</text>
+      <text x="15" y="48" fill="#7dd3fc" font-family="'JetBrains Mono', monospace" font-size="11">Signed with hardware private key</text>
+    </g>
+
+    <g transform="translate(20, 235)">
+      <rect width="300" height="65" rx="8" fill="rgba(16, 185, 129, 0.1)" stroke="rgba(16, 185, 129, 0.3)"/>
+      <text x="15" y="28" fill="#ffffff" font-family="'Inter', sans-serif" font-size="12" font-weight="700">3. Server Verifies Public Key</text>
+      <text x="15" y="48" fill="#a7f3d0" font-family="'JetBrains Mono', monospace" font-size="11">Zero shared secret transmitted</text>
+    </g>
+
+    <g transform="translate(20, 320)">
+      <rect width="300" height="70" rx="8" fill="rgba(56, 189, 248, 0.15)" stroke="#00f0ff"/>
+      <text x="150" y="32" fill="#00f0ff" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="800" text-anchor="middle">100% PHISHING RESISTANT</text>
+      <text x="150" y="52" fill="#e2e8f0" font-family="'Inter', sans-serif" font-size="11" text-anchor="middle">Domain-bound origin validation</text>
+    </g>
+  </g>
+
+  <!-- Right: Relying Party Cloud Server -->
+  <g transform="translate(870, 150)">
+    <rect width="290" height="420" rx="16" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(0, 240, 255, 0.3)" stroke-width="1.5"/>
+    <text x="24" y="45" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700">RELYING PARTY (SERVER)</text>
+
+    <!-- Public Key Store -->
+    <g transform="translate(20, 80)">
+      <rect width="250" height="130" rx="8" fill="rgba(30, 41, 59, 0.6)" stroke="rgba(56, 189, 248, 0.2)"/>
+      <text x="20" y="32" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700">PUBLIC KEY REPOSITORY</text>
+      <text x="20" y="60" fill="#cbd5e1" font-family="'JetBrains Mono', monospace" font-size="11">Stores only public keys</text>
+      <text x="20" y="80" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="11">No database hash dumps</text>
+      <text x="20" y="105" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="11">Immune to credential theft</text>
+    </g>
+
+    <!-- Auth Granted Badge -->
+    <g transform="translate(45, 240)">
+      <circle cx="100" cy="65" r="45" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="2"/>
+      <path d="M 80 65 L 95 80 L 125 50" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="100" y="135" fill="#a7f3d0" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="700" text-anchor="middle">Access Authorized</text>
+    </g>
+  </g>
+
+  <!-- Top Banner -->
+  <text x="640" y="60" fill="#f8fafc" font-family="'Space Grotesk', sans-serif" font-size="22" font-weight="800" text-anchor="middle" letter-spacing="1">PASSKEY MIGRATION &amp; PHISHING-RESISTANT AUTHENTICATION</text>
+  <text x="640" y="85" fill="#94a3b8" font-family="'Inter', sans-serif" font-size="13" text-anchor="middle">FIDO Alliance / W3C Web Authentication Standard Architecture</text>
+</svg>

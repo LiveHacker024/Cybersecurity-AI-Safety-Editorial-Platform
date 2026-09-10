@@ -203,11 +203,11 @@ export default function GuidesPage({ selectedGuideSlug, onNavigate }) {
                 border: '1px solid rgba(56, 189, 248, 0.2)'
               }}
             >
-              <div style={{ height: '200px', position: 'relative', overflow: 'hidden' }}>
+              <div style={{ aspectRatio: '16 / 9', width: '100%', position: 'relative', overflow: 'hidden' }}>
                 <img
                   src={guide.heroImage}
                   alt={guide.title}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  style={{ width: '100%', height: '100%', aspectRatio: '16 / 9', objectFit: 'cover' }}
                   loading="lazy"
                 />
                 <div style={{ position: 'absolute', top: '1rem', left: '1rem' }}>

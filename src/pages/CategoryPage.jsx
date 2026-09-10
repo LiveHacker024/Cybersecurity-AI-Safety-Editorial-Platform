@@ -11,7 +11,7 @@ export default function CategoryPage({ categorySlug, onNavigate }) {
     name: categorySlug ? categorySlug.toUpperCase() : "Cyber Intelligence",
     badge: "Intel Hub",
     tagline: "Latest threat research, vulnerability discoveries, and technical analysis.",
-    description: "Deep investigative coverage and peer-reviewed defensive insights."
+    description: "Deep investigative coverage and practical defensive insights."
   };
 
   const articles = categorySlug === 'news'
@@ -124,11 +124,11 @@ export default function CategoryPage({ categorySlug, onNavigate }) {
                     border: '1px solid rgba(56, 189, 248, 0.15)'
                   }}
                 >
-                  <div style={{ height: '210px', position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ aspectRatio: '16 / 9', width: '100%', position: 'relative', overflow: 'hidden' }}>
                     <img
                       src={article.heroImage}
                       alt={article.title}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      style={{ width: '100%', height: '100%', aspectRatio: '16 / 9', objectFit: 'cover' }}
                       loading="lazy"
                     />
                     <div style={{ position: 'absolute', top: '1rem', left: '1rem' }}>

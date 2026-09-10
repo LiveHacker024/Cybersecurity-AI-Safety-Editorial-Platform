@@ -49,11 +49,11 @@ export default function CyberGuidesSection({ onNavigate }) {
               }}
             >
               {/* Image thumbnail */}
-              <div style={{ height: '170px', position: 'relative', overflow: 'hidden' }}>
+              <div style={{ aspectRatio: '16 / 9', width: '100%', position: 'relative', overflow: 'hidden' }}>
                 <img
                   src={guide.heroImage}
                   alt={guide.title}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  style={{ width: '100%', height: '100%', aspectRatio: '16 / 9', objectFit: 'cover' }}
                   loading="lazy"
                 />
                 <div style={{ position: 'absolute', top: '0.85rem', left: '0.85rem' }}>

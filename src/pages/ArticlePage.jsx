@@ -257,7 +257,7 @@ export default function ArticlePage({ slug, onNavigate }) {
           <img
             src={article.heroImage}
             alt={article.title}
-            style={{ width: '100%', maxHeight: '480px', objectFit: 'cover' }}
+            style={{ width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', display: 'block' }}
           />
         </div>
 

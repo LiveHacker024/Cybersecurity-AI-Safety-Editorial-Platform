@@ -17,7 +17,7 @@ export default function FeaturedStory({ onNavigate }) {
             </h2>
           </div>
           <span style={{ fontSize: '0.8rem', color: '#00f0ff', fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-            <Sparkles size={14} /> PEER-REVIEWED RESEARCH
+            <Sparkles size={14} /> FEATURED EDITORIAL
           </span>
         </div>
 

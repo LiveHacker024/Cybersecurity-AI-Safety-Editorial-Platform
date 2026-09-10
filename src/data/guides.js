@@ -10,7 +10,7 @@ export const guidesData = [
     categoryColor: "rose",
     author: "Kunal Rajput",
     publishedAt: "September 8, 2026",
-    heroImage: "/assets/images/pexels-pixabay-60504.jpg",
+    heroImage: "/assets/images/gmail-account-security-lock.jpg",
     summary: "A step-by-step defensive guide to enabling phishing-resistant Passkeys, configuring Advanced Protection Program, and revoking dangerous third-party OAuth app permissions.",
     steps: [
       {
@@ -53,7 +53,7 @@ export const guidesData = [
     categoryColor: "rose",
     author: "Kunal Rajput",
     publishedAt: "September 7, 2026",
-    heroImage: "/assets/images/pexels-dan-nelson-1667453-3949100.jpg",
+    heroImage: "/assets/images/ai-phishing-detection-shield.jpg",
     summary: "AI has eliminated spelling errors from phishing emails. Learn how to inspect email headers, analyze punycode domain spoofing, and identify conversational manipulation triggers.",
     steps: [
       {
@@ -95,7 +95,7 @@ export const guidesData = [
     categoryColor: "rose",
     author: "Kunal Rajput",
     publishedAt: "September 6, 2026",
-    heroImage: "/assets/images/pexels-tima-miroshnichenko-5380792.jpg",
+    heroImage: "/assets/images/whatsapp-secure-messaging.jpg",
     summary: "Lock down your WhatsApp account against account hijacking, number spoofing, and unauthorized cloud backup reading with end-to-end encrypted backup keys.",
     steps: [
       {
@@ -138,7 +138,7 @@ export const guidesData = [
     categoryColor: "rose",
     author: "Kunal Rajput",
     publishedAt: "September 5, 2026",
-    heroImage: "/assets/images/pexels-tima-miroshnichenko-5380675.jpg",
+    heroImage: "/assets/images/android-mobile-defense.jpg",
     summary: "A comprehensive technical lockdown guide for modern Android devices: disabling dangerous permissions, auditing accessibility services, and configuring Private DNS.",
     steps: [
       {
