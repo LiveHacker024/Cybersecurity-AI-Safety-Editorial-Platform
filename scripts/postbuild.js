@@ -150,6 +150,19 @@ function run() {
       fs.copyFileSync(indexPath, notFoundPath);
       console.log('✓ Created dist/404.html for SPA routing');
     }
+
+    // Copy _redirects and _headers if present in public
+    const redirectsPath = path.join(publicDir, '_redirects');
+    if (fs.existsSync(redirectsPath)) {
+      fs.copyFileSync(redirectsPath, path.join(distDir, '_redirects'));
+      console.log('✓ Copied _redirects to dist/');
+    }
+    const headersPath = path.join(publicDir, '_headers');
+    if (fs.existsSync(headersPath)) {
+      fs.copyFileSync(headersPath, path.join(distDir, '_headers'));
+      console.log('✓ Copied _headers to dist/');
+    }
+
     console.log('✓ Wrote sitemap.xml, robots.txt, rss.xml, feed.xml, ads.txt to dist/');
   }
 
