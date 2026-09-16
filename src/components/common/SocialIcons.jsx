@@ -38,3 +38,6 @@ export function LinkedinIcon({ size = 18, color = "currentColor", ...props }) {
     </svg>
   );
 }
+
+export const Youtube = YoutubeIcon;
+export const Linkedin = LinkedinIcon;

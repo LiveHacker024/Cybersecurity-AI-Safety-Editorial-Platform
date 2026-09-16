@@ -1,66 +1,72 @@
 import React from 'react';
-import { ShieldCheck } from 'lucide-react';
+import { siteConfig } from '../../config/site';
 
-export default function AdSlot({ type = "leaderboard", className = "" }) {
-  // Configs for standard IAB sizes
-  const config = {
-    billboard: {
-      width: '970px',
-      minHeight: '250px',
-      name: 'IAB Billboard (970x250)'
-    },
-    leaderboard: {
-      width: '728px',
-      minHeight: '90px',
-      name: 'IAB Leaderboard (728x90)'
-    },
-    rectangle: {
-      width: '300px',
-      minHeight: '250px',
-      name: 'IAB Medium Rectangle (300x250)'
-    },
-    infeed: {
-      width: '100%',
-      minHeight: '120px',
-      name: 'In-Feed Responsive Display'
-    }
-  }[type] || {
-    width: '100%',
-    minHeight: '100px',
-    name: 'Responsive Cyber Ad Unit'
+export default function AdSlot({
+  type = "in-content",
+  slotId = "",
+  format = "auto",
+  className = ""
+}) {
+  const isAdSenseActive = siteConfig.monetization.isAdSenseActive;
+  const clientId = siteConfig.monetization.adsenseClientId;
+
+  // Responsive dimensions based on placement type
+  const heightMap = {
+    leaderboard: '90px',
+    billboard: '180px',
+    rectangle: '250px',
+    'in-content': '120px',
+    sidebar: '300px',
+    'top-article': '100px',
+    'bottom-article': '140px',
+    'between-sections': '90px'
   };
 
-  return (
-    <div className={`ad-slot-wrapper ${className}`} style={{ maxWidth: config.width, margin: '2rem auto' }}>
-      <div className="ad-label">
-        ADVERTISEMENT • GOOGLE ADSENSE VERIFIED PLACEMENT
-      </div>
+  const minHeight = heightMap[type] || '100px';
 
-      <div
+  // When AdSense is active and client ID is provided
+  if (isAdSenseActive && clientId) {
+    return (
+      <aside
+        className={`ad-container ${className}`}
+        aria-label="Advertisement"
         style={{
           width: '100%',
-          minHeight: config.minHeight,
-          background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(10, 15, 29, 0.8) 100%)',
-          borderRadius: '8px',
-          border: '1px solid rgba(56, 189, 248, 0.15)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '1.25rem',
+          margin: '2.5rem 0',
           textAlign: 'center',
-          color: '#64748b',
-          fontSize: '0.8rem',
-          fontFamily: 'var(--font-mono)'
+          overflow: 'hidden',
+          padding: '0.75rem 0',
+          borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+          background: 'rgba(5, 8, 17, 0.4)'
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#0ea5e9', marginBottom: '0.35rem', fontWeight: 600 }}>
-          <ShieldCheck size={16} /> {config.name}
-        </div>
-        <div style={{ fontSize: '0.72rem', color: '#475569' }}>
-          Targeted Ethical Tech & Security Sponsors • Non-Intrusive Display
-        </div>
-      </div>
-    </div>
-  );
+        <span
+          style={{
+            fontSize: '0.625rem',
+            color: '#64748b',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            display: 'block',
+            marginBottom: '0.5rem',
+            fontFamily: 'var(--font-mono)'
+          }}
+        >
+          ADVERTISEMENT
+        </span>
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block', minHeight }}
+          data-ad-client={clientId}
+          data-ad-slot={slotId || "1234567890"}
+          data-ad-format={format}
+          data-full-width-responsive="true"
+        />
+      </aside>
+    );
+  }
+
+  // Pre-approval / Unconfigured state:
+  // Gracefully collapse to avoid empty placeholder boxes or dashed borders during editorial and AdSense quality reviews.
+  return null;
 }

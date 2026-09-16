@@ -1,158 +1,108 @@
 import React from 'react';
-import { ShieldCheck, BookOpen, Lock, Scale, ArrowRight } from 'lucide-react';
-import { YoutubeIcon } from '../common/SocialIcons';
-import { founderData } from '../../data/founder';
+import { ShieldCheck, ArrowRight, ExternalLink, Award, FileCheck } from 'lucide-react';
+import { Linkedin, Youtube } from '../common/SocialIcons';
+import { siteConfig } from '../../config/site';
 
 export default function FounderTrustSection({ onNavigate }) {
-  const trustCards = [
-    {
-      title: "DEFENSIVE SECURITY",
-      desc: "Security content is created for education, awareness, prevention, and responsible defensive use.",
-      icon: <ShieldCheck size={16} color="#00f0ff" />
-    },
-    {
-      title: "SOURCE-BASED REPORTING",
-      desc: "Important claims and security developments should be supported by reliable primary sources or reputable reporting.",
-      icon: <BookOpen size={16} color="#00f0ff" />
-    },
-    {
-      title: "RESPONSIBLE DISCLOSURE",
-      desc: "We do not publish instructions intended to enable unauthorized access, credential theft, malware deployment, or cyber abuse.",
-      icon: <Lock size={16} color="#00f0ff" />
-    },
-    {
-      title: "EDITORIAL TRANSPARENCY",
-      desc: "When information is uncertain, developing, or based on third-party reporting, it should be clearly identified as such.",
-      icon: <Scale size={16} color="#00f0ff" />
-    }
-  ];
+  const founder = siteConfig.founder;
 
   return (
-    <section className="founder-editorial-section" aria-label="Editorial Integrity and Leadership">
+    <section style={{ padding: '4rem 0', background: 'rgba(5, 8, 17, 0.6)', borderTop: '1px solid rgba(56, 189, 248, 0.1)', borderBottom: '1px solid rgba(56, 189, 248, 0.1)' }}>
       <div className="container-custom">
-        <div className="founder-editorial-panel">
-          <div className="founder-editorial-grid">
-            
-            {/* Left Column (Desktop) */}
-            <div className="founder-left-col">
-              {/* 1. Editorial Label */}
-              <div className="order-1-label">
-                <div className="cyber-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <ShieldCheck size={14} color="#00f0ff" /> EDITORIAL INTEGRITY & CREDIBILITY
-                </div>
+        <div
+          className="glass-panel"
+          style={{
+            padding: '2.5rem',
+            borderRadius: '16px',
+            border: '1px solid rgba(0, 240, 255, 0.25)',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '2.5rem',
+            alignItems: 'center'
+          }}
+        >
+          {/* Left Column: Founder Profile Card */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+            <img
+              src={founder.avatar}
+              alt={founder.name}
+              style={{
+                width: '96px',
+                height: '96px',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                border: '3px solid #00f0ff',
+                boxShadow: '0 0 25px rgba(0, 240, 255, 0.25)'
+              }}
+            />
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.25rem' }}>
+                <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+                  {founder.name}
+                </h3>
+                <span style={{ padding: '0.1rem 0.4rem', borderRadius: '4px', background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', fontSize: '0.68rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                  VERIFIED AUTHOR
+                </span>
               </div>
+              <div style={{ fontSize: '0.85rem', color: '#00f0ff', fontFamily: 'var(--font-mono)', marginBottom: '0.5rem' }}>
+                {founder.title} • {founder.brand}
+              </div>
+              <p style={{ fontSize: '0.825rem', color: '#94a3b8', margin: 0, lineHeight: 1.5, maxWidth: '420px' }}>
+                {founder.bio}
+              </p>
+            </div>
+          </div>
 
-              {/* 2. Headline */}
-              <div className="order-2-headline">
-                <h2
-                  className="font-heading"
-                  style={{
-                    fontSize: 'clamp(1.85rem, 3.2vw, 2.5rem)',
-                    fontWeight: 800,
-                    color: '#ffffff',
-                    lineHeight: 1.2
-                  }}
-                >
-                  Directed by <span className="gradient-text-cyan">{founderData.name}</span>
-                </h2>
-              </div>
-
-              {/* 3. Role */}
-              <div className="order-3-role">
-                <p
-                  style={{
-                    color: '#00f0ff',
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.925rem',
-                    fontWeight: 600,
-                    letterSpacing: '0.02em'
-                  }}
-                >
-                  Founder & Editor — HackWithKunal
-                </p>
-              </div>
-
-              {/* 6. Description */}
-              <div className="order-6-desc">
-                <p style={{ color: '#cbd5e1', fontSize: '0.985rem', lineHeight: 1.75, marginBottom: '1rem' }}>
-                  HackWithKunal is an independent cybersecurity and AI safety publication focused on explaining digital threats, privacy risks, emerging technologies, and practical security practices in clear and accessible language.
-                </p>
-                <p style={{ color: '#94a3b8', fontSize: '0.95rem', lineHeight: 1.7 }}>
-                  Our editorial approach prioritizes accuracy, responsible security education, transparent sourcing, and practical guidance for individuals and businesses.
-                </p>
-              </div>
-
-              {/* 8. CTA Buttons */}
-              <div className="order-8-cta" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem', marginTop: '1.75rem' }}>
-                <button
-                  onClick={() => onNavigate('/editorial-standards')}
-                  className="btn-cyber-primary"
-                  style={{ padding: '0.7rem 1.35rem', fontSize: '0.875rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
-                >
-                  Read Editorial Standards <ArrowRight size={15} />
-                </button>
-                <button
-                  onClick={() => onNavigate('/about')}
-                  className="btn-cyber-secondary"
-                  style={{ padding: '0.7rem 1.35rem', fontSize: '0.875rem' }}
-                >
-                  About the Publication
-                </button>
-                <a
-                  href={founderData.socials.youtube}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-cyber-secondary"
-                  style={{ padding: '0.7rem 1.35rem', fontSize: '0.875rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
-                >
-                  <YoutubeIcon size={16} color="#ef4444" /> YouTube Channel
-                </a>
-              </div>
+          {/* Right Column: Editorial Pledge & Links */}
+          <div style={{ borderLeft: '1px solid rgba(255, 255, 255, 0.08)', paddingLeft: '1.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.5rem' }}>
+              <FileCheck size={18} color="#10b981" />
+              <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#10b981', letterSpacing: '0.06em', fontFamily: 'var(--font-mono)', textTransform: 'uppercase' }}>
+                EDITORIAL INTEGRITY PLEDGE
+              </span>
             </div>
 
-            {/* Right Column (Desktop) */}
-            <div className="founder-right-col">
-              {/* 4. 16:9 Founder Photo Card */}
-              <div className="order-4-image">
-                <div className="founder-image-card">
-                  <img
-                    src="/assets/founder/founder-photo.png"
-                    alt="Kunal Rajput, founder and editor of HackWithKunal"
-                    style={{
-                      aspectRatio: '16 / 9',
-                      width: '100%',
-                      height: 'auto',
-                      objectFit: 'cover',
-                      objectPosition: 'center 22%'
-                    }}
-                  />
-                </div>
-              </div>
+            <p style={{ fontSize: '0.85rem', color: '#cbd5e1', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+              "We do not generate synthetic news, unverified claims, or exaggerated threat scores. Every CVE breakdown is verified against primary sources, and every tutorial is built strictly for authorized defensive environments."
+            </p>
 
-              {/* 5. Photo Caption */}
-              <div className="order-5-caption founder-caption">
-                <div className="founder-caption-name">Kunal Rajput</div>
-                <div className="founder-caption-role">Founder & Editor — HackWithKunal</div>
-              </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+              <button
+                onClick={() => onNavigate('/author/kunal-rajput')}
+                className="btn-cyber-primary"
+                style={{ padding: '0.5rem 1.15rem', fontSize: '0.825rem' }}
+              >
+                <span>Read Full Bio & Portfolio</span>
+                <ArrowRight size={13} />
+              </button>
 
-              {/* 7. Trust Cards */}
-              <div className="order-7-trust">
-                <div className="trust-cards-grid">
-                  {trustCards.map((card, idx) => (
-                    <div key={idx} className="trust-card">
-                      <div className="trust-card-title">
-                        {card.icon}
-                        <span>{card.title}</span>
-                      </div>
-                      <p className="trust-card-desc">
-                        {card.desc}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <button
+                onClick={() => onNavigate('/editorial-policy')}
+                className="btn-cyber-secondary"
+                style={{ padding: '0.5rem 1.15rem', fontSize: '0.825rem' }}
+              >
+                <span>Editorial Standards</span>
+              </button>
+
+              <a
+                href={founder.socials.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.35rem',
+                  color: '#38bdf8',
+                  fontSize: '0.825rem',
+                  fontWeight: 600,
+                  textDecoration: 'none'
+                }}
+              >
+                <Linkedin size={15} />
+                <span>LinkedIn</span>
+                <ExternalLink size={12} />
+              </a>
             </div>
-
           </div>
         </div>
       </div>

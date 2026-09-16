@@ -1,519 +1,471 @@
 import React, { useState, useEffect } from 'react';
-import { Clock, Calendar, ShieldCheck, Share2, Bookmark, Check, ChevronRight, BookOpen, HelpCircle, FileText, ArrowRight, UserCheck, Lock } from 'lucide-react';
-import { getArticleBySlug, articlesData } from '../data/articles';
-import { founderData } from '../data/founder';
-import { updateMetaTags, generateArticleSchema, generateFaqSchema, generateBreadcrumbSchema } from '../utils/seo';
+import {
+  Clock, Calendar, User, Share2, Bookmark, CheckCircle2,
+  AlertTriangle, Shield, ArrowLeft, ChevronRight, Lock,
+  Copy, Check, ExternalLink, ListOrdered
+} from 'lucide-react';
+import { Linkedin, Youtube } from '../components/common/SocialIcons';
+import { getAllArticles } from '../utils/storage';
+import { updateMetaTags, generateArticleSchema, generateBreadcrumbSchema } from '../utils/seo';
+import { recordPageView } from '../utils/analytics';
+import ClaimBadge from '../components/common/ClaimBadge';
+import SourceList from '../components/common/SourceList';
 import AdSlot from '../components/ads/AdSlot';
+import NewsletterBox from '../components/home/NewsletterBox';
+import { siteConfig } from '../config/site';
 
 export default function ArticlePage({ slug, onNavigate }) {
-  const article = getArticleBySlug(slug) || articlesData[0];
-
-  const [fontSize, setFontSize] = useState(18);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [copiedLink, setCopiedLink] = useState(false);
+  const [copied, setCopied] = useState(false);
   const [activeHeading, setActiveHeading] = useState('');
 
-  // SEO updates & scroll progress
-  useEffect(() => {
-    window.scrollTo(0, 0);
+  const allArticles = getAllArticles();
+  const article = allArticles.find(a => a.slug === slug) || allArticles[0];
 
+  useEffect(() => {
+    if (!article) return;
+    
     updateMetaTags({
-      title: `${article.title} — HackWithKunal`,
+      title: `${article.title} — ${siteConfig.name}`,
       description: article.subtitle || article.excerpt,
-      keywords: article.tags?.join(', ') || 'cybersecurity, AI safety',
       image: article.heroImage,
-      url: window.location.href,
-      type: 'article',
+      type: "article",
       publishedTime: article.publishedAt,
-      modifiedTime: article.updatedAt,
-      author: article.author?.name || 'Kunal Rajput',
-      schema: {
-        "@context": "https://schema.org",
-        "@graph": [
-          generateArticleSchema(article),
-          generateBreadcrumbSchema([
-            { name: "Home", url: "https://hackwithkunal.com" },
-            { name: article.categoryName, url: `https://hackwithkunal.com/${article.category}` },
-            { name: article.title, url: window.location.href }
-          ]),
-          ...(article.faqs ? [generateFaqSchema(article.faqs)] : [])
-        ]
-      }
+      modifiedTime: article.updatedAt || article.publishedAt,
+      author: article.author?.name || siteConfig.founder.name,
+      schema: generateArticleSchema(article)
     });
 
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollTop;
-      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const progress = totalScroll / (windowHeight || 1);
-      setScrollProgress(progress);
-    };
+    recordPageView(`/${article.category}/${article.slug}`, article.title);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [article, slug]);
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [slug, article]);
-
-  const handleCopyLink = () => {
-    navigator.clipboard?.writeText(window.location.href);
-    setCopiedLink(true);
-    setTimeout(() => setCopiedLink(false), 2000);
+  const handleShare = async () => {
+    const url = window.location.href;
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: article.title,
+          text: article.excerpt,
+          url
+        });
+      } catch (err) {}
+    } else {
+      navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    }
   };
 
-  const relatedArticles = articlesData
-    .filter(a => a.id !== article.id && (a.category === article.category || a.trending))
+  const handleLinkedInShare = () => {
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'width=600,height=500');
+  };
+
+  if (!article) {
+    return (
+      <div className="container-custom" style={{ padding: '6rem 0', textAlign: 'center' }}>
+        <h2 style={{ color: '#ffffff' }}>Article Not Found</h2>
+        <button onClick={() => onNavigate('/')} className="btn-cyber-primary" style={{ marginTop: '1rem' }}>
+          Return to Homepage
+        </button>
+      </div>
+    );
+  }
+
+  // Related articles lookup
+  const relatedList = allArticles
+    .filter(a => a.slug !== article.slug && (a.category === article.category || (article.relatedArticles && article.relatedArticles.includes(a.slug))))
     .slice(0, 3);
 
   return (
-    <div style={{ minHeight: '100vh', background: '#050811', paddingBottom: '5rem' }}>
-      {/* Top Sticky Reading Progress Bar */}
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '3px',
-          background: 'rgba(0, 240, 255, 0.2)',
-          zIndex: 99
-        }}
-      >
-        <div
-          style={{
-            height: '100%',
-            width: `${scrollProgress * 100}%`,
-            background: 'linear-gradient(90deg, #00f0ff 0%, #38bdf8 100%)',
-            boxShadow: '0 0 10px #00f0ff',
-            transition: 'width 0.1s ease-out'
-          }}
-        />
-      </div>
-
-      <div className="container-custom" style={{ paddingTop: '2.5rem' }}>
+    <article style={{ background: '#030712', minHeight: '100vh', padding: '2rem 0 5rem' }}>
+      <div className="container-custom" style={{ maxWidth: '1080px' }}>
         {/* Breadcrumb Navigation */}
-        <nav
-          aria-label="Breadcrumb"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            fontSize: '0.825rem',
-            color: '#64748b',
-            marginBottom: '1.5rem',
-            fontFamily: 'var(--font-mono)'
-          }}
-        >
-          <span
-            onClick={() => onNavigate('/')}
-            style={{ cursor: 'pointer', color: '#94a3b8' }}
-            onMouseEnter={(e) => e.currentTarget.style.color = '#00f0ff'}
-            onMouseLeave={(e) => e.currentTarget.style.color = '#94a3b8'}
-          >
-            HOME
-          </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', color: '#64748b', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+          <button onClick={() => onNavigate('/')} style={{ background: 'transparent', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: 0 }}>
+            Home
+          </button>
           <ChevronRight size={14} />
-          <span
-            onClick={() => onNavigate(`/${article.category}`)}
-            style={{ cursor: 'pointer', color: '#38bdf8' }}
-            onMouseEnter={(e) => e.currentTarget.style.color = '#00f0ff'}
-            onMouseLeave={(e) => e.currentTarget.style.color = '#38bdf8'}
-          >
-            {article.categoryName?.toUpperCase()}
-          </span>
+          <button onClick={() => onNavigate(`/${article.category}`)} style={{ background: 'transparent', border: 'none', color: '#00f0ff', cursor: 'pointer', padding: 0, textTransform: 'capitalize' }}>
+            {article.categoryName || article.category}
+          </button>
           <ChevronRight size={14} />
           <span style={{ color: '#cbd5e1', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '300px' }}>
             {article.title}
           </span>
-        </nav>
+        </div>
 
-        {/* Article Header */}
-        <header style={{ maxWidth: '960px', marginBottom: '2.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
-            <span className="cyber-badge" style={{ fontSize: '0.78rem' }}>
-              {article.categoryName}
+        {/* Header Section */}
+        <header style={{ marginBottom: '2.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+            <span
+              style={{
+                padding: '0.2rem 0.65rem',
+                borderRadius: '6px',
+                background: 'rgba(0, 240, 255, 0.15)',
+                border: '1px solid rgba(0, 240, 255, 0.35)',
+                color: '#00f0ff',
+                fontSize: '0.75rem',
+                fontWeight: 700,
+                fontFamily: 'var(--font-mono)'
+              }}
+            >
+              {article.type || "ANALYSIS"}
             </span>
-            <span style={{ fontSize: '0.8rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-              <Clock size={14} /> {article.readingTime}
-            </span>
-            <span style={{ fontSize: '0.8rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-              <Calendar size={14} /> {article.publishedAt}
+
+            <ClaimBadge status={article.claimStatus || "ANALYSIS"} />
+
+            <span style={{ fontSize: '0.75rem', color: '#64748b', fontFamily: 'var(--font-mono)' }}>
+              STATUS: {article.status || "PUBLISHED"}
             </span>
           </div>
 
           <h1
             className="font-heading"
             style={{
-              fontSize: 'clamp(2.1rem, 4.5vw, 3.25rem)',
-              fontWeight: 800,
+              fontSize: 'clamp(2rem, 4.5vw, 3.2rem)',
+              fontWeight: 900,
               lineHeight: 1.15,
+              letterSpacing: '-0.03em',
               color: '#ffffff',
-              marginBottom: '1.25rem',
-              letterSpacing: '-0.02em'
+              marginBottom: '1.25rem'
             }}
           >
             {article.title}
           </h1>
 
-          <p
-            style={{
-              fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
-              color: '#94a3b8',
-              lineHeight: 1.6,
-              marginBottom: '2rem'
-            }}
-          >
-            {article.subtitle}
-          </p>
+          {article.subtitle && (
+            <p style={{ fontSize: 'clamp(1.05rem, 2vw, 1.25rem)', color: '#94a3b8', lineHeight: 1.6, marginBottom: '1.75rem' }}>
+              {article.subtitle}
+            </p>
+          )}
 
-          {/* Author Bar & Reader Toolbar */}
+          {/* Author & Meta Strip */}
           <div
             style={{
               display: 'flex',
-              flexWrap: 'wrap',
               alignItems: 'center',
               justifyContent: 'space-between',
-              gap: '1.25rem',
-              padding: '1.25rem',
-              background: 'rgba(15, 23, 42, 0.75)',
-              borderRadius: '12px',
-              border: '1px solid rgba(56, 189, 248, 0.15)'
+              padding: '1.25rem 0',
+              borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+              flexWrap: 'wrap',
+              gap: '1rem'
             }}
           >
-            {/* Author */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
               <img
-                src={article.author?.avatar || founderData.images.avatar}
-                alt={article.author?.name || founderData.name}
-                style={{
-                  width: '46px',
-                  height: '46px',
-                  borderRadius: '50%',
-                  objectFit: 'cover',
-                  border: '2px solid #00f0ff'
-                }}
+                src={article.author?.avatar || "/assets/founder/founder-photo.png"}
+                alt={article.author?.name}
+                style={{ width: '44px', height: '44px', borderRadius: '50%', border: '2px solid #00f0ff', objectFit: 'cover' }}
               />
               <div>
-                <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                  {article.author?.name || founderData.name}
-                  <ShieldCheck size={16} color="#00f0ff" />
+                <div style={{ fontSize: '0.95rem', fontWeight: 800, color: '#f8fafc' }}>
+                  {article.author?.name}
                 </div>
-                <div style={{ fontSize: '0.75rem', color: '#64748b', fontFamily: 'var(--font-mono)' }}>
-                  {article.author?.role || founderData.role}
+                <div style={{ fontSize: '0.75rem', color: '#00f0ff', fontFamily: 'var(--font-mono)' }}>
+                  {article.author?.role}
                 </div>
               </div>
             </div>
 
-            {/* Actions: Font Size & Share */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', background: '#0a0f1d', borderRadius: '6px', border: '1px solid #1e293b' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', fontSize: '0.8rem', color: '#94a3b8' }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                <Calendar size={14} color="#00f0ff" />
+                {article.publishedAt}
+              </span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                <Clock size={14} color="#00f0ff" />
+                {article.readingTime}
+              </span>
+
+              {/* Share buttons */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginLeft: '0.5rem' }}>
                 <button
-                  onClick={() => setFontSize(Math.max(15, fontSize - 1))}
-                  style={{ background: 'none', border: 'none', color: '#cbd5e1', padding: '0.35rem 0.65rem', cursor: 'pointer', fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}
-                  title="Decrease Font Size"
+                  onClick={handleShare}
+                  className="btn-cyber-secondary"
+                  style={{ padding: '0.4rem 0.75rem', fontSize: '0.75rem' }}
+                  title="Copy Article Link"
                 >
-                  A-
+                  {copied ? <Check size={13} color="#10b981" /> : <Copy size={13} />}
+                  <span>{copied ? 'Copied' : 'Share'}</span>
                 </button>
-                <span style={{ fontSize: '0.75rem', color: '#64748b', fontFamily: 'var(--font-mono)' }}>{fontSize}px</span>
                 <button
-                  onClick={() => setFontSize(Math.min(24, fontSize + 1))}
-                  style={{ background: 'none', border: 'none', color: '#cbd5e1', padding: '0.35rem 0.65rem', cursor: 'pointer', fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}
-                  title="Increase Font Size"
+                  onClick={handleLinkedInShare}
+                  style={{
+                    background: 'rgba(14, 165, 233, 0.15)',
+                    border: '1px solid rgba(14, 165, 233, 0.35)',
+                    color: '#38bdf8',
+                    padding: '0.4rem 0.65rem',
+                    borderRadius: '6px',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.3rem',
+                    fontSize: '0.75rem',
+                    fontWeight: 600
+                  }}
+                  title="Share on LinkedIn"
                 >
-                  A+
+                  <Linkedin size={13} />
+                  <span>Post</span>
                 </button>
               </div>
-
-              <button
-                onClick={handleCopyLink}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.4rem',
-                  padding: '0.45rem 0.85rem',
-                  borderRadius: '6px',
-                  background: 'rgba(30, 41, 59, 0.8)',
-                  border: '1px solid #334155',
-                  color: copiedLink ? '#34d399' : '#cbd5e1',
-                  cursor: 'pointer',
-                  fontSize: '0.8rem'
-                }}
-              >
-                {copiedLink ? <Check size={14} /> : <Share2 size={14} />}
-                <span>{copiedLink ? 'Copied Link' : 'Share'}</span>
-              </button>
             </div>
           </div>
         </header>
 
-        {/* Hero Image / Media */}
-        <div
-          style={{
-            maxWidth: '960px',
-            marginBottom: '3rem',
-            borderRadius: '16px',
-            overflow: 'hidden',
-            border: '1px solid rgba(56, 189, 248, 0.25)',
-            boxShadow: '0 15px 40px rgba(0, 0, 0, 0.7)'
-          }}
-        >
-          <img
-            src={article.heroImage}
-            alt={article.title}
-            style={{ width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', display: 'block' }}
-          />
-        </div>
+        {/* Top Ad Slot */}
+        <AdSlot type="top-article" />
 
-        {/* 2-Column Editorial Grid (Main Content + Sidebar) */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(0, 780px) 320px',
-            gap: '3.5rem',
-            justifyContent: 'center',
-            alignItems: 'flex-start'
-          }}
-          className="article-layout-grid"
-        >
-          {/* Main Article Column */}
-          <main style={{ minWidth: 0 }}>
+        {/* Two-Column Editorial Layout */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 280px', gap: '3rem', alignItems: 'start' }} className="article-grid">
+          {/* Main Article Content */}
+          <div style={{ minWidth: 0 }}>
             {/* Key Takeaways Box */}
-            {article.keyTakeaways && (
-              <div
-                className="glass-panel"
-                style={{
-                  padding: '1.75rem',
-                  marginBottom: '2.5rem',
-                  borderLeft: '4px solid #00f0ff',
-                  background: 'rgba(10, 15, 29, 0.85)'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#00f0ff', marginBottom: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  <ShieldCheck size={16} /> Key Security Takeaways
-                </div>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-                  {article.keyTakeaways.map((item, idx) => (
-                    <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', fontSize: '0.95rem', color: '#e2e8f0', lineHeight: 1.55 }}>
-                      <span style={{ color: '#00f0ff', fontWeight: 700 }}>•</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Table of Contents */}
-            {article.tableOfContents && (
+            {article.keyTakeaways && article.keyTakeaways.length > 0 && (
               <div
                 style={{
-                  padding: '1.5rem',
-                  background: 'rgba(15, 23, 42, 0.5)',
+                  background: 'rgba(0, 240, 255, 0.05)',
+                  border: '1px solid rgba(0, 240, 255, 0.25)',
                   borderRadius: '12px',
-                  border: '1px solid #1e293b',
+                  padding: '1.5rem',
                   marginBottom: '2.5rem'
                 }}
               >
-                <div style={{ fontSize: '0.8rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-                  Table of Contents
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.85rem' }}>
+                  <Shield size={18} color="#00f0ff" />
+                  <h3 style={{ fontSize: '0.95rem', fontWeight: 800, color: '#00f0ff', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Executive Summary & Key Takeaways
+                  </h3>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                  {article.tableOfContents.map((toc) => (
-                    <a
-                      key={toc.id}
-                      href={`#${toc.id}`}
-                      style={{
-                        color: '#38bdf8',
-                        fontSize: '0.9rem',
-                        textDecoration: 'none',
-                        transition: 'color 0.2s ease',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.4rem'
-                      }}
-                      onMouseEnter={(e) => e.currentTarget.style.color = '#00f0ff'}
-                      onMouseLeave={(e) => e.currentTarget.style.color = '#38bdf8'}
-                    >
-                      <ChevronRight size={14} /> {toc.title}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* In-Article AdSense Banner */}
-            <AdSlot type="leaderboard" />
-
-            {/* Markdown Body Content */}
-            <div
-              className="prose-cyber"
-              style={{ fontSize: `${fontSize}px` }}
-              dangerouslySetInnerHTML={{
-                __html: article.content
-                  .replace(/## (.*?)\n/g, '<h2 id="$1">$1</h2>')
-                  .replace(/### (.*?)\n/g, '<h3>$1</h3>')
-                  .replace(/\n\n/g, '</p><p>')
-                  .replace(/```txt([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-                  .replace(/```json([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-                  .replace(/```bash([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-                  .replace(/```mermaid([\s\S]*?)```/g, '<div style="padding:1rem;background:#090e1a;border:1px solid #38bdf833;border-radius:8px;margin:1.5rem 0;color:#00f0ff;font-family:monospace;font-size:0.85rem;"><strong style="display:block;margin-bottom:0.5rem;color:#f8fafc">Interactive Attack Flow Diagram:</strong>$1</div>')
-              }}
-            />
-
-            {/* Trust Verification Box */}
-            <div
-              className="glass-panel"
-              style={{
-                marginTop: '3.5rem',
-                marginBottom: '2.5rem',
-                padding: '2rem',
-                border: '1px solid rgba(0, 240, 255, 0.3)',
-                background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(10, 15, 29, 0.95) 100%)'
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem' }}>
-                <ShieldCheck size={22} color="#00f0ff" />
-                <h3 className="font-heading" style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff' }}>
-                  Why You Can Trust This Article
-                </h3>
-              </div>
-
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-                  gap: '1.25rem',
-                  fontSize: '0.85rem'
-                }}
-              >
-                <div>
-                  <div style={{ fontWeight: 700, color: '#00f0ff', marginBottom: '0.2rem' }}>Peer-Reviewed Research</div>
-                  <div style={{ color: '#94a3b8' }}>Tested in HackWithKunal & ASD Cybersecurity lab environments. Cross-checked with NIST & MITRE standards.</div>
-                </div>
-
-                <div>
-                  <div style={{ fontWeight: 700, color: '#38bdf8', marginBottom: '0.2rem' }}>Verified Author</div>
-                  <div style={{ color: '#94a3b8' }}>Written by Kunal Rajput (Junior Penetration Tester, CEH & VAPT certified).</div>
-                </div>
-
-                <div>
-                  <div style={{ fontWeight: 700, color: '#34d399', marginBottom: '0.2rem' }}>Zero Commercial Bias</div>
-                  <div style={{ color: '#94a3b8' }}>No paid vendor placements. Defensive tools recommended solely on cryptographic merits.</div>
-                </div>
-              </div>
-            </div>
-
-            {/* FAQs Accordion */}
-            {article.faqs && article.faqs.length > 0 && (
-              <div style={{ marginTop: '2.5rem', marginBottom: '3rem' }}>
-                <h3 className="font-heading" style={{ fontSize: '1.4rem', fontWeight: 800, color: '#f8fafc', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <HelpCircle size={20} color="#00f0ff" /> Frequently Asked Security Questions
-                </h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  {article.faqs.map((faq, idx) => (
-                    <div
-                      key={idx}
-                      style={{
-                        padding: '1.25rem 1.5rem',
-                        background: 'rgba(15, 23, 42, 0.7)',
-                        borderRadius: '10px',
-                        border: '1px solid #1e293b'
-                      }}
-                    >
-                      <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#f8fafc', marginBottom: '0.5rem' }}>
-                        {faq.question}
-                      </h4>
-                      <p style={{ color: '#94a3b8', fontSize: '0.925rem', lineHeight: 1.6 }}>
-                        {faq.answer}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Sources & Citations */}
-            {article.sources && (
-              <div
-                style={{
-                  padding: '1.25rem',
-                  background: 'rgba(10, 15, 29, 0.6)',
-                  borderRadius: '8px',
-                  border: '1px solid #1e293b',
-                  fontSize: '0.8rem',
-                  color: '#64748b'
-                }}
-              >
-                <div style={{ fontWeight: 700, color: '#94a3b8', marginBottom: '0.5rem', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
-                  Verified Intelligence Sources & Academic Citations:
-                </div>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-                  {article.sources.map((src, i) => (
-                    <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                      <FileText size={12} color="#00f0ff" />
-                      <span>{src}</span>
+                <ul style={{ margin: 0, paddingLeft: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  {article.keyTakeaways.map((takeaway, idx) => (
+                    <li key={idx} style={{ fontSize: '0.9rem', color: '#e2e8f0', lineHeight: 1.55 }}>
+                      {takeaway}
                     </li>
                   ))}
                 </ul>
               </div>
             )}
-          </main>
 
-          {/* Desktop Right Sidebar */}
-          <aside style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            {/* Author Quick Box */}
-            <div className="glass-panel" style={{ padding: '1.5rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-                <img
-                  src={article.author?.avatar || founderData.images.avatar}
-                  alt={article.author?.name || founderData.name}
-                  style={{ width: '52px', height: '52px', borderRadius: '50%', objectFit: 'cover', border: '2px solid #00f0ff' }}
+            {/* Responsible Security Disclaimer */}
+            <div
+              style={{
+                background: 'rgba(15, 23, 42, 0.6)',
+                borderLeft: '3px solid #10b981',
+                padding: '1rem 1.25rem',
+                borderRadius: '0 8px 8px 0',
+                marginBottom: '2.5rem',
+                fontSize: '0.825rem',
+                color: '#94a3b8',
+                lineHeight: 1.5
+              }}
+            >
+              <strong style={{ color: '#10b981' }}>Responsible Security Notice:</strong> All technical descriptions, proof-of-concept analyses, and threat models on CyberAI Watch are published strictly for defensive engineering, authorized security testing, and vulnerability mitigation.
+            </div>
+
+            {/* Markdown Body Content */}
+            <div className="article-body" style={{ fontSize: '1.05rem', lineHeight: 1.8, color: '#cbd5e1' }}>
+              {article.content ? (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: (() => {
+                      let html = article.content;
+                      // Replace h2 headings with IDs derived from text/TOC
+                      html = html.replace(/^## (.*$)/gim, (match, headingText) => {
+                        const cleanText = headingText.trim();
+                        // Find matching TOC item or generate slug
+                        const tocMatch = article.tableOfContents?.find(t => t.title === cleanText || cleanText.includes(t.title));
+                        const headingId = tocMatch ? tocMatch.id : cleanText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                        return `<h2 id="${headingId}" style="font-size: 1.65rem; color: #ffffff; margin: 2.5rem 0 1.25rem; font-weight: 800; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.5rem; scroll-margin-top: 100px;">${cleanText}</h2>`;
+                      });
+                      html = html.replace(/^### (.*$)/gim, '<h3 style="font-size: 1.35rem; color: #ffffff; margin: 2rem 0 1rem; font-weight: 800; scroll-margin-top: 100px;">$1</h3>');
+                      html = html.replace(/^# (.*$)/gim, '<h1 style="font-size: 2rem; color: #ffffff; margin: 2.5rem 0 1rem; font-weight: 900;">$1</h1>');
+                      html = html.replace(/\*\*(.*?)\*\*/gim, '<strong style="color: #ffffff; font-weight: 700;">$1</strong>');
+                      html = html.replace(/\*(.*?)\*/gim, '<em>$1</em>');
+                      html = html.replace(/^> (.*$)/gim, '<blockquote style="border-left: 3px solid #00f0ff; padding-left: 1.25rem; margin: 1.75rem 0; color: #e2e8f0; font-style: italic; background: rgba(0, 240, 255, 0.04); padding: 1rem 1.25rem; border-radius: 0 8px 8px 0;">$1</blockquote>');
+                      html = html.replace(/```([\s\S]*?)```/gim, '<pre style="background: #0b0f19; border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 1.25rem; overflow-x: auto; font-family: var(--font-mono); font-size: 0.85rem; color: #38bdf8; margin: 1.75rem 0;"><code>$1</code></pre>');
+                      html = html.replace(/\n\n/gim, '<p style="margin-bottom: 1.5rem;"></p>');
+                      return html;
+                    })()
+                  }}
                 />
-                <div>
-                  <div style={{ fontWeight: 800, fontSize: '1rem', color: '#ffffff' }}>
-                    {article.author?.name || founderData.name}
-                  </div>
-                  <div style={{ fontSize: '0.75rem', color: '#00f0ff', fontFamily: 'var(--font-mono)' }}>
-                    {article.author?.role || founderData.role}
-                  </div>
+              ) : (
+                <p>{article.excerpt}</p>
+              )}
+            </div>
+
+            {/* In-Content Ad Placement */}
+            <AdSlot type="in-content" />
+
+            {/* Verified Sources & References */}
+            {article.sources && <SourceList sources={article.sources} />}
+
+            {/* Author Profile Footer Card */}
+            <div
+              className="glass-panel"
+              style={{
+                padding: '2rem',
+                borderRadius: '12px',
+                marginTop: '3.5rem',
+                border: '1px solid rgba(0, 240, 255, 0.25)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '1.5rem',
+                flexWrap: 'wrap'
+              }}
+            >
+              <img
+                src={article.author?.avatar || "/assets/founder/founder-photo.png"}
+                alt={article.author?.name}
+                style={{ width: '72px', height: '72px', borderRadius: '50%', border: '2px solid #00f0ff', objectFit: 'cover' }}
+              />
+              <div style={{ flex: 1, minWidth: '240px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.25rem' }}>
+                  <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+                    {article.author?.name}
+                  </h4>
+                  <span style={{ fontSize: '0.65rem', padding: '0.1rem 0.35rem', borderRadius: '4px', background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', fontWeight: 700 }}>
+                    VERIFIED
+                  </span>
+                </div>
+                <div style={{ fontSize: '0.8rem', color: '#00f0ff', fontFamily: 'var(--font-mono)', marginBottom: '0.5rem' }}>
+                  {article.author?.role}
+                </div>
+                <p style={{ fontSize: '0.825rem', color: '#94a3b8', margin: '0 0 0.85rem', lineHeight: 1.5 }}>
+                  {siteConfig.founder.bio}
+                </p>
+                <div style={{ display: 'flex', gap: '0.75rem' }}>
+                  <button
+                    onClick={() => onNavigate('/author/kunal-rajput')}
+                    style={{ background: 'transparent', border: 'none', color: '#00f0ff', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer', padding: 0 }}
+                  >
+                    View Author Articles →
+                  </button>
                 </div>
               </div>
-              <p style={{ fontSize: '0.825rem', color: '#94a3b8', lineHeight: 1.55, marginBottom: '1rem' }}>
-                {founderData.shortBio}
-              </p>
-              <button
-                onClick={() => onNavigate('/about')}
-                className="btn-cyber-secondary"
-                style={{ width: '100%', padding: '0.5rem', fontSize: '0.8rem' }}
-              >
-                View Full Bio & Certifications
-              </button>
             </div>
 
-            {/* Sidebar AdSlot */}
-            <AdSlot type="rectangle" />
+            {/* Bottom Article Ad Slot */}
+            <AdSlot type="bottom-article" />
+          </div>
 
-            {/* Trending Articles Widget */}
-            <div className="glass-panel" style={{ padding: '1.5rem' }}>
-              <div style={{ fontSize: '0.8rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#00f0ff', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                Trending Threat Reports
+          {/* Sticky Sidebar (Table of Contents & Meta) */}
+          <aside style={{ position: 'sticky', top: '90px', display: 'flex', flexDirection: 'column', gap: '1.75rem' }} className="article-sidebar">
+            {/* Table of Contents */}
+            {article.tableOfContents && article.tableOfContents.length > 0 && (
+              <div className="glass-panel" style={{ padding: '1.25rem', borderRadius: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.85rem' }}>
+                  <ListOrdered size={16} color="#00f0ff" />
+                  <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#f8fafc', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Table of Contents
+                  </span>
+                </div>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+                  {article.tableOfContents.map((item) => (
+                    <li key={item.id}>
+                      <a
+                        href={`#${item.id}`}
+                        style={{
+                          fontSize: '0.8rem',
+                          color: '#94a3b8',
+                          textDecoration: 'none',
+                          lineHeight: 1.4,
+                          display: 'block',
+                          transition: 'color 0.15s ease'
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.color = '#00f0ff'}
+                        onMouseLeave={(e) => e.currentTarget.style.color = '#94a3b8'}
+                      >
+                        {item.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                {relatedArticles.map((rel) => (
-                  <div
-                    key={rel.id}
-                    onClick={() => onNavigate(`/${rel.category}/${rel.slug}`)}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    <div style={{ fontSize: '0.7rem', color: '#38bdf8', fontFamily: 'var(--font-mono)', marginBottom: '0.2rem' }}>
-                      {rel.categoryName} • {rel.readingTime}
-                    </div>
-                    <div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#f8fafc', lineHeight: 1.4 }} className="hover-cyan">
-                      {rel.title}
-                    </div>
-                  </div>
-                ))}
+            )}
+
+            {/* Tags Cloud */}
+            {article.tags && (
+              <div className="glass-panel" style={{ padding: '1.25rem', borderRadius: '12px' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '0.75rem', fontFamily: 'var(--font-mono)' }}>
+                  Threat Topics & Tags
+                </span>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                  {article.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      style={{
+                        padding: '0.2rem 0.55rem',
+                        borderRadius: '4px',
+                        background: 'rgba(15, 23, 42, 0.8)',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                        color: '#cbd5e1',
+                        fontSize: '0.72rem'
+                      }}
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
+
+            {/* Sidebar Ad Slot */}
+            <AdSlot type="sidebar" />
           </aside>
         </div>
+
+        {/* Related Articles Section */}
+        {relatedList.length > 0 && (
+          <div style={{ marginTop: '5rem', paddingTop: '3rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#00f0ff', letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
+              CONTINUE READING
+            </span>
+            <h3 className="font-heading" style={{ fontSize: '1.5rem', fontWeight: 800, color: '#ffffff', margin: '0.3rem 0 1.75rem' }}>
+              Related Threat Analyses & Research
+            </h3>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+              {relatedList.map((rel) => (
+                <div
+                  key={rel.slug}
+                  onClick={() => onNavigate(`/${rel.category}/${rel.slug}`)}
+                  className="glass-panel"
+                  style={{ padding: '1.5rem', cursor: 'pointer', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
+                >
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.65rem' }}>
+                      <span style={{ fontSize: '0.68rem', color: '#00f0ff', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                        {rel.categoryName}
+                      </span>
+                      <ClaimBadge status={rel.claimStatus || "ANALYSIS"} size="small" />
+                    </div>
+                    <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#ffffff', lineHeight: 1.35, marginBottom: '0.5rem' }}>
+                      {rel.title}
+                    </h4>
+                    <p style={{ fontSize: '0.8rem', color: '#94a3b8', margin: 0, lineHeight: 1.5 }}>
+                      {rel.excerpt}
+                    </p>
+                  </div>
+                  <div style={{ marginTop: '1rem', paddingTop: '0.65rem', borderTop: '1px solid rgba(255, 255, 255, 0.05)', fontSize: '0.75rem', color: '#64748b', display: 'flex', justifyContent: 'space-between' }}>
+                    <span>{rel.publishedAt}</span>
+                    <span style={{ color: '#00f0ff' }}>{rel.readingTime}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
-    </div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .article-grid { grid-template-columns: 1fr !important; }
+          .article-sidebar { display: none !important; }
+        }
+      `}</style>
+    </article>
   );
 }

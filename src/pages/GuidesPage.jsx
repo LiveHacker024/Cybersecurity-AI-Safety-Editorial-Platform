@@ -4,6 +4,8 @@ import { guidesData, getGuideBySlug } from '../data/guides';
 import { updateMetaTags, generateBreadcrumbSchema } from '../utils/seo';
 import AdSlot from '../components/ads/AdSlot';
 
+import { siteConfig } from '../config/site';
+
 export default function GuidesPage({ selectedGuideSlug, onNavigate }) {
   const selectedGuide = selectedGuideSlug ? getGuideBySlug(selectedGuideSlug) : null;
   const [completedSteps, setCompletedSteps] = useState({});
@@ -12,24 +14,24 @@ export default function GuidesPage({ selectedGuideSlug, onNavigate }) {
     window.scrollTo(0, 0);
     if (selectedGuide) {
       updateMetaTags({
-        title: `${selectedGuide.title} — HackWithKunal Defensive Guide`,
+        title: `${selectedGuide.title} — ${siteConfig.name} Defensive Guide`,
         description: selectedGuide.summary,
-        keywords: `cybersecurity guide, ${selectedGuide.title}, Kunal Rajput, HackWithKunal`,
+        keywords: `cybersecurity guide, ${selectedGuide.title}, Kunal Rajput, HackWithKunal, CyberAI Watch`,
         image: selectedGuide.heroImage,
         schema: generateBreadcrumbSchema([
-          { name: "Home", url: "https://hackwithkunal.com" },
-          { name: "Guides", url: "https://hackwithkunal.com/guides" },
+          { name: "Home", url: `${siteConfig.domain}` },
+          { name: "Guides", url: `${siteConfig.domain}/tutorials` },
           { name: selectedGuide.title, url: window.location.href }
         ])
       });
     } else {
       updateMetaTags({
-        title: "Defensive Cybersecurity & Privacy Guides — HackWithKunal",
+        title: `Defensive Cybersecurity & Privacy Guides — ${siteConfig.name}`,
         description: "Field-tested, non-malicious hardening tutorials to secure your accounts, audit device permissions, and safeguard personal privacy.",
-        keywords: "cybersecurity guides, hardening, Gmail 2FA, Android security, WhatsApp lockdown, Kunal Rajput",
+        keywords: "cybersecurity guides, hardening, Gmail 2FA, Android security, WhatsApp lockdown, Kunal Rajput, CyberAI Watch",
         schema: generateBreadcrumbSchema([
-          { name: "Home", url: "https://hackwithkunal.com" },
-          { name: "Guides", url: window.location.href }
+          { name: "Home", url: `${siteConfig.domain}` },
+          { name: "Guides", url: `${siteConfig.domain}/tutorials` }
         ])
       });
     }

@@ -1,0 +1,2 @@
+# CyberAI Watch ads.txt
+# Populate when Google AdSense account publisher ID is configured.

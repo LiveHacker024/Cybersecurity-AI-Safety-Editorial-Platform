@@ -1,19 +1,20 @@
 export const founderData = {
   name: "Kunal Rajput",
   roles: [
-    "Founder & Editor — HackWithKunal",
-    "Founder — VANIX",
-    "Cybersecurity Professional",
+    "Founder & Editor-in-Chief — CyberAI Watch",
+    "Creator — HackWithKunal",
+    "Cybersecurity Professional & Security Researcher",
     "Junior Penetration Tester"
   ],
-  role: "Founder & Editor — HackWithKunal",
-  company: "HackWithKunal & VANIX",
-  bio: "Kunal Rajput is a cybersecurity professional, junior penetration tester, digital technology builder, and the founder and editor of HackWithKunal and founder of VANIX. He focuses on explaining digital threats, AI safety risks, defensive security protocols, and engineering modern digital growth solutions.",
-  aboutMe: "I am a dedicated cybersecurity practitioner, technologist, and digital solutions architect with a strong focus on defensive security, AI safety, and interactive web development. Through HackWithKunal, I direct an independent editorial publication committed to demystifying technical vulnerabilities, data privacy, and emerging AI threats. Through VANIX, I lead digital transformation and web technology initiatives including AI-powered web applications, 3D interactive interfaces, e-commerce development, and business growth technology.",
-  shortBio: "Founder & Editor of HackWithKunal and Founder of VANIX. Specializing in educational cybersecurity, AI safety analysis, and high-performance digital technology.",
-  location: "Shamli, Uttar Pradesh, India",
-  email: "livehacker024@gmail.com",
-  vanixContact: "9457727770",
+  role: "Founder & Editor-in-Chief — CyberAI Watch",
+  company: "CyberAI Watch",
+  personalBrand: "HackWithKunal",
+  bio: "Kunal Rajput is a cybersecurity professional, AI safety researcher, and the founder and editor-in-chief of CyberAI Watch and HackWithKunal. He focuses on explaining digital threats, AI safety risks, defensive security engineering, vulnerability triage, and responsible cyber education.",
+  aboutMe: "I am a dedicated cybersecurity practitioner, technologist, and digital researcher with a strong focus on defensive security, AI safety, and interactive web technologies. Through CyberAI Watch and HackWithKunal, I direct an independent international editorial publication committed to demystifying technical vulnerabilities, data privacy, and emerging AI threats through responsible, source-backed journalism and hands-on defensive tutorials.",
+  shortBio: "Founder & Editor-in-Chief of CyberAI Watch and Creator of HackWithKunal. Specializing in defensive cybersecurity, AI safety analysis, and actionable digital security education.",
+  location: "India",
+  email: "editorial@cyberaiwatch.com",
+  contactEmail: "livehacker024@gmail.com",
   socials: {
     youtube: "https://www.youtube.com/@HackWithKunal",
     youtubeHandle: "@HackWithKunal",
@@ -21,25 +22,24 @@ export const founderData = {
   },
   experience: [
     {
-      company: "VANIX",
-      role: "Founder & Lead Consultant",
-      period: "2024 – Present",
-      description: "Founded VANIX as a digital technology and growth-focused venture. Leading development of AI-powered web applications, interactive 3D web experiences, e-commerce platforms, custom web architectures, digital branding, and strategic business growth technology.",
-      highlights: [
-        "Architecting AI-powered and 3D web applications with modern frameworks (React, Three.js, Node.js).",
-        "Developing tailored digital solutions and e-commerce platforms focused on technical performance and conversion.",
-        "Providing technical consultancy in digital branding and growth-oriented web technology."
-      ]
-    },
-    {
-      company: "HACKWITHKUNAL",
-      role: "Founder & Editor",
+      company: "CyberAI Watch",
+      role: "Founder & Editor-in-Chief",
       period: "2025 – Present",
-      description: "Directing an independent cybersecurity and AI safety editorial platform. Publishing rigorous, educational, defensive security research, threat advisories, and practical privacy guides.",
+      description: "Directing an independent international cybersecurity and AI safety editorial publication. Publishing rigorous, educational, defensive security research, CVE triage, and practical privacy guides.",
       highlights: [
         "Authoring deep-dive analyses on AI agent attack surfaces, prompt injection vectors, and ransomware extortion lifecycles.",
         "Engineering client-side cryptographic security tools using the Web Crypto API for zero-telemetry in-browser utility.",
-        "Maintaining strict source-based reporting standards and transparent editorial guidelines."
+        "Maintaining strict source-based reporting standards and transparent editorial guidelines with explicit claim-verification tagging."
+      ]
+    },
+    {
+      company: "HackWithKunal",
+      role: "Founder & Content Lead",
+      period: "2024 – Present",
+      description: "Creating practical cybersecurity tutorials, vulnerability walkthroughs, and AI safety awareness content across digital channels and video platforms.",
+      highlights: [
+        "Producing non-destructive cybersecurity video tutorials focusing on ethical security testing and defensive lab setups.",
+        "Educating developers and tech enthusiasts on modern threat mitigation, authentication hygiene, and safe AI integration."
       ]
     }
   ],
@@ -54,13 +54,11 @@ export const founderData = {
     "Client-Side Cryptography (Web Crypto API)"
   ],
   digitalSkills: [
-    "AI-Powered Web Application Development",
+    "Full-Stack Frontend Architecture (React, Vite, JavaScript, TypeScript)",
     "Interactive 3D Web Development (Three.js, WebGL)",
-    "Full-Stack Frontend Architecture (React, Vite, JavaScript)",
-    "E-Commerce Architecture & Modern CMS Integration",
-    "Digital Branding & UI/UX Systems Design",
     "Technical Editorial Writing & Security Journalism",
-    "Search Engine Optimization (SEO) & Core Web Vitals"
+    "Search Engine Optimization (SEO) & Core Web Vitals",
+    "Information Security Architecture"
   ],
   certifications: [
     { title: "Certified Ethical Hacker (CEH) Training", issuer: "ASD Academy", year: "2025" },
@@ -75,14 +73,9 @@ export const founderData = {
   },
   projects: [
     {
-      name: "HackWithKunal Platform",
+      name: "CyberAI Watch Editorial Platform",
       category: "Cybersecurity & AI Safety Editorial Publication",
-      desc: "Full-scale independent publication platform featuring interactive 3D threat intelligence radar, in-browser cryptographic tools, and comprehensive defensive guides."
-    },
-    {
-      name: "VANIX Digital Web Solutions",
-      category: "Digital Technology & Business Growth",
-      desc: "AI-powered web platforms, interactive 3D web interfaces, and e-commerce systems tailored for business growth."
+      desc: "Full-scale independent international publication platform featuring real-time CVE tracking, interactive 3D threat intelligence radar, in-browser cryptographic tools, and comprehensive defensive guides."
     },
     {
       name: "Client-Side Cryptographic Security Suite",
@@ -100,5 +93,5 @@ export const founderData = {
     badge: "/assets/founder/founder-badge.png",
     video: "/assets/founder/founder-intro.mp4"
   },
-  editorialPledge: "HackWithKunal focuses on responsible cybersecurity education and does not publish content intended to facilitate unauthorized access, credential theft, malware deployment, or cyber abuse. All editorial analysis prioritizes technical accuracy, source transparency, and defensive empowerment."
+  editorialPledge: "CyberAI Watch focuses strictly on responsible cybersecurity journalism and defensive education. We do not publish content intended to facilitate unauthorized access, credential theft, malware deployment, or cyber abuse. All editorial analysis prioritizes technical accuracy, source transparency, and defensive empowerment."
 };

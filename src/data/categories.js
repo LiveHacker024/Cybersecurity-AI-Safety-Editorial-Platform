@@ -5,70 +5,88 @@ export const categoriesData = [
     name: "Cybersecurity",
     badge: "Cyber Defense",
     color: "cyan",
-    tagline: "Vulnerability analysis, threat intelligence, enterprise defense, and CVE tracking.",
-    description: "In-depth technical coverage of vulnerability discoveries, zero-day research, defensive engineering, and actionable threat mitigations for modern systems."
+    tagline: "Vulnerability analysis, zero-days, enterprise defense, and CVE tracking.",
+    description: "In-depth technical coverage of vulnerability discoveries, zero-day research, defensive engineering, and actionable threat mitigations for modern systems.",
+    subcategories: ["Data Breaches", "Ransomware", "Malware", "Phishing", "Zero-Days", "Vulnerabilities", "Android Security", "API Security", "Web Security", "Cloud Security", "Network Security", "Identity Security", "Digital Forensics", "Supply Chain Security", "Enterprise Security"]
   },
   {
     id: "ai-safety",
     slug: "ai-safety",
     name: "AI Safety",
-    badge: "AI Defense",
+    badge: "AI Safety Hub",
     color: "purple",
-    tagline: "LLM guardrails, autonomous agent security, prompt injection defense, and alignment.",
-    description: "Investigating the security perimeter of artificial intelligence: red-teaming foundation models, mitigating agentic hijacking, and establishing robust AI governance frameworks."
+    tagline: "LLM guardrails, autonomous agent risks, prompt injection defense, and alignment.",
+    description: "Investigating the safety perimeter of artificial intelligence: red-teaming foundation models, mitigating agentic hijacking, AI misuse prevention, and establishing robust AI governance frameworks.",
+    subcategories: ["AI Misuse", "AI Agents", "Agentic AI Security", "Prompt Injection", "Model Security", "AI Privacy", "AI Red Teaming", "AI Governance", "AI Cyber Attacks", "AI-Powered Scams", "AI Supply-Chain Security", "Model Theft", "Data Poisoning", "Jailbreak Research", "AI Safety Research"]
   },
   {
-    id: "ai-news",
-    slug: "ai-news",
-    name: "AI News & Tools",
-    badge: "Intelligence",
+    id: "ai-security",
+    slug: "ai-security",
+    name: "AI Security",
+    badge: "Model Defense",
     color: "sky",
-    tagline: "Breakthroughs in artificial intelligence, agent workflows, and practical security tools.",
-    description: "Curated reporting on frontier AI model releases, autonomous agent frameworks, enterprise AI tooling, and safety benchmarks."
+    tagline: "LLM security, RAG poisoning protection, agent sandbox isolation, and API hardening.",
+    description: "Defensive engineering for artificial intelligence applications: protecting RAG pipelines against indirect prompt injection, securing AI model endpoints, and implementing strict access controls.",
+    subcategories: ["LLM Security", "AI Application Security", "Prompt Injection Defense", "Indirect Prompt Injection", "RAG Security", "Agent Security", "API Security for AI", "Model Access Control", "Secrets Protection", "AI Data Leakage", "AI Infrastructure Security", "AI Threat Modeling", "AI Red Teaming"]
+  },
+  {
+    id: "threat-intelligence",
+    slug: "threat-intelligence",
+    name: "Threat Intelligence",
+    badge: "Threat Intel",
+    color: "emerald",
+    tagline: "Nation-state campaigns, malware reverse-engineering, and adversary tracking.",
+    description: "Actionable digital intelligence dissecting active advanced persistent threats (APTs), malware campaigns, command-and-control infrastructures, and global indicators of compromise (IoCs).",
+    subcategories: ["APT Campaigns", "Malware Analysis", "C2 Infrastructure", "Dark Web Recon", "IoC Trackers", "Ransomware Groups", "Threat Actor Profiles"]
+  },
+  {
+    id: "vulnerabilities",
+    slug: "vulnerabilities",
+    name: "Vulnerabilities",
+    badge: "CVE Tracker",
+    color: "red",
+    tagline: "Real-time CVE triage, CVSS scoring, proof-of-concept analysis, and vendor patches.",
+    description: "Structured vulnerability repository and advisory center backed by official CISA KEV and NVD data with step-by-step remediation protocols.",
+    subcategories: ["Critical CVEs", "CISA KEV Catalog", "Zero-Days", "Patch Advisories", "CVSS 9.0+", "Exploit Disclosures"]
   },
   {
     id: "privacy",
     slug: "privacy",
-    name: "Privacy & Data",
-    badge: "Data Privacy",
+    name: "Privacy & Digital Security",
+    badge: "Data Sovereignty",
     color: "emerald",
-    tagline: "Data sovereignity, end-to-end encryption, surveillance defense, and identity protection.",
-    description: "Actionable strategies and investigative reporting on consumer data privacy, corporate surveillance, telemetry opt-outs, and zero-knowledge technologies."
+    tagline: "Data sovereignty, zero-telemetry utilities, end-to-end encryption, and metadata defense.",
+    description: "Actionable strategies and investigative reporting on consumer data privacy, corporate surveillance, telemetry opt-outs, secure communications, and zero-knowledge technologies.",
+    subcategories: ["Data Sovereignty", "Encryption", "Surveillance Defense", "Identity Protection", "Metadata Scrubbing", "Zero-Telemetry Tools"]
   },
   {
-    id: "technology",
-    slug: "technology",
-    name: "Technology & Hardware",
-    badge: "Hardware & Tech",
+    id: "tutorials",
+    slug: "tutorials",
+    name: "Tutorials & How-To",
+    badge: "Defensive Labs",
     color: "amber",
-    tagline: "Apple silicon security, mobile ecosystems, cloud infrastructure, and chip architecture.",
-    description: "Deep technical analysis of consumer hardware, secure enclaves, mobile OS sandboxes, and modern operating system security architectures."
+    tagline: "Evergreen, defensive step-by-step hardening manuals for individuals and security teams.",
+    description: "Responsible, non-malicious tutorials designed to secure your accounts, audit device permissions, configure hardware keys, build secure labs, and safeguard personal data.",
+    subcategories: ["Defensive Hardening", "Lab Setup", "Hardware Security Keys", "Cryptographic Utilities", "Network Hardening", "OS Hardening"]
   },
   {
-    id: "finance-tech",
-    slug: "finance-tech",
-    name: "FinTech Security",
-    badge: "Market Tech",
-    color: "emerald",
-    tagline: "Stock market trading infrastructure, algorithmic security, and banking resilience.",
-    description: "Investigating algorithmic high-frequency trading security, banking API fortifications, fraud detection neural nets, and cryptocurrency threat vectors."
-  },
-  {
-    id: "guides",
-    slug: "guides",
-    name: "Security Guides",
-    badge: "Actionable Guides",
-    color: "rose",
-    tagline: "Evergreen, defensive step-by-step hardening manuals for individuals and teams.",
-    description: "Field-tested, non-malicious tutorials designed to secure your accounts, audit device permissions, configure hardware keys, and safeguard personal privacy."
+    id: "analysis",
+    slug: "analysis",
+    name: "Latest Analysis",
+    badge: "Deep Dives",
+    color: "purple",
+    tagline: "Rigorous technical dissections, architectural critiques, and policy investigations.",
+    description: "Long-form editorial research examining the intersection of emerging technologies, national cyber policies, cryptographic failures, and foundation model safety.",
+    subcategories: ["Architectural Reviews", "Policy Deep Dives", "Cryptographic Analysis", "Attack Surface Audits"]
   },
   {
     id: "news",
     slug: "news",
     name: "Global Threat Wire",
-    badge: "Live Wire",
+    badge: "News Wire",
     color: "rose",
-    tagline: "Fast-breaking breach alerts, malware campaigns, and regulatory security updates.",
-    description: "Timely, verified reports on global cyber incidents, ransomware negotiations, law enforcement takedowns, and international cybersecurity policy."
+    tagline: "Fast-breaking verified cyber incident reports, law enforcement actions, and security bulletins.",
+    description: "Timely, verified reports on global cyber incidents, ransomware disruptions, law enforcement takedowns, and international cybersecurity policy updates.",
+    subcategories: ["Breach Alerts", "Law Enforcement Takedowns", "Regulatory Actions", "Security Bulletins"]
   }
 ];

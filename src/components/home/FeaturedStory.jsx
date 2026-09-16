@@ -1,188 +1,186 @@
 import React from 'react';
-import { Clock, Calendar, User, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
-import { getFeaturedArticle } from '../../data/articles';
+import { Clock, User, ArrowRight, ShieldCheck, Tag } from 'lucide-react';
+import { getAllArticles } from '../../utils/storage';
+import ClaimBadge from '../common/ClaimBadge';
 
 export default function FeaturedStory({ onNavigate }) {
-  const article = getFeaturedArticle();
+  const allArticles = getAllArticles().filter(a => a.status === 'PUBLISHED');
+  const leadArticle = allArticles.find(a => a.featured) || allArticles[0];
+  const secondaryArticles = allArticles.filter(a => a.slug !== leadArticle?.slug).slice(0, 2);
+
+  if (!leadArticle) return null;
 
   return (
-    <section style={{ padding: '4.5rem 0 2.5rem' }}>
+    <section style={{ padding: '3.5rem 0 2rem' }}>
       <div className="container-custom">
-        {/* Section Title */}
+        {/* Section Heading */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.75rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-            <span style={{ width: '4px', height: '24px', background: '#00f0ff', borderRadius: '2px' }} />
-            <h2 className="font-heading" style={{ fontSize: '1.4rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#f8fafc' }}>
-              Lead Editorial Investigation
+          <div>
+            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#00f0ff', letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
+              EDITORIAL SPOTLIGHT
+            </span>
+            <h2 className="font-heading" style={{ fontSize: '1.6rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+              Top Stories & Primary Investigations
             </h2>
           </div>
-          <span style={{ fontSize: '0.8rem', color: '#00f0ff', fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-            <Sparkles size={14} /> FEATURED EDITORIAL
-          </span>
         </div>
 
-        {/* Large Editorial Card */}
+        {/* Lead Story + Secondary Grid */}
         <div
-          className="glass-panel"
-          onClick={() => onNavigate(`/${article.category}/${article.slug}`)}
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            borderRadius: '16px',
-            overflow: 'hidden',
-            cursor: 'pointer',
-            border: '1px solid rgba(56, 189, 248, 0.25)',
-            background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(10, 15, 29, 0.95) 100%)'
+            gap: '1.75rem',
+            alignItems: 'stretch'
           }}
         >
-          {/* Media Column (Image + Hover Zoom) */}
+          {/* Primary Lead Article Card */}
           <div
+            onClick={() => onNavigate(`/${leadArticle.category}/${leadArticle.slug}`)}
+            className="glass-panel"
             style={{
+              padding: '2rem',
+              cursor: 'pointer',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              gridColumn: 'span 2',
               position: 'relative',
-              minHeight: '340px',
               overflow: 'hidden'
             }}
           >
-            <img
-              src={article.heroImage}
-              alt={article.title}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
-              }}
-              className="featured-media-img"
-            />
-            {/* Dark gradient overlay for text protection */}
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'linear-gradient(to right, transparent 60%, rgba(15, 23, 42, 0.9) 100%)'
-              }}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                top: '1.25rem',
-                left: '1.25rem',
-                zIndex: 2
-              }}
-            >
-              <span className="cyber-badge-purple" style={{ padding: '0.35rem 0.75rem', fontSize: '0.75rem', fontWeight: 700 }}>
-                {article.badge}
-              </span>
-            </div>
-          </div>
-
-          {/* Editorial Content Column */}
-          <div
-            style={{
-              padding: '2.5rem',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between'
-            }}
-          >
             <div>
-              {/* Category & Read Time */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginBottom: '1rem' }}>
-                <span className="cyber-badge" style={{ fontSize: '0.75rem' }}>
-                  {article.categoryName}
+              {/* Badges Row */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+                <span
+                  style={{
+                    padding: '0.2rem 0.6rem',
+                    borderRadius: '4px',
+                    background: 'rgba(0, 240, 255, 0.15)',
+                    border: '1px solid rgba(0, 240, 255, 0.35)',
+                    color: '#00f0ff',
+                    fontSize: '0.72rem',
+                    fontWeight: 700,
+                    fontFamily: 'var(--font-mono)'
+                  }}
+                >
+                  {leadArticle.categoryName}
                 </span>
-                <span style={{ fontSize: '0.8rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                  <Clock size={14} /> {article.readingTime}
-                </span>
-                <span style={{ fontSize: '0.8rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                  <Calendar size={14} /> {article.publishedAt}
-                </span>
+                <ClaimBadge status={leadArticle.claimStatus || "ANALYSIS"} />
               </div>
 
-              {/* Headline */}
+              {/* Title */}
               <h3
                 className="font-heading"
                 style={{
-                  fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
+                  fontSize: 'clamp(1.4rem, 2.5vw, 1.85rem)',
                   fontWeight: 800,
-                  lineHeight: 1.25,
                   color: '#ffffff',
-                  marginBottom: '1rem',
-                  letterSpacing: '-0.02em',
-                  transition: 'color 0.2s ease'
+                  lineHeight: 1.25,
+                  marginBottom: '1rem'
                 }}
               >
-                {article.title}
+                {leadArticle.title}
               </h3>
 
               {/* Excerpt */}
-              <p
-                style={{
-                  color: '#94a3b8',
-                  fontSize: '1rem',
-                  lineHeight: 1.65,
-                  marginBottom: '1.75rem'
-                }}
-              >
-                {article.excerpt}
+              <p style={{ fontSize: '0.95rem', color: '#94a3b8', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+                {leadArticle.subtitle || leadArticle.excerpt}
               </p>
             </div>
 
-            {/* Author Footer & CTA */}
+            {/* Author & Meta Footer */}
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                paddingTop: '1.5rem',
-                borderTop: '1px solid #1e293b'
+                paddingTop: '1.25rem',
+                borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                flexWrap: 'wrap',
+                gap: '0.75rem'
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
                 <img
-                  src={article.author.avatar}
-                  alt={article.author.name}
-                  style={{
-                    width: '42px',
-                    height: '42px',
-                    borderRadius: '50%',
-                    objectFit: 'cover',
-                    border: '2px solid #00f0ff'
-                  }}
+                  src={leadArticle.author?.avatar || "/assets/founder/founder-photo.png"}
+                  alt={leadArticle.author?.name}
+                  style={{ width: '34px', height: '34px', borderRadius: '50%', border: '1px solid #00f0ff' }}
                 />
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                    {article.author.name} <ShieldCheck size={14} color="#00f0ff" />
+                  <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f8fafc' }}>
+                    {leadArticle.author?.name}
                   </div>
-                  <div style={{ fontSize: '0.75rem', color: '#64748b' }}>
-                    {article.author.role}
+                  <div style={{ fontSize: '0.72rem', color: '#64748b' }}>
+                    {leadArticle.publishedAt}
                   </div>
                 </div>
               </div>
 
-              <span
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <span style={{ fontSize: '0.78rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                  <Clock size={13} />
+                  {leadArticle.readingTime}
+                </span>
+                <span style={{ fontSize: '0.825rem', color: '#00f0ff', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                  <span>Read Investigation</span>
+                  <ArrowRight size={14} />
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Secondary Lead Column */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            {secondaryArticles.map((art) => (
+              <div
+                key={art.slug}
+                onClick={() => onNavigate(`/${art.category}/${art.slug}`)}
+                className="glass-panel"
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.4rem',
-                  color: '#00f0ff',
-                  fontWeight: 700,
-                  fontSize: '0.9rem',
-                  fontFamily: 'var(--font-display)'
+                  padding: '1.5rem',
+                  cursor: 'pointer',
+                  flex: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between'
                 }}
               >
-                Read Deep Dive <ArrowRight size={16} />
-              </span>
-            </div>
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                    <span
+                      style={{
+                        padding: '0.15rem 0.5rem',
+                        borderRadius: '4px',
+                        background: 'rgba(255, 255, 255, 0.08)',
+                        color: '#cbd5e1',
+                        fontSize: '0.68rem',
+                        fontWeight: 700,
+                        fontFamily: 'var(--font-mono)'
+                      }}
+                    >
+                      {art.categoryName}
+                    </span>
+                    <ClaimBadge status={art.claimStatus || "CONFIRMED FACT"} size="small" />
+                  </div>
+
+                  <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#ffffff', lineHeight: 1.35, marginBottom: '0.6rem' }}>
+                    {art.title}
+                  </h4>
+                  <p style={{ fontSize: '0.825rem', color: '#94a3b8', lineHeight: 1.5, margin: 0 }}>
+                    {art.excerpt}
+                  </p>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px solid rgba(255, 255, 255, 0.05)', fontSize: '0.75rem', color: '#64748b' }}>
+                  <span>{art.publishedAt}</span>
+                  <span style={{ color: '#00f0ff', fontWeight: 600 }}>{art.readingTime}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-
-      <style>{`
-        .glass-panel:hover .featured-media-img {
-          transform: scale(1.05);
-        }
-      `}</style>
     </section>
   );
 }

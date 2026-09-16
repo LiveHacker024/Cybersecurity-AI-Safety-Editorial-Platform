@@ -1,62 +1,48 @@
 import React from 'react';
-import { Shield, Lock, Terminal, Mail, CheckCircle, ExternalLink, Heart } from 'lucide-react';
-import { YoutubeIcon, LinkedinIcon } from '../common/SocialIcons';
-import { founderData } from '../../data/founder';
+import { Shield, Rss, FileText, Lock, ExternalLink, Globe2 } from 'lucide-react';
+import { Youtube, Linkedin } from '../common/SocialIcons';
+import { siteConfig } from '../../config/site';
 
 export default function Footer({ onNavigate }) {
   const currentYear = new Date().getFullYear();
 
+  const handleLinkClick = (path) => {
+    onNavigate(path);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <footer
       style={{
-        background: 'rgba(3, 6, 14, 0.98)',
+        background: '#030712',
         borderTop: '1px solid rgba(56, 189, 248, 0.15)',
-        paddingTop: '4.5rem',
-        paddingBottom: '2.5rem',
-        position: 'relative',
-        overflow: 'hidden'
+        color: '#94a3b8',
+        padding: '4.5rem 0 2.5rem',
+        marginTop: 'auto'
       }}
     >
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '800px',
-          height: '1px',
-          background: 'radial-gradient(ellipse, #00f0ff 0%, transparent 70%)',
-          opacity: 0.6
-        }}
-      />
-
       <div className="container-custom">
+        {/* Main Footer Grid */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
             gap: '3rem',
             marginBottom: '3.5rem'
           }}
         >
-          {/* Column 1: Brand & Positioning */}
-          <div>
+          {/* Column 1: Brand & Editorial Identity */}
+          <div style={{ gridColumn: 'span 1' }}>
             <div
-              onClick={() => onNavigate('/')}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.75rem',
-                cursor: 'pointer',
-                marginBottom: '1rem'
-              }}
+              onClick={() => handleLinkClick('/')}
+              style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '1rem', cursor: 'pointer' }}
             >
               <div
                 style={{
                   width: '36px',
                   height: '36px',
                   borderRadius: '8px',
-                  background: 'linear-gradient(135deg, rgba(0, 240, 255, 0.2) 0%, rgba(2, 132, 199, 0.4) 100%)',
+                  background: 'linear-gradient(135deg, rgba(0, 240, 255, 0.25) 0%, rgba(16, 185, 129, 0.3) 100%)',
                   border: '1px solid #00f0ff',
                   display: 'flex',
                   alignItems: 'center',
@@ -65,223 +51,236 @@ export default function Footer({ onNavigate }) {
               >
                 <Shield size={20} color="#00f0ff" />
               </div>
-              <span className="font-heading" style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff' }}>
-                HACKWITH<span style={{ color: '#00f0ff' }}>KUNAL</span>
+              <span className="font-heading" style={{ fontSize: '1.2rem', fontWeight: 900, color: '#ffffff' }}>
+                CYBER<span style={{ color: '#00f0ff' }}>AI</span> WATCH
               </span>
             </div>
 
-            <div style={{ fontSize: '0.8rem', color: '#00f0ff', fontFamily: 'var(--font-mono)', fontWeight: 600, marginBottom: '1rem', letterSpacing: '0.04em' }}>
-              Cybersecurity • AI Safety • Privacy • Technology
-            </div>
-
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>
-              Independent cybersecurity and artificial intelligence safety publication. Dedicated to defensive research, vulnerability awareness, and secure digital architecture.
+            <p style={{ fontSize: '0.85rem', lineHeight: 1.6, color: '#94a3b8', marginBottom: '1.25rem' }}>
+              Independent international editorial publication covering cybersecurity journalism, AI safety research, vulnerability triage, and defensive digital engineering.
             </p>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <a
-                href={founderData.socials.youtube}
+                href={siteConfig.socials.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '8px',
+                  background: 'rgba(239, 68, 68, 0.12)',
+                  border: '1px solid rgba(239, 68, 68, 0.35)',
+                  color: '#f87171',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.4rem',
-                  padding: '0.45rem 0.75rem',
-                  borderRadius: '6px',
-                  background: 'rgba(239, 68, 68, 0.15)',
-                  border: '1px solid rgba(239, 68, 68, 0.3)',
-                  color: '#f87171',
-                  fontSize: '0.8rem',
-                  textDecoration: 'none',
-                  fontWeight: 600
+                  justifyContent: 'center',
+                  transition: 'all 0.2s ease'
                 }}
+                title="YouTube — HackWithKunal"
               >
-                <YoutubeIcon size={15} color="#f87171" /> YouTube {founderData.socials.youtubeHandle}
+                <Youtube size={18} />
               </a>
               <a
-                href={founderData.socials.linkedin}
+                href={siteConfig.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '8px',
+                  background: 'rgba(14, 165, 233, 0.12)',
+                  border: '1px solid rgba(14, 165, 233, 0.35)',
+                  color: '#38bdf8',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.4rem',
-                  padding: '0.45rem 0.75rem',
-                  borderRadius: '6px',
-                  background: 'rgba(14, 165, 233, 0.15)',
-                  border: '1px solid rgba(14, 165, 233, 0.3)',
-                  color: '#38bdf8',
-                  fontSize: '0.8rem',
-                  textDecoration: 'none',
-                  fontWeight: 600
+                  justifyContent: 'center',
+                  transition: 'all 0.2s ease'
                 }}
+                title="LinkedIn — Kunal Rajput"
               >
-                <LinkedinIcon size={15} color="#38bdf8" /> LinkedIn
+                <Linkedin size={18} />
+              </a>
+              <a
+                href="/rss.xml"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '8px',
+                  background: 'rgba(245, 158, 11, 0.12)',
+                  border: '1px solid rgba(245, 158, 11, 0.35)',
+                  color: '#fbbf24',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.2s ease'
+                }}
+                title="RSS Editorial Feed"
+              >
+                <Rss size={18} />
               </a>
             </div>
           </div>
 
-          {/* Column 2: Navigation */}
+          {/* Column 2: Editorial Hubs */}
           <div>
-            <h4 className="font-heading" style={{ color: '#f8fafc', fontSize: '0.95rem', fontWeight: 700, marginBottom: '1.25rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-              Navigation
+            <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1.25rem', fontFamily: 'var(--font-mono)' }}>
+              Editorial Hubs
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-              {[
-                { label: "Home", path: "/" },
-                { label: "Cybersecurity", path: "/cybersecurity" },
-                { label: "AI Safety", path: "/ai-safety" },
-                { label: "Privacy", path: "/privacy" },
-                { label: "Technology", path: "/technology" },
-                { label: "Security Guides", path: "/guides" },
-                { label: "About HackWithKunal", path: "/about" },
-                { label: "Contact Tip Line", path: "/contact" }
-              ].map((link) => (
-                <li key={link.path}>
-                  <button
-                    onClick={() => onNavigate(link.path)}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      color: '#94a3b8',
-                      fontSize: '0.875rem',
-                      cursor: 'pointer',
-                      padding: 0,
-                      transition: 'color 0.2s ease',
-                      textAlign: 'left'
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = '#00f0ff'}
-                    onMouseLeave={(e) => e.currentTarget.style.color = '#94a3b8'}
-                  >
-                    {link.label}
-                  </button>
-                </li>
-              ))}
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+              <li>
+                <button onClick={() => handleLinkClick('/cybersecurity')} className="footer-link">Cybersecurity News</button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/ai-safety')} className="footer-link">AI Safety & Risks</button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/ai-security')} className="footer-link">AI Model Security</button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/threat-intelligence')} className="footer-link">Threat Intelligence</button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/vulnerabilities')} className="footer-link">CVE Vulnerability Tracker</button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/privacy')} className="footer-link">Privacy & Encryption</button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/tutorials')} className="footer-link">Defensive Tutorials</button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/analysis')} className="footer-link">Technical Analysis</button>
+              </li>
             </ul>
           </div>
 
-          {/* Column 3: Legal & Standards */}
+          {/* Column 3: Trust & Author */}
           <div>
-            <h4 className="font-heading" style={{ color: '#f8fafc', fontSize: '0.95rem', fontWeight: 700, marginBottom: '1.25rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-              Legal & Standards
+            <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1.25rem', fontFamily: 'var(--font-mono)' }}>
+              Editorial Team
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-              {[
-                { label: "Privacy Policy", path: "/privacy-policy" },
-                { label: "Terms of Service", path: "/terms" },
-                { label: "Cookie Policy", path: "/privacy-policy" },
-                { label: "Educational Disclaimer", path: "/terms" },
-                { label: "Editorial Standards", path: "/editorial-standards" },
-                { label: "Corrections Policy", path: "/editorial-standards" }
-              ].map((link) => (
-                <li key={link.path}>
-                  <button
-                    onClick={() => onNavigate(link.path)}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      color: '#94a3b8',
-                      fontSize: '0.875rem',
-                      cursor: 'pointer',
-                      padding: 0,
-                      transition: 'color 0.2s ease',
-                      textAlign: 'left'
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = '#00f0ff'}
-                    onMouseLeave={(e) => e.currentTarget.style.color = '#94a3b8'}
-                  >
-                    {link.label}
-                  </button>
-                </li>
-              ))}
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+              <li>
+                <button onClick={() => handleLinkClick('/author/kunal-rajput')} className="footer-link">
+                  Kunal Rajput (Founder & Editor)
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/youtube')} className="footer-link">
+                  HackWithKunal Video Hub
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/tools')} className="footer-link">
+                  Zero-Telemetry Security Tools
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/trending')} className="footer-link">
+                  Trending Threat Topics
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/newsletter')} className="footer-link">
+                  Weekly Dispatch Newsletter
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/admin')} className="footer-link" style={{ opacity: 0.6 }}>
+                  Editorial CMS Access
+                </button>
+              </li>
             </ul>
           </div>
 
-          {/* Column 4: Defensive Guidance */}
+          {/* Column 4: Legal & Standards */}
           <div>
-            <h4 className="font-heading" style={{ color: '#f8fafc', fontSize: '0.95rem', fontWeight: 700, marginBottom: '1.25rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-              Defensive Playbooks
+            <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1.25rem', fontFamily: 'var(--font-mono)' }}>
+              Standards & Policies
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-              {[
-                { label: "Secure Your Gmail Account", path: "/guides/how-to-protect-gmail-account" },
-                { label: "Recognize AI Phishing Scams", path: "/guides/how-to-detect-phishing-message" },
-                { label: "Harden WhatsApp Privacy", path: "/guides/how-to-secure-whatsapp-privacy" },
-                { label: "Protect Your Android Device", path: "/guides/how-to-secure-android-phone" },
-                { label: "Password Entropy Analyzer", path: "/tools" },
-                { label: "Phishing URL Inspector", path: "/tools" }
-              ].map((link) => (
-                <li key={link.path}>
-                  <button
-                    onClick={() => onNavigate(link.path)}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      color: '#94a3b8',
-                      fontSize: '0.875rem',
-                      cursor: 'pointer',
-                      padding: 0,
-                      transition: 'color 0.2s ease',
-                      textAlign: 'left'
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = '#00f0ff'}
-                    onMouseLeave={(e) => e.currentTarget.style.color = '#94a3b8'}
-                  >
-                    {link.label}
-                  </button>
-                </li>
-              ))}
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+              <li>
+                <button onClick={() => handleLinkClick('/editorial-policy')} className="footer-link">Editorial Standards & Fact-Check</button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/correction-policy')} className="footer-link">Correction & Retraction Policy</button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/disclaimer')} className="footer-link">Responsible Security Disclaimer</button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/privacy-policy')} className="footer-link">Privacy Policy</button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/terms')} className="footer-link">Terms of Service</button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/cookie-policy')} className="footer-link">Cookie Policy</button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/advertising-policy')} className="footer-link">Advertising & Monetization</button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/contact')} className="footer-link">Contact & Vulnerability Disclosure</button>
+              </li>
             </ul>
           </div>
         </div>
 
-        {/* Ethical Non-Malicious Pledge Callout */}
+        {/* Bottom Attribution & Integrity Row */}
         <div
           style={{
-            padding: '1.25rem',
-            background: 'rgba(15, 23, 42, 0.6)',
-            borderRadius: '10px',
-            border: '1px solid rgba(56, 189, 248, 0.15)',
-            marginBottom: '2.5rem',
+            paddingTop: '2rem',
+            borderTop: '1px solid rgba(255, 255, 255, 0.06)',
             display: 'flex',
-            alignItems: 'flex-start',
-            gap: '1rem'
-          }}
-        >
-          <Lock size={20} color="#00f0ff" style={{ flexShrink: 0, marginTop: '0.2rem' }} />
-          <div style={{ fontSize: '0.825rem', color: '#94a3b8', lineHeight: 1.6 }}>
-            <strong style={{ color: '#f8fafc' }}>ETHICAL RESEARCH STATEMENT:</strong> {founderData.editorialPledge}
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
             alignItems: 'center',
             justifyContent: 'space-between',
+            flexWrap: 'wrap',
             gap: '1rem',
-            paddingTop: '1.5rem',
-            borderTop: '1px solid #1e293b',
-            fontSize: '0.8rem',
+            fontSize: '0.78rem',
             color: '#64748b'
           }}
         >
           <div>
-            © {currentYear} <strong>HackWithKunal</strong>. All rights reserved. Directed by <strong>Kunal Rajput</strong>.
+            © {currentYear} <strong>{siteConfig.name}</strong>. Directed by <strong>{siteConfig.founder.name}</strong> ({siteConfig.founder.brand}). All rights reserved.
           </div>
-          <div style={{ display: 'flex', gap: '1.5rem' }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
-              Security Intel Feed Online
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+            <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" style={{ color: '#64748b', textDecoration: 'none' }}>
+              Sitemap
+            </a>
+            <a href="/robots.txt" target="_blank" rel="noopener noreferrer" style={{ color: '#64748b', textDecoration: 'none' }}>
+              Robots.txt
+            </a>
+            <a href="/ads.txt" target="_blank" rel="noopener noreferrer" style={{ color: '#64748b', textDecoration: 'none' }}>
+              Ads.txt
+            </a>
+            <span style={{ color: '#00f0ff', fontFamily: 'var(--font-mono)' }}>
+              PEOPLE FIRST. SEARCH SECOND.
             </span>
-            <span>AdSense Ready</span>
-            <span>SSL Encrypted</span>
           </div>
         </div>
       </div>
+
+      <style>{`
+        .footer-link {
+          background: transparent;
+          border: none;
+          color: #94a3b8;
+          font-size: 0.85rem;
+          padding: 0;
+          cursor: pointer;
+          text-align: left;
+          transition: all 0.15s ease;
+        }
+        .footer-link:hover {
+          color: #00f0ff;
+          transform: translateX(2px);
+        }
+      `}</style>
     </footer>
   );
 }

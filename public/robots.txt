@@ -1,5 +1,7 @@
+# CyberAI Watch — https://cyberaiwatch.com
 User-agent: *
 Allow: /
-Disallow: /scratch/
+Disallow: /admin
+Disallow: /unsubscribe
 
-Sitemap: https://hackwithkunal.com/sitemap.xml
+Sitemap: https://cyberaiwatch.com/sitemap.xml

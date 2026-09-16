@@ -1,220 +1,149 @@
 import React, { useState } from 'react';
-import { Clock, Calendar, Shield, ArrowRight, Filter, ChevronRight, User } from 'lucide-react';
-import { articlesData } from '../../data/articles';
+import { Clock, ArrowRight, ShieldCheck, Tag, Filter } from 'lucide-react';
+import { getAllArticles } from '../../utils/storage';
+import { categoriesData } from '../../data/categories';
+import ClaimBadge from '../common/ClaimBadge';
 
 export default function LatestNewsGrid({ onNavigate }) {
-  const [selectedFilter, setSelectedFilter] = useState('ALL');
+  const [selectedCat, setSelectedCat] = useState('all');
+  const allArticles = getAllArticles().filter(a => a.status === 'PUBLISHED');
 
-  const filterTabs = [
-    { id: 'ALL', label: 'All Intel' },
-    { id: 'cybersecurity', label: 'Cyber Attack' },
-    { id: 'ai-safety', label: 'AI Security' },
-    { id: 'privacy', label: 'Privacy' },
-    { id: 'technology', label: 'Mobile & Hardware' },
-    { id: 'finance-tech', label: 'FinTech' }
-  ];
-
-  const filteredArticles = selectedFilter === 'ALL'
-    ? articlesData
-    : articlesData.filter(a => a.category === selectedFilter);
+  const filtered = selectedCat === 'all'
+    ? allArticles
+    : allArticles.filter(a => a.category === selectedCat);
 
   return (
     <section style={{ padding: '3.5rem 0' }}>
       <div className="container-custom">
-        {/* Section Header & Category Filter Tabs */}
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '1.5rem',
-            marginBottom: '2.5rem',
-            borderBottom: '1px solid #1e293b',
-            paddingBottom: '1.25rem'
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-            <span style={{ width: '4px', height: '24px', background: '#00f0ff', borderRadius: '2px' }} />
-            <h2 className="font-heading" style={{ fontSize: '1.5rem', fontWeight: 800, color: '#ffffff' }}>
-              Latest Cybersecurity & Threat Intelligence
+        {/* Header & Filter Tabs */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
+          <div>
+            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#00f0ff', letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
+              DISPATCH FEED
+            </span>
+            <h2 className="font-heading" style={{ fontSize: '1.6rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+              Latest Cybersecurity & Threat Analysis
             </h2>
           </div>
 
-          {/* Filter Pills */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-            {filterTabs.map((tab) => {
-              const isActive = selectedFilter === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setSelectedFilter(tab.id)}
-                  style={{
-                    padding: '0.45rem 0.9rem',
-                    borderRadius: '8px',
-                    fontSize: '0.825rem',
-                    fontWeight: 600,
-                    fontFamily: 'var(--font-display)',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                    background: isActive ? 'rgba(0, 240, 255, 0.15)' : 'rgba(15, 23, 42, 0.6)',
-                    color: isActive ? '#00f0ff' : '#94a3b8',
-                    border: isActive ? '1px solid #00f0ff' : '1px solid #1e293b'
-                  }}
-                >
-                  {tab.label}
-                </button>
-              );
-            })}
+          {/* Category Tabs */}
+          <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+            <button
+              onClick={() => setSelectedCat('all')}
+              style={{
+                padding: '0.4rem 0.85rem',
+                borderRadius: '6px',
+                background: selectedCat === 'all' ? '#00f0ff' : 'rgba(15, 23, 42, 0.6)',
+                border: '1px solid ' + (selectedCat === 'all' ? '#00f0ff' : 'rgba(255, 255, 255, 0.1)'),
+                color: selectedCat === 'all' ? '#030712' : '#cbd5e1',
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                cursor: 'pointer'
+              }}
+            >
+              All Topics
+            </button>
+            {categoriesData.slice(0, 5).map(c => (
+              <button
+                key={c.slug}
+                onClick={() => setSelectedCat(c.slug)}
+                style={{
+                  padding: '0.4rem 0.85rem',
+                  borderRadius: '6px',
+                  background: selectedCat === c.slug ? '#00f0ff' : 'rgba(15, 23, 42, 0.6)',
+                  border: '1px solid ' + (selectedCat === c.slug ? '#00f0ff' : 'rgba(255, 255, 255, 0.1)'),
+                  color: selectedCat === c.slug ? '#030712' : '#cbd5e1',
+                  fontSize: '0.8rem',
+                  fontWeight: 700,
+                  cursor: 'pointer'
+                }}
+              >
+                {c.name}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Dynamic Grid Layout with varying card sizes */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
-            gap: '1.75rem'
-          }}
-        >
-          {filteredArticles.map((article, index) => (
-            <article
-              key={article.id}
-              className="glass-panel"
-              onClick={() => onNavigate(`/${article.category}/${article.slug}`)}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                borderRadius: '14px',
-                overflow: 'hidden',
-                cursor: 'pointer',
-                border: '1px solid rgba(56, 189, 248, 0.15)'
-              }}
-            >
-              {/* Card Thumbnail */}
+        {/* Articles Grid */}
+        {filtered.length === 0 ? (
+          <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center' }}>
+            <p style={{ color: '#94a3b8', margin: 0 }}>No published stories in this category yet.</p>
+          </div>
+        ) : (
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+              gap: '1.75rem'
+            }}
+          >
+            {filtered.map(article => (
               <div
-                style={{
-                  position: 'relative',
-                  aspectRatio: '16 / 9',
-                  width: '100%',
-                  overflow: 'hidden'
-                }}
-              >
-                <img
-                  src={article.heroImage}
-                  alt={article.title}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    aspectRatio: '16 / 9',
-                    objectFit: 'cover',
-                    transition: 'transform 0.4s ease'
-                  }}
-                  className="article-card-img"
-                  loading="lazy"
-                />
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '1rem',
-                    left: '1rem'
-                  }}
-                >
-                  <span className="cyber-badge">
-                    {article.categoryName}
-                  </span>
-                </div>
-              </div>
-
-              {/* Card Body */}
-              <div
+                key={article.slug}
+                onClick={() => onNavigate(`/${article.category}/${article.slug}`)}
+                className="glass-panel"
                 style={{
                   padding: '1.5rem',
+                  cursor: 'pointer',
                   display: 'flex',
                   flexDirection: 'column',
-                  flex: 1,
-                  justifyContent: 'space-between'
+                  justifyContent: 'space-between',
+                  transition: 'all 0.2s ease'
                 }}
               >
                 <div>
-                  {/* Meta */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.75rem', fontSize: '0.75rem', color: '#64748b' }}>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                      <Calendar size={13} /> {article.publishedAt}
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                    <span
+                      style={{
+                        padding: '0.15rem 0.5rem',
+                        borderRadius: '4px',
+                        background: 'rgba(0, 240, 255, 0.12)',
+                        color: '#00f0ff',
+                        fontSize: '0.7rem',
+                        fontWeight: 700,
+                        fontFamily: 'var(--font-mono)'
+                      }}
+                    >
+                      {article.categoryName}
                     </span>
-                    <span>•</span>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                      <Clock size={13} /> {article.readingTime}
-                    </span>
+                    <ClaimBadge status={article.claimStatus || "CONFIRMED FACT"} size="small" />
                   </div>
 
-                  {/* Headline */}
-                  <h3
-                    className="font-heading"
-                    style={{
-                      fontSize: '1.15rem',
-                      fontWeight: 700,
-                      lineHeight: 1.4,
-                      color: '#f8fafc',
-                      marginBottom: '0.75rem'
-                    }}
-                  >
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#ffffff', lineHeight: 1.35, marginBottom: '0.75rem' }}>
                     {article.title}
                   </h3>
 
-                  {/* 2-Line Summary */}
-                  <p
-                    style={{
-                      color: '#94a3b8',
-                      fontSize: '0.875rem',
-                      lineHeight: 1.6,
-                      marginBottom: '1.25rem',
-                      display: '-webkit-box',
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: 'vertical',
-                      overflow: 'hidden'
-                    }}
-                  >
+                  <p style={{ fontSize: '0.85rem', color: '#94a3b8', lineHeight: 1.55, marginBottom: '1.25rem' }}>
                     {article.excerpt}
                   </p>
                 </div>
 
-                {/* Author Footer */}
                 <div
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    paddingTop: '1rem',
-                    borderTop: '1px solid #1e293b'
+                    paddingTop: '0.85rem',
+                    borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+                    fontSize: '0.75rem',
+                    color: '#64748b'
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <img
-                      src={article.author.avatar}
-                      alt={article.author.name}
-                      style={{ width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover' }}
+                      src={article.author?.avatar || "/assets/founder/founder-photo.png"}
+                      alt={article.author?.name}
+                      style={{ width: '22px', height: '22px', borderRadius: '50%' }}
                     />
-                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#cbd5e1' }}>
-                      {article.author.name}
-                    </span>
+                    <span>{article.author?.name}</span>
                   </div>
-
-                  <span style={{ color: '#00f0ff', display: 'flex', alignItems: 'center', gap: '0.2rem', fontSize: '0.8rem', fontWeight: 600 }}>
-                    Read <ChevronRight size={14} />
-                  </span>
+                  <span style={{ color: '#00f0ff', fontWeight: 600 }}>{article.readingTime}</span>
                 </div>
               </div>
-            </article>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
-
-      <style>{`
-        .glass-panel:hover .article-card-img {
-          transform: scale(1.06);
-        }
-      `}</style>
     </section>
   );
 }

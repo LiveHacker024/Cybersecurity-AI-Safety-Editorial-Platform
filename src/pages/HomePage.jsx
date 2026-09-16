@@ -1,58 +1,78 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import HeroSection from '../components/home/HeroSection';
 import BreakingTicker from '../components/layout/BreakingTicker';
 import FeaturedStory from '../components/home/FeaturedStory';
 import LatestNewsGrid from '../components/home/LatestNewsGrid';
-import ThreatIntelligence3D from '../components/3d/ThreatIntelligence3D';
+import VulnerabilitiesWidget from '../components/home/VulnerabilitiesWidget';
 import AiBattlefieldSection from '../components/home/AiBattlefieldSection';
+import ThreatIntelligenceSection from '../components/home/ThreatIntelligenceSection';
 import CyberGuidesSection from '../components/home/CyberGuidesSection';
 import SecurityToolsSuite from '../components/tools/SecurityToolsSuite';
+import YouTubeSection from '../components/home/YouTubeSection';
 import FounderTrustSection from '../components/home/FounderTrustSection';
 import NewsletterBox from '../components/home/NewsletterBox';
 import AdSlot from '../components/ads/AdSlot';
+import { updateMetaTags, generateWebsiteSchema } from '../utils/seo';
+import { recordPageView } from '../utils/analytics';
+import { siteConfig } from '../config/site';
 
 export default function HomePage({ onNavigate }) {
-  return (
-    <div style={{ background: '#050811' }}>
-      {/* 3D Hero Section */}
-      <HeroSection onNavigate={onNavigate} />
+  useEffect(() => {
+    updateMetaTags({
+      title: `${siteConfig.name} — ${siteConfig.tagline}`,
+      description: siteConfig.description,
+      schema: generateWebsiteSchema()
+    });
+    recordPageView('/', `${siteConfig.name} — Homepage`);
+  }, []);
 
-      {/* Breaking Cyber Ticker */}
+  return (
+    <div style={{ background: '#030712' }}>
+      {/* 1. Breaking Threat Ticker */}
       <BreakingTicker onSelectArticle={onNavigate} />
 
-      {/* Featured Primary Story */}
+      {/* 2. Hero Section */}
+      <HeroSection onNavigate={onNavigate} />
+
+      {/* 3. Top Stories Spotlight */}
       <FeaturedStory onNavigate={onNavigate} />
 
-      {/* AdSense Unit */}
+      {/* Monetization Slot: Leaderboard */}
       <div className="container-custom">
         <AdSlot type="leaderboard" />
       </div>
 
-      {/* Latest News Feed */}
+      {/* 4 & 5. Latest Cybersecurity News Feed */}
       <LatestNewsGrid onNavigate={onNavigate} />
 
-      {/* 3D Threat Intelligence Matrix */}
-      <ThreatIntelligence3D />
-
-      {/* AI Safety: The Next Cyber Battlefield */}
+      {/* 6 & 7. AI Safety & Model Security Hub Spotlight */}
       <AiBattlefieldSection onNavigate={onNavigate} />
 
-      {/* Evergreen Defensive Guides */}
-      <CyberGuidesSection onNavigate={onNavigate} />
+      {/* 8. Authentic Vulnerabilities & CVE Tracker Widget */}
+      <VulnerabilitiesWidget onNavigate={onNavigate} />
 
-      {/* AdSense Unit */}
+      {/* 9. Threat Intelligence Grid */}
+      <ThreatIntelligenceSection onNavigate={onNavigate} />
+
+      {/* Monetization Slot: Billboard */}
       <div className="container-custom">
         <AdSlot type="billboard" />
       </div>
 
-      {/* Interactive Client-Side Security Tools Suite */}
+      {/* 10. Privacy & Client-Side Zero-Telemetry Tools Suite */}
       <SecurityToolsSuite />
 
-      {/* Founder Editorial Trust Spotlight */}
-      <FounderTrustSection onNavigate={onNavigate} />
+      {/* 12. Defensive Tutorials & Hardening Guides */}
+      <CyberGuidesSection onNavigate={onNavigate} />
 
-      {/* Newsletter Signup */}
+      {/* 14. YouTube & HackWithKunal Video Hub */}
+      <YouTubeSection />
+
+      {/* 15. Weekly Dispatch Newsletter */}
       <NewsletterBox />
+
+      {/* 16. Founder Trust & Editorial Standards */}
+      <FounderTrustSection onNavigate={onNavigate} />
     </div>
   );
 }

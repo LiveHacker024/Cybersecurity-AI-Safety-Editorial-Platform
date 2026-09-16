@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Key, Shield, Send, CheckCircle2, MessageSquare, Copy, Check } from 'lucide-react';
+import { Mail, Key, Shield, Send, CheckCircle2, MessageSquare, Copy, Check, ChevronRight } from 'lucide-react';
 import { founderData } from '../data/founder';
-import { updateMetaTags } from '../utils/seo';
+import { siteConfig } from '../config/site';
+import { updateMetaTags, generateBreadcrumbSchema } from '../utils/seo';
 
-export default function ContactPage() {
+export default function ContactPage({ onNavigate }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,8 +18,12 @@ export default function ContactPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
     updateMetaTags({
-      title: "Contact & Editorial Tip Line — HackWithKunal",
-      description: "Secure contact channel, editorial tips, correction requests, and PGP public key for encrypted communications with Kunal Rajput."
+      title: `Contact Editorial & Security Desk — ${siteConfig.name}`,
+      description: "Secure contact channel, editorial tips, vulnerability disclosures, correction requests, and PGP public key for CyberAI Watch.",
+      schema: generateBreadcrumbSchema([
+        { name: "Home", url: "/" },
+        { name: "Contact Desk", url: "/contact" }
+      ])
     });
   }, []);
 
@@ -29,11 +34,11 @@ export default function ContactPage() {
 
   const pgpKey = `-----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: OpenPGP.js v4.10.10
-Comment: https://hackwithkunal.com/pgp
+Comment: https://cyberaiwatch.com/pgp
 
 mQGNBF+vL8wBDAC7/tK0mPqO7kL4vFk7L9Yp9J9...
 ...[KUNAL RAJPUT SECURITY ENCRYPTED KEY]...
-=HackWithKunal-PGP
+=CyberAIWatch-PGP
 -----END PGP PUBLIC KEY BLOCK-----`;
 
   const copyPgp = () => {
@@ -43,18 +48,27 @@ mQGNBF+vL8wBDAC7/tK0mPqO7kL4vFk7L9Yp9J9...
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#050811', padding: '3.5rem 0 5rem' }}>
-      <div className="container-custom" style={{ maxWidth: '920px' }}>
+    <div style={{ minHeight: '100vh', background: '#050811', padding: '3rem 0 5rem' }}>
+      <div className="container-custom" style={{ maxWidth: '960px' }}>
+        {/* Breadcrumb Navigation */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', color: '#64748b', marginBottom: '2rem' }}>
+          <button onClick={() => onNavigate && onNavigate('/')} style={{ background: 'transparent', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: 0 }}>
+            Home
+          </button>
+          <ChevronRight size={14} />
+          <span style={{ color: '#00f0ff' }}>Contact & Tip Line</span>
+        </div>
+
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
           <div className="cyber-badge" style={{ marginBottom: '1rem' }}>
-            <Mail size={14} /> SECURE COMMUNICATIONS
+            <Mail size={14} /> SECURE COMMUNICATIONS DESK
           </div>
           <h1 className="font-heading" style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3rem)', fontWeight: 800, color: '#ffffff', marginBottom: '1rem' }}>
-            Contact & Threat Intelligence Tip Line
+            Contact &amp; Threat Intelligence Tip Line
           </h1>
           <p style={{ color: '#94a3b8', fontSize: '1.05rem', maxWidth: '640px', margin: '0 auto', lineHeight: 1.6 }}>
-            Have a verified security research tip, vulnerability advisory, correction request, or editorial inquiry? Reach out directly.
+            Have a verified security research tip, vulnerability advisory, correction request, or editorial inquiry? Reach out directly to our editorial and research desk.
           </p>
         </div>
 

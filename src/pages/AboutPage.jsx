@@ -20,33 +20,34 @@ import {
 } from 'lucide-react';
 import { YoutubeIcon, LinkedinIcon } from '../components/common/SocialIcons';
 import { founderData } from '../data/founder';
+import { siteConfig } from '../config/site';
 import { updateMetaTags, generateBreadcrumbSchema } from '../utils/seo';
 
 export default function AboutPage({ onNavigate }) {
   useEffect(() => {
     window.scrollTo(0, 0);
     updateMetaTags({
-      title: "About Kunal Rajput — Founder & Editor of HackWithKunal | Founder of VANIX",
-      description: "Complete professional profile of Kunal Rajput: Founder & Editor of HackWithKunal, Founder of VANIX, Cybersecurity Professional, and Junior Penetration Tester. Technical skills, experience, and editorial integrity.",
-      keywords: "Kunal Rajput, HackWithKunal, VANIX, Cybersecurity Professional, Junior Penetration Tester, AI Safety, Web Development",
+      title: `About Kunal Rajput — Founder & Editor-in-Chief | ${siteConfig.name}`,
+      description: `Complete professional profile of Kunal Rajput: Founder & Editor-in-Chief of CyberAI Watch, creator of HackWithKunal, Cybersecurity Professional, and AI Safety Researcher. Technical skills, experience, and editorial integrity.`,
+      keywords: "Kunal Rajput, CyberAI Watch, HackWithKunal, VANIX, Cybersecurity Professional, Junior Penetration Tester, AI Safety, Threat Intelligence",
       schema: {
         "@context": "https://schema.org",
         "@graph": [
           {
             "@type": "Person",
             "name": founderData.name,
-            "jobTitle": "Founder & Editor — HackWithKunal | Founder — VANIX",
+            "jobTitle": "Founder & Editor-in-Chief — CyberAI Watch",
             "description": founderData.bio,
-            "image": "https://hackwithkunal.com/assets/founder/founder-photo.png",
-            "url": "https://hackwithkunal.com/about",
+            "image": "https://cyberaiwatch.com/assets/founder/founder-photo.png",
+            "url": "https://cyberaiwatch.com/about",
             "sameAs": [
               founderData.socials.youtube,
               founderData.socials.linkedin
             ]
           },
           generateBreadcrumbSchema([
-            { name: "Home", url: "https://hackwithkunal.com" },
-            { name: "About", url: "https://hackwithkunal.com/about" }
+            { name: "Home", url: "https://cyberaiwatch.com" },
+            { name: "About", url: "https://cyberaiwatch.com/about" }
           ])
         ]
       }
