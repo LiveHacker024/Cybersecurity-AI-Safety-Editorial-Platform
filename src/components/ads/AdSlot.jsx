@@ -58,7 +58,7 @@ export default function AdSlot({
           className="adsbygoogle"
           style={{ display: 'block', minHeight }}
           data-ad-client={clientId}
-          data-ad-slot={slotId || "1234567890"}
+          data-ad-slot={slotId || undefined}
           data-ad-format={format}
           data-full-width-responsive="true"
         />
