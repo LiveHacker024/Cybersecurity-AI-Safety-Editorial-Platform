@@ -49,28 +49,30 @@ export default function ConsentBanner() {
       {/* Floating Bottom Consent Banner */}
       {isVisible && !isModalOpen && (
         <div
+          className="consent-banner-card"
           style={{
             position: 'fixed',
-            bottom: '1.5rem',
-            left: '1.5rem',
-            right: '1.5rem',
+            bottom: '1rem',
+            left: '1rem',
+            right: '1rem',
             maxWidth: '920px',
             margin: '0 auto',
             zIndex: 90,
             background: 'rgba(5, 8, 17, 0.95)',
             backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
             border: '1px solid rgba(0, 240, 255, 0.25)',
             borderRadius: '16px',
-            padding: '1.25rem 1.75rem',
+            padding: '1.15rem 1.5rem',
             boxShadow: '0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 240, 255, 0.1)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '1.5rem',
+            gap: '1.25rem',
             flexWrap: 'wrap'
           }}
         >
-          <div style={{ flex: 1, minWidth: '280px' }}>
+          <div style={{ flex: 1, minWidth: '220px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
               <ShieldCheck size={18} color="#00f0ff" />
               <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#ffffff' }}>
@@ -82,22 +84,25 @@ export default function ConsentBanner() {
             </p>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
             <button
               onClick={() => setIsModalOpen(true)}
               style={{
                 background: 'transparent',
                 border: '1px solid rgba(255, 255, 255, 0.15)',
                 color: '#cbd5e1',
-                padding: '0.5rem 0.85rem',
+                padding: '0.45rem 0.75rem',
                 borderRadius: '8px',
                 fontSize: '0.8rem',
                 fontWeight: 600,
-                cursor: 'pointer'
+                cursor: 'pointer',
+                minHeight: '38px',
+                display: 'inline-flex',
+                alignItems: 'center'
               }}
             >
               <Settings size={14} style={{ display: 'inline', marginRight: '0.3rem' }} />
-              Manage Options
+              Manage
             </button>
             <button
               onClick={handleRejectAll}
@@ -105,19 +110,20 @@ export default function ConsentBanner() {
                 background: 'rgba(239, 68, 68, 0.1)',
                 border: '1px solid rgba(239, 68, 68, 0.3)',
                 color: '#f87171',
-                padding: '0.5rem 0.95rem',
+                padding: '0.45rem 0.85rem',
                 borderRadius: '8px',
                 fontSize: '0.8rem',
                 fontWeight: 600,
-                cursor: 'pointer'
+                cursor: 'pointer',
+                minHeight: '38px'
               }}
             >
-              Reject Non-Essential
+              Reject
             </button>
             <button
               onClick={handleAcceptAll}
               className="btn-cyber-primary"
-              style={{ padding: '0.5rem 1.25rem', fontSize: '0.8rem' }}
+              style={{ padding: '0.45rem 1.15rem', fontSize: '0.8rem', minHeight: '38px' }}
             >
               Accept All
             </button>
@@ -134,10 +140,12 @@ export default function ConsentBanner() {
             zIndex: 100,
             background: 'rgba(3, 6, 14, 0.85)',
             backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '1.5rem'
+            padding: '1rem',
+            overflowY: 'auto'
           }}
         >
           <div
@@ -145,32 +153,35 @@ export default function ConsentBanner() {
             style={{
               width: '100%',
               maxWidth: '560px',
-              padding: '2rem',
+              padding: '1.75rem',
               borderRadius: '16px',
-              border: '1px solid rgba(0, 240, 255, 0.25)'
+              border: '1px solid rgba(0, 240, 255, 0.25)',
+              maxHeight: '90vh',
+              overflowY: 'auto'
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                 <ShieldCheck size={22} color="#00f0ff" />
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
                   Cookie Consent Preferences
                 </h3>
               </div>
               <button
                 onClick={() => setIsModalOpen(false)}
-                style={{ background: 'transparent', border: 'none', color: '#94a3b8', cursor: 'pointer' }}
+                style={{ background: 'transparent', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '0.3rem' }}
+                aria-label="Close"
               >
                 <X size={20} />
               </button>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '1.5rem' }}>
               {/* Necessary */}
-              <div style={{ padding: '1rem', background: 'rgba(15, 23, 42, 0.6)', borderRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-                  <span style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.9rem' }}>Strictly Necessary</span>
-                  <span style={{ fontSize: '0.7rem', color: '#10b981', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>ALWAYS ACTIVE</span>
+              <div style={{ padding: '0.85rem', background: 'rgba(15, 23, 42, 0.6)', borderRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.25rem' }}>
+                  <span style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.875rem' }}>Strictly Necessary</span>
+                  <span style={{ fontSize: '0.68rem', color: '#10b981', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>ALWAYS ACTIVE</span>
                 </div>
                 <p style={{ fontSize: '0.78rem', color: '#94a3b8', margin: 0, lineHeight: 1.4 }}>
                   Required for core navigation, security state, and theme rendering. Cannot be disabled.
@@ -178,9 +189,9 @@ export default function ConsentBanner() {
               </div>
 
               {/* Analytics */}
-              <div style={{ padding: '1rem', background: 'rgba(15, 23, 42, 0.6)', borderRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-                  <span style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.9rem' }}>Privacy Analytics</span>
+              <div style={{ padding: '0.85rem', background: 'rgba(15, 23, 42, 0.6)', borderRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.25rem' }}>
+                  <span style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.875rem' }}>Privacy Analytics</span>
                   <input
                     type="checkbox"
                     checked={preferences.analytics}
@@ -194,9 +205,9 @@ export default function ConsentBanner() {
               </div>
 
               {/* Advertising */}
-              <div style={{ padding: '1rem', background: 'rgba(15, 23, 42, 0.6)', borderRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-                  <span style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.9rem' }}>Display Advertising (Google AdSense)</span>
+              <div style={{ padding: '0.85rem', background: 'rgba(15, 23, 42, 0.6)', borderRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.25rem' }}>
+                  <span style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.875rem' }}>Display Advertising (Google AdSense)</span>
                   <input
                     type="checkbox"
                     checked={preferences.advertising}
@@ -210,16 +221,16 @@ export default function ConsentBanner() {
               </div>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.65rem', flexWrap: 'wrap' }}>
               <button
                 onClick={handleRejectAll}
                 style={{
                   background: 'transparent',
                   border: '1px solid rgba(255, 255, 255, 0.15)',
                   color: '#cbd5e1',
-                  padding: '0.55rem 1.25rem',
+                  padding: '0.5rem 1rem',
                   borderRadius: '8px',
-                  fontSize: '0.85rem',
+                  fontSize: '0.825rem',
                   fontWeight: 600,
                   cursor: 'pointer'
                 }}
@@ -229,7 +240,7 @@ export default function ConsentBanner() {
               <button
                 onClick={() => saveConsent(preferences)}
                 className="btn-cyber-primary"
-                style={{ padding: '0.55rem 1.5rem', fontSize: '0.85rem' }}
+                style={{ padding: '0.5rem 1.25rem', fontSize: '0.825rem' }}
               >
                 Save Preferences
               </button>
@@ -237,6 +248,17 @@ export default function ConsentBanner() {
           </div>
         </div>
       )}
+
+      <style>{`
+        @media (max-width: 480px) {
+          .consent-banner-card {
+            padding: 0.85rem 1rem !important;
+            bottom: 0.5rem !important;
+            left: 0.5rem !important;
+            right: 0.5rem !important;
+          }
+        }
+      `}</style>
     </>
   );
 }

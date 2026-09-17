@@ -31,8 +31,8 @@ export default function BreakingTicker({ onSelectArticle }) {
         padding: '0.6rem 0'
       }}
     >
-      <div className="container-custom" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flex: 1, minWidth: '280px' }}>
+      <div className="container-custom" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flex: 1, minWidth: 0 }}>
           <div
             style={{
               display: 'inline-flex',
@@ -52,7 +52,7 @@ export default function BreakingTicker({ onSelectArticle }) {
             }}
           >
             <Zap size={12} />
-            <span>THREAT WIRE</span>
+            <span className="ticker-badge-text">THREAT WIRE</span>
           </div>
 
           <div
@@ -60,15 +60,16 @@ export default function BreakingTicker({ onSelectArticle }) {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '0.6rem',
+              gap: '0.5rem',
               cursor: 'pointer',
               overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap'
+              minWidth: 0
             }}
           >
-            <ClaimBadge status={current.claimStatus || "CONFIRMED FACT"} size="small" />
-            <span style={{ fontSize: '0.825rem', color: '#f8fafc', fontWeight: 600 }}>
+            <div className="ticker-claim-badge" style={{ flexShrink: 0 }}>
+              <ClaimBadge status={current.claimStatus || "CONFIRMED FACT"} size="small" />
+            </div>
+            <span style={{ fontSize: '0.825rem', color: '#f8fafc', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               {current.title}
             </span>
           </div>
@@ -86,7 +87,9 @@ export default function BreakingTicker({ onSelectArticle }) {
               display: 'flex',
               alignItems: 'center',
               gap: '0.2rem',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              padding: '0.2rem 0.4rem',
+              whiteSpace: 'nowrap'
             }}
           >
             <span>Read Story</span>
@@ -94,6 +97,12 @@ export default function BreakingTicker({ onSelectArticle }) {
           </button>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 480px) {
+          .ticker-claim-badge { display: none !important; }
+        }
+      `}</style>
     </div>
   );
 }

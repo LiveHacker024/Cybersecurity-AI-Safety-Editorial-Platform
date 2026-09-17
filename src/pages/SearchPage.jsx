@@ -70,7 +70,7 @@ export default function SearchPage({ onNavigate }) {
 
           {/* Search Input Bar */}
           <div style={{ position: 'relative', maxWidth: '640px', margin: '0 auto' }}>
-            <Search size={20} color="#00f0ff" style={{ position: 'absolute', left: '1.25rem', top: '50%', transform: 'translateY(-50%)' }} />
+            <Search size={18} color="#00f0ff" style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)' }} />
             <input
               type="text"
               autoFocus
@@ -79,12 +79,12 @@ export default function SearchPage({ onNavigate }) {
               onChange={(e) => setQuery(e.target.value)}
               style={{
                 width: '100%',
-                padding: '1rem 3rem 1rem 3.25rem',
+                padding: '0.85rem 2.5rem 0.85rem 2.75rem',
                 background: 'rgba(15, 23, 42, 0.9)',
                 border: '1px solid rgba(0, 240, 255, 0.4)',
                 borderRadius: '12px',
                 color: '#ffffff',
-                fontSize: '1.05rem',
+                fontSize: '1rem',
                 outline: 'none',
                 boxShadow: '0 0 30px rgba(0, 240, 255, 0.15)'
               }}
@@ -92,7 +92,7 @@ export default function SearchPage({ onNavigate }) {
             {query && (
               <button
                 onClick={() => setQuery('')}
-                style={{ position: 'absolute', right: '1.25rem', top: '50%', transform: 'translateY(-50%)', background: 'transparent', border: 'none', color: '#94a3b8', cursor: 'pointer' }}
+                style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'transparent', border: 'none', color: '#94a3b8', cursor: 'pointer' }}
               >
                 <X size={18} />
               </button>

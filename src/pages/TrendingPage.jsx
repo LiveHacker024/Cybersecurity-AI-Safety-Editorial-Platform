@@ -41,14 +41,14 @@ export default function TrendingPage({ onNavigate }) {
         <header
           className="glass-panel"
           style={{
-            padding: '3rem 2.5rem',
+            padding: 'clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem)',
             borderRadius: '16px',
             marginBottom: '3rem',
             border: '1px solid rgba(0, 240, 255, 0.25)',
             background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0, 240, 255, 0.12) 0%, rgba(5, 8, 17, 0.9) 100%)'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
             <span
               style={{
                 padding: '0.2rem 0.65rem',
@@ -81,17 +81,18 @@ export default function TrendingPage({ onNavigate }) {
           <div
             className="glass-panel"
             style={{
-              padding: '2rem',
+              padding: 'clamp(1.25rem, 3vw, 2rem)',
               borderRadius: '12px',
               border: '1px dashed rgba(255, 255, 255, 0.15)',
               marginBottom: '2.5rem',
               display: 'flex',
               alignItems: 'center',
-              gap: '1rem'
+              gap: '1rem',
+              flexWrap: 'wrap'
             }}
           >
             <BarChart2 size={24} color="#00f0ff" />
-            <div>
+            <div style={{ flex: 1, minWidth: '200px' }}>
               <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#ffffff', margin: '0 0 0.25rem' }}>
                 Zero-Telemetry Transparent Ranking
               </h4>
@@ -110,23 +111,23 @@ export default function TrendingPage({ onNavigate }) {
               onClick={() => onNavigate(`/${article.category}/${article.slug}`)}
               className="glass-panel"
               style={{
-                padding: '1.75rem',
+                padding: 'clamp(1rem, 3vw, 1.75rem)',
                 borderRadius: '12px',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'flex-start',
-                gap: '1.5rem',
+                gap: '1.25rem',
                 transition: 'all 0.15s ease'
               }}
             >
               {/* Rank Index */}
               <div
                 style={{
-                  fontSize: '2rem',
+                  fontSize: 'clamp(1.5rem, 4vw, 2rem)',
                   fontWeight: 900,
                   fontFamily: 'var(--font-mono)',
                   color: idx < 3 ? '#00f0ff' : '#475569',
-                  minWidth: '42px',
+                  minWidth: '36px',
                   lineHeight: 1
                 }}
               >

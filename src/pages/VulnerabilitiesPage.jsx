@@ -52,14 +52,14 @@ export default function VulnerabilitiesPage({ onNavigate }) {
         <header
           className="glass-panel"
           style={{
-            padding: '3rem 2.5rem',
+            padding: 'clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem)',
             borderRadius: '16px',
             marginBottom: '2.5rem',
             border: '1px solid rgba(239, 68, 68, 0.3)',
             background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(239, 68, 68, 0.12) 0%, rgba(5, 8, 17, 0.9) 100%)'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
             <span
               style={{
                 padding: '0.2rem 0.65rem',
@@ -88,7 +88,7 @@ export default function VulnerabilitiesPage({ onNavigate }) {
 
           {/* Search & Filter Bar */}
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-            <div style={{ position: 'relative', flex: 1, minWidth: '260px' }}>
+            <div style={{ position: 'relative', flex: '1 1 240px', minWidth: 0, width: '100%' }}>
               <Search size={18} color="#94a3b8" style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)' }} />
               <input
                 type="text"
@@ -148,7 +148,7 @@ export default function VulnerabilitiesPage({ onNavigate }) {
                 key={vuln.cveId}
                 className="glass-panel"
                 style={{
-                  padding: '2rem',
+                  padding: 'clamp(1.25rem, 3vw, 2rem)',
                   borderRadius: '14px',
                   border: '1px solid rgba(239, 68, 68, 0.25)',
                   background: 'rgba(5, 8, 17, 0.85)'
@@ -175,7 +175,7 @@ export default function VulnerabilitiesPage({ onNavigate }) {
                 <div
                   style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
                     gap: '1rem',
                     padding: '1rem',
                     background: 'rgba(15, 23, 42, 0.6)',

@@ -98,7 +98,7 @@ export default function AiBattlefieldSection({ onNavigate }) {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: '1.5rem'
           }}
         >
@@ -110,7 +110,7 @@ export default function AiBattlefieldSection({ onNavigate }) {
                 className="glass-panel"
                 onClick={() => onNavigate(card.targetSlug)}
                 style={{
-                  padding: '2rem',
+                  padding: 'clamp(1.25rem, 3vw, 2rem)',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',

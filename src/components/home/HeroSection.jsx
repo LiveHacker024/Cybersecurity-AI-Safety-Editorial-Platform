@@ -63,26 +63,26 @@ export default function HeroSection({ onNavigate }) {
         </p>
 
         {/* Action Buttons */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+        <div className="hero-action-buttons" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.85rem', flexWrap: 'wrap' }}>
           <button
             onClick={() => onNavigate('/ai-safety')}
-            className="btn-cyber-primary"
-            style={{ padding: '0.8rem 1.75rem', fontSize: '0.95rem' }}
+            className="btn-cyber-primary hero-btn"
+            style={{ padding: '0.8rem 1.6rem', fontSize: '0.95rem' }}
           >
             <span>Explore AI Safety Hub</span>
             <ArrowRight size={16} />
           </button>
           <button
             onClick={() => onNavigate('/vulnerabilities')}
-            className="btn-cyber-secondary"
-            style={{ padding: '0.8rem 1.75rem', fontSize: '0.95rem' }}
+            className="btn-cyber-secondary hero-btn"
+            style={{ padding: '0.8rem 1.6rem', fontSize: '0.95rem' }}
           >
             <span>Live CVE Tracker</span>
           </button>
           <button
             onClick={() => onNavigate('/tutorials')}
-            className="btn-cyber-secondary"
-            style={{ padding: '0.8rem 1.75rem', fontSize: '0.95rem' }}
+            className="btn-cyber-secondary hero-btn"
+            style={{ padding: '0.8rem 1.6rem', fontSize: '0.95rem' }}
           >
             <span>Defensive Guides</span>
           </button>
@@ -90,11 +90,12 @@ export default function HeroSection({ onNavigate }) {
 
         {/* Highlights Bar */}
         <div
+          className="hero-highlights-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '1.25rem',
-            marginTop: '4rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gap: '1rem',
+            marginTop: '3.5rem',
             textAlign: 'left'
           }}
         >
@@ -129,6 +130,24 @@ export default function HeroSection({ onNavigate }) {
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 600px) {
+          .hero-action-buttons {
+            flex-direction: column !important;
+            width: 100% !important;
+          }
+          .hero-btn {
+            width: 100% !important;
+            justify-content: center !important;
+            min-height: 48px !important;
+          }
+          .hero-highlights-grid {
+            grid-template-columns: 1fr !important;
+            margin-top: 2.5rem !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

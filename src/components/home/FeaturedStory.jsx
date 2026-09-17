@@ -27,6 +27,7 @@ export default function FeaturedStory({ onNavigate }) {
 
         {/* Lead Story + Secondary Grid */}
         <div
+          className="featured-story-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
@@ -37,7 +38,7 @@ export default function FeaturedStory({ onNavigate }) {
           {/* Primary Lead Article Card */}
           <div
             onClick={() => onNavigate(`/${leadArticle.category}/${leadArticle.slug}`)}
-            className="glass-panel"
+            className="glass-panel featured-lead-card"
             style={{
               padding: '2rem',
               cursor: 'pointer',
@@ -73,7 +74,7 @@ export default function FeaturedStory({ onNavigate }) {
               <h3
                 className="font-heading"
                 style={{
-                  fontSize: 'clamp(1.4rem, 2.5vw, 1.85rem)',
+                  fontSize: 'clamp(1.3rem, 2.5vw, 1.85rem)',
                   fontWeight: 800,
                   color: '#ffffff',
                   lineHeight: 1.25,
@@ -105,7 +106,7 @@ export default function FeaturedStory({ onNavigate }) {
                 <img
                   src={leadArticle.author?.avatar || "/assets/founder/founder-photo.png"}
                   alt={leadArticle.author?.name}
-                  style={{ width: '34px', height: '34px', borderRadius: '50%', border: '1px solid #00f0ff' }}
+                  style={{ width: '34px', height: '34px', borderRadius: '50%', border: '1px solid #00f0ff', objectFit: 'cover' }}
                 />
                 <div>
                   <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f8fafc' }}>
@@ -147,7 +148,7 @@ export default function FeaturedStory({ onNavigate }) {
                 }}
               >
                 <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
                     <span
                       style={{
                         padding: '0.15rem 0.5rem',
@@ -181,6 +182,22 @@ export default function FeaturedStory({ onNavigate }) {
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 960px) {
+          .featured-story-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .featured-lead-card {
+            grid-column: span 1 !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .featured-lead-card {
+            padding: 1.25rem !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

@@ -295,6 +295,36 @@ export default function ArticlePage({ slug, onNavigate }) {
               <strong style={{ color: '#10b981' }}>Responsible Security Notice:</strong> All technical descriptions, proof-of-concept analyses, and threat models on CyberAI Watch are published strictly for defensive engineering, authorized security testing, and vulnerability mitigation.
             </div>
 
+            {/* Mobile-Only Table of Contents */}
+            {article.tableOfContents && article.tableOfContents.length > 0 && (
+              <div className="mobile-toc-box glass-panel" style={{ padding: '1.25rem', borderRadius: '12px', marginBottom: '2rem', border: '1px solid rgba(56, 189, 248, 0.25)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.75rem' }}>
+                  <ListOrdered size={16} color="#00f0ff" />
+                  <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#f8fafc', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Quick Navigation / Table of Contents
+                  </span>
+                </div>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+                  {article.tableOfContents.map((item) => (
+                    <li key={item.id}>
+                      <a
+                        href={`#${item.id}`}
+                        style={{
+                          fontSize: '0.825rem',
+                          color: '#00f0ff',
+                          textDecoration: 'none',
+                          lineHeight: 1.4,
+                          display: 'block'
+                        }}
+                      >
+                        • {item.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {/* Markdown Body Content */}
             <div
               className="article-body"
@@ -323,10 +353,10 @@ export default function ArticlePage({ slug, onNavigate }) {
                         // Find matching TOC item or generate slug
                         const tocMatch = article.tableOfContents?.find(t => t.title === cleanText || cleanText.includes(t.title));
                         const headingId = tocMatch ? tocMatch.id : cleanText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-                        return `<h2 id="${headingId}" style="font-size: 1.65rem; color: #ffffff; margin: 2.5rem 0 1.25rem; font-weight: 800; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.5rem; scroll-margin-top: 100px;">${cleanText}</h2>`;
+                        return `<h2 id="${headingId}" style="font-size: clamp(1.4rem, 3.5vw, 1.65rem); color: #ffffff; margin: 2.5rem 0 1.25rem; font-weight: 800; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.5rem; scroll-margin-top: 100px;">${cleanText}</h2>`;
                       });
-                      html = html.replace(/^### (.*$)/gim, '<h3 style="font-size: 1.35rem; color: #ffffff; margin: 2rem 0 1rem; font-weight: 800; scroll-margin-top: 100px;">$1</h3>');
-                      html = html.replace(/^# (.*$)/gim, '<h1 style="font-size: 2rem; color: #ffffff; margin: 2.5rem 0 1rem; font-weight: 900;">$1</h1>');
+                      html = html.replace(/^### (.*$)/gim, '<h3 style="font-size: clamp(1.2rem, 3vw, 1.35rem); color: #ffffff; margin: 2rem 0 1rem; font-weight: 800; scroll-margin-top: 100px;">$1</h3>');
+                      html = html.replace(/^# (.*$)/gim, '<h1 style="font-size: clamp(1.6rem, 4vw, 2rem); color: #ffffff; margin: 2.5rem 0 1rem; font-weight: 900;">$1</h1>');
                       // Markdown links [text](url)
                       html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color: #00f0ff; text-decoration: underline; text-underline-offset: 3px; font-weight: 600;">$1</a>');
                       // Markdown bold and italics
@@ -335,8 +365,8 @@ export default function ArticlePage({ slug, onNavigate }) {
                       // Markdown blockquotes
                       html = html.replace(/^> (.*$)/gim, '<blockquote style="border-left: 3px solid #00f0ff; padding-left: 1.25rem; margin: 1.75rem 0; color: #e2e8f0; font-style: italic; background: rgba(0, 240, 255, 0.04); padding: 1rem 1.25rem; border-radius: 0 8px 8px 0;">$1</blockquote>');
                       // Markdown unordered lists
-                      html = html.replace(/^\s*-\s+(.*$)/gim, '<li style="margin-bottom: 0.5rem; margin-left: 1.5rem; list-style-type: disc; color: #cbd5e1;">$1</li>');
-                      html = html.replace(/```([\s\S]*?)```/gim, '<pre style="background: #0b0f19; border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 1.25rem; overflow-x: auto; font-family: var(--font-mono); font-size: 0.85rem; color: #38bdf8; margin: 1.75rem 0;"><code>$1</code></pre>');
+                      html = html.replace(/^\s*-\s+(.*$)/gim, '<li style="margin-bottom: 0.5rem; margin-left: 1.25rem; list-style-type: disc; color: #cbd5e1;">$1</li>');
+                      html = html.replace(/```([\s\S]*?)```/gim, '<pre style="background: #0b0f19; border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 1.25rem; overflow-x: auto; font-family: var(--font-mono); font-size: 0.85rem; color: #38bdf8; margin: 1.75rem 0; max-width: 100%; white-space: pre-wrap; word-break: break-all;"><code>$1</code></pre>');
                       html = html.replace(/\n\n/gim, '<p style="margin-bottom: 1.5rem;"></p>');
                       return html;
                     })()
@@ -390,23 +420,23 @@ export default function ArticlePage({ slug, onNavigate }) {
             <div
               className="glass-panel"
               style={{
-                padding: '2rem',
+                padding: 'clamp(1.25rem, 3vw, 2rem)',
                 borderRadius: '12px',
                 marginTop: '3.5rem',
                 border: '1px solid rgba(0, 240, 255, 0.25)',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '1.5rem',
+                gap: '1.25rem',
                 flexWrap: 'wrap'
               }}
             >
               <img
                 src={article.author?.avatar || "/assets/founder/founder-photo.png"}
                 alt={article.author?.name}
-                style={{ width: '72px', height: '72px', borderRadius: '50%', border: '2px solid #00f0ff', objectFit: 'cover' }}
+                style={{ width: '64px', height: '64px', borderRadius: '50%', border: '2px solid #00f0ff', objectFit: 'cover' }}
               />
-              <div style={{ flex: 1, minWidth: '240px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.25rem' }}>
+              <div style={{ flex: '1 1 240px', minWidth: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.25rem', flexWrap: 'wrap' }}>
                   <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
                     {article.author?.name}
                   </h4>
@@ -511,7 +541,7 @@ export default function ArticlePage({ slug, onNavigate }) {
               Related Threat Analyses & Research
             </h3>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '1.5rem' }}>
               {relatedList.map((rel) => (
                 <div
                   key={rel.slug}
@@ -545,9 +575,11 @@ export default function ArticlePage({ slug, onNavigate }) {
       </div>
 
       <style>{`
+        .mobile-toc-box { display: none; }
         @media (max-width: 900px) {
           .article-grid { grid-template-columns: 1fr !important; }
           .article-sidebar { display: none !important; }
+          .mobile-toc-box { display: block !important; }
         }
       `}</style>
     </article>

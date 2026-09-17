@@ -69,7 +69,7 @@ export default function AboutPage({ onNavigate }) {
         <div
           className="glass-panel"
           style={{
-            padding: '2.5rem',
+            padding: 'clamp(1.25rem, 3vw, 2.5rem)',
             marginBottom: '3rem',
             background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(10, 15, 29, 0.98) 100%)',
             border: '1px solid rgba(0, 240, 255, 0.25)',
@@ -80,8 +80,8 @@ export default function AboutPage({ onNavigate }) {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '2.5rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+              gap: '2rem',
               alignItems: 'center'
             }}
           >
@@ -123,12 +123,12 @@ export default function AboutPage({ onNavigate }) {
             </div>
 
             {/* Profile Intro & Multi-Role Badges */}
-            <div>
+            <div style={{ minWidth: 0 }}>
               <div className="cyber-badge" style={{ marginBottom: '1rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
                 <ShieldCheck size={14} color="#00f0ff" /> EDITORIAL &amp; PROFESSIONAL PROFILE
               </div>
 
-              <h1 className="font-heading" style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', fontWeight: 800, color: '#ffffff', marginBottom: '0.75rem', lineHeight: 1.2 }}>
+              <h1 className="font-heading" style={{ fontSize: 'clamp(1.85rem, 3.5vw, 2.75rem)', fontWeight: 800, color: '#ffffff', marginBottom: '0.75rem', lineHeight: 1.2 }}>
                 {founderData.name}
               </h1>
 
@@ -190,7 +190,7 @@ export default function AboutPage({ onNavigate }) {
         </div>
 
         {/* 1. ABOUT ME */}
-        <section className="glass-panel" style={{ padding: '2.5rem', marginBottom: '2.5rem' }}>
+        <section className="glass-panel" style={{ padding: 'clamp(1.25rem, 3vw, 2.5rem)', marginBottom: '2.5rem' }}>
           <h2 className="font-heading" style={{ fontSize: '1.4rem', fontWeight: 800, color: '#ffffff', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <BookOpen size={20} color="#00f0ff" /> About Me
           </h2>
@@ -203,7 +203,7 @@ export default function AboutPage({ onNavigate }) {
         </section>
 
         {/* 2. PROFESSIONAL EXPERIENCE */}
-        <section className="glass-panel" style={{ padding: '2.5rem', marginBottom: '2.5rem' }}>
+        <section className="glass-panel" style={{ padding: 'clamp(1.25rem, 3vw, 2.5rem)', marginBottom: '2.5rem' }}>
           <h2 className="font-heading" style={{ fontSize: '1.4rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Briefcase size={20} color="#00f0ff" /> Professional Experience
           </h2>
@@ -213,7 +213,7 @@ export default function AboutPage({ onNavigate }) {
               <div
                 key={idx}
                 style={{
-                  padding: '1.75rem',
+                  padding: 'clamp(1rem, 2.5vw, 1.75rem)',
                   background: 'rgba(15, 23, 42, 0.7)',
                   borderRadius: '16px',
                   border: '1px solid rgba(56, 189, 248, 0.2)'
@@ -264,13 +264,13 @@ export default function AboutPage({ onNavigate }) {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: '2rem',
             marginBottom: '2.5rem'
           }}
         >
           {/* Technical Cybersecurity Skills */}
-          <section className="glass-panel" style={{ padding: '2rem' }}>
+          <section className="glass-panel" style={{ padding: 'clamp(1.25rem, 3vw, 2rem)' }}>
             <h2 className="font-heading" style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Terminal size={18} color="#00f0ff" /> Technical &amp; Security Skills
             </h2>
@@ -285,7 +285,7 @@ export default function AboutPage({ onNavigate }) {
           </section>
 
           {/* Digital & Content Skills */}
-          <section className="glass-panel" style={{ padding: '2rem' }}>
+          <section className="glass-panel" style={{ padding: 'clamp(1.25rem, 3vw, 2rem)' }}>
             <h2 className="font-heading" style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Code2 size={18} color="#38bdf8" /> Digital &amp; Content Skills
             </h2>
@@ -304,13 +304,13 @@ export default function AboutPage({ onNavigate }) {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: '2rem',
             marginBottom: '2.5rem'
           }}
         >
           {/* Certifications & Training */}
-          <section className="glass-panel" style={{ padding: '2rem' }}>
+          <section className="glass-panel" style={{ padding: 'clamp(1.25rem, 3vw, 2rem)' }}>
             <h2 className="font-heading" style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Award size={18} color="#00f0ff" /> Certifications &amp; Training
             </h2>
@@ -337,7 +337,7 @@ export default function AboutPage({ onNavigate }) {
           </section>
 
           {/* Education & Languages */}
-          <section className="glass-panel" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <section className="glass-panel" style={{ padding: 'clamp(1.25rem, 3vw, 2rem)', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <div>
               <h2 className="font-heading" style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <GraduationCap size={18} color="#00f0ff" /> Education
@@ -366,7 +366,7 @@ export default function AboutPage({ onNavigate }) {
               <h3 className="font-heading" style={{ fontSize: '1.1rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Globe size={16} color="#38bdf8" /> Languages
               </h3>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '0.75rem' }}>
                 {founderData.languages.map((l, idx) => (
                   <div key={idx} style={{ padding: '0.75rem', background: 'rgba(15, 23, 42, 0.6)', borderRadius: '8px', border: '1px solid #1e293b' }}>
                     <div style={{ fontWeight: 700, color: '#f8fafc', fontSize: '0.85rem' }}>{l.language}</div>
@@ -379,14 +379,14 @@ export default function AboutPage({ onNavigate }) {
         </div>
 
         {/* 7. TECHNICAL PROJECTS */}
-        <section className="glass-panel" style={{ padding: '2.5rem', marginBottom: '2.5rem' }}>
+        <section className="glass-panel" style={{ padding: 'clamp(1.25rem, 3vw, 2.5rem)', marginBottom: '2.5rem' }}>
           <h2 className="font-heading" style={{ fontSize: '1.4rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Layers size={20} color="#00f0ff" /> Technical Projects
           </h2>
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
               gap: '1.25rem'
             }}
           >
@@ -423,7 +423,7 @@ export default function AboutPage({ onNavigate }) {
         <section
           className="glass-panel"
           style={{
-            padding: '2.5rem',
+            padding: 'clamp(1.25rem, 3vw, 2.5rem)',
             marginBottom: '2.5rem',
             border: '1px solid rgba(0, 240, 255, 0.3)',
             background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(6, 13, 27, 0.95) 100%)'
@@ -450,14 +450,14 @@ export default function AboutPage({ onNavigate }) {
         </section>
 
         {/* 9. CONTACT INFORMATION */}
-        <section className="glass-panel" style={{ padding: '2.5rem' }}>
+        <section className="glass-panel" style={{ padding: 'clamp(1.25rem, 3vw, 2.5rem)' }}>
           <h2 className="font-heading" style={{ fontSize: '1.4rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Mail size={20} color="#00f0ff" /> Contact &amp; Business Inquiries
           </h2>
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
               gap: '1.25rem'
             }}
           >
@@ -465,7 +465,7 @@ export default function AboutPage({ onNavigate }) {
               <div style={{ fontSize: '0.75rem', color: '#64748b', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', marginBottom: '0.35rem' }}>
                 Editorial Email
               </div>
-              <a href={`mailto:${founderData.email}`} style={{ color: '#00f0ff', fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none' }}>
+              <a href={`mailto:${founderData.email}`} style={{ color: '#00f0ff', fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none', wordBreak: 'break-all' }}>
                 {founderData.email}
               </a>
             </div>

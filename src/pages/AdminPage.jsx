@@ -437,12 +437,12 @@ export default function AdminPage({ onNavigate }) {
 
         {/* Tab 2: Create / Edit Article Form */}
         {activeTab === 'new-article' && (
-          <form onSubmit={handleSaveArticle} className="glass-panel" style={{ padding: '2rem', borderRadius: '12px' }}>
+          <form onSubmit={handleSaveArticle} className="glass-panel" style={{ padding: 'clamp(1rem, 3vw, 2rem)', borderRadius: '12px' }}>
             <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.5rem' }}>
               {editingArticle.id ? 'Edit Article & Workflow' : 'Create New Investigation / Article'}
             </h3>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
               <div>
                 <label style={{ display: 'block', fontSize: '0.8rem', color: '#94a3b8', marginBottom: '0.35rem' }}>Headline (Title)</label>
                 <input
@@ -472,7 +472,7 @@ export default function AdminPage({ onNavigate }) {
               </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
               <div>
                 <label style={{ display: 'block', fontSize: '0.8rem', color: '#94a3b8', marginBottom: '0.35rem' }}>Category</label>
                 <select

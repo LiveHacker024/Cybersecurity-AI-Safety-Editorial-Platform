@@ -75,12 +75,12 @@ mQGNBF+vL8wBDAC7/tK0mPqO7kL4vFk7L9Yp9J9...
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: '2.5rem'
           }}
         >
           {/* Left: Contact Form */}
-          <div className="glass-panel" style={{ padding: '2.5rem', border: '1px solid rgba(56, 189, 248, 0.25)' }}>
+          <div className="glass-panel" style={{ padding: 'clamp(1.25rem, 3vw, 2.5rem)', border: '1px solid rgba(56, 189, 248, 0.25)' }}>
             <h2 className="font-heading" style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <MessageSquare size={18} color="#00f0ff" /> Send a Message
             </h2>
@@ -228,8 +228,8 @@ mQGNBF+vL8wBDAC7/tK0mPqO7kL4vFk7L9Yp9J9...
               </div>
             </div>
 
-            <div className="glass-panel" style={{ padding: '2rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+            <div className="glass-panel" style={{ padding: 'clamp(1.25rem, 3vw, 2rem)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#00f0ff', fontWeight: 700, fontSize: '0.9rem', fontFamily: 'var(--font-mono)' }}>
                   <Key size={16} /> PGP PUBLIC KEY
                 </div>
@@ -253,7 +253,7 @@ mQGNBF+vL8wBDAC7/tK0mPqO7kL4vFk7L9Yp9J9...
                 </button>
               </div>
 
-              <pre style={{ background: '#090e1a', padding: '1rem', borderRadius: '8px', fontSize: '0.72rem', color: '#94a3b8', overflowX: 'auto', border: '1px solid #1e293b' }}>
+              <pre style={{ background: '#090e1a', padding: '1rem', borderRadius: '8px', fontSize: '0.72rem', color: '#94a3b8', overflowX: 'auto', border: '1px solid #1e293b', whiteSpace: 'pre-wrap', wordBreak: 'break-all', maxWidth: '100%' }}>
                 <code>{pgpKey}</code>
               </pre>
             </div>

@@ -56,15 +56,15 @@ export default function GuidesPage({ selectedGuideSlug, onNavigate }) {
             <span style={{ color: '#cbd5e1' }}>{selectedGuide.title}</span>
           </div>
 
-          <div className="glass-panel" style={{ padding: '2.5rem', marginBottom: '2.5rem', border: '1px solid rgba(56, 189, 248, 0.25)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '1rem' }}>
+          <div className="glass-panel" style={{ padding: 'clamp(1.25rem, 3vw, 2.5rem)', marginBottom: '2.5rem', border: '1px solid rgba(56, 189, 248, 0.25)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
               <span className="cyber-badge-emerald">{selectedGuide.difficulty}</span>
               <span style={{ fontSize: '0.8rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                 <Clock size={14} /> {selectedGuide.timeToComplete}
               </span>
             </div>
 
-            <h1 className="font-heading" style={{ fontSize: 'clamp(1.85rem, 4vw, 2.5rem)', fontWeight: 800, color: '#ffffff', marginBottom: '1rem', lineHeight: 1.25 }}>
+            <h1 className="font-heading" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 800, color: '#ffffff', marginBottom: '1rem', lineHeight: 1.25 }}>
               {selectedGuide.title}
             </h1>
 
@@ -72,7 +72,7 @@ export default function GuidesPage({ selectedGuideSlug, onNavigate }) {
               {selectedGuide.summary}
             </p>
 
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '1.25rem', borderTop: '1px solid #1e293b', fontSize: '0.85rem', color: '#cbd5e1' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '1.25rem', borderTop: '1px solid #1e293b', fontSize: '0.85rem', color: '#cbd5e1', flexWrap: 'wrap', gap: '0.5rem' }}>
               <span>Curated by <strong>{selectedGuide.author}</strong></span>
               <span style={{ color: '#00f0ff', fontFamily: 'var(--font-mono)' }}>100% DEFENSIVE & SAFE</span>
             </div>
@@ -88,12 +88,12 @@ export default function GuidesPage({ selectedGuideSlug, onNavigate }) {
                   key={step.stepNumber}
                   className="glass-panel"
                   style={{
-                    padding: '2rem',
+                    padding: 'clamp(1.25rem, 3vw, 2rem)',
                     border: isDone ? '1px solid rgba(16, 185, 129, 0.5)' : '1px solid rgba(56, 189, 248, 0.2)',
                     background: isDone ? 'rgba(16, 185, 129, 0.05)' : 'rgba(15, 23, 42, 0.75)'
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', marginBottom: '1rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                       <div
                         style={{
@@ -108,7 +108,8 @@ export default function GuidesPage({ selectedGuideSlug, onNavigate }) {
                           fontWeight: 800,
                           fontFamily: 'var(--font-mono)',
                           fontSize: '0.9rem',
-                          border: isDone ? 'none' : '1px solid #00f0ff'
+                          border: isDone ? 'none' : '1px solid #00f0ff',
+                          flexShrink: 0
                         }}
                       >
                         {step.stepNumber}
@@ -131,7 +132,8 @@ export default function GuidesPage({ selectedGuideSlug, onNavigate }) {
                         color: isDone ? '#34d399' : '#94a3b8',
                         cursor: 'pointer',
                         fontSize: '0.8rem',
-                        fontFamily: 'var(--font-mono)'
+                        fontFamily: 'var(--font-mono)',
+                        flexShrink: 0
                       }}
                     >
                       {isDone ? <Check size={14} /> : null}
@@ -139,7 +141,7 @@ export default function GuidesPage({ selectedGuideSlug, onNavigate }) {
                     </button>
                   </div>
 
-                  <p style={{ color: '#cbd5e1', fontSize: '0.975rem', lineHeight: 1.7, paddingLeft: '2.75rem' }}>
+                  <p style={{ color: '#cbd5e1', fontSize: '0.975rem', lineHeight: 1.7, paddingLeft: 'clamp(0rem, 2vw, 2.75rem)' }}>
                     {step.details}
                   </p>
                 </div>
@@ -148,7 +150,7 @@ export default function GuidesPage({ selectedGuideSlug, onNavigate }) {
           </div>
 
           {selectedGuide.checklist && (
-            <div className="glass-panel" style={{ padding: '2rem', borderLeft: '4px solid #34d399', background: 'rgba(10, 15, 29, 0.9)' }}>
+            <div className="glass-panel" style={{ padding: 'clamp(1.25rem, 3vw, 2rem)', borderLeft: '4px solid #34d399', background: 'rgba(10, 15, 29, 0.9)' }}>
               <h3 className="font-heading" style={{ fontSize: '1.2rem', fontWeight: 800, color: '#ffffff', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <ShieldCheck size={20} color="#34d399" /> Verification Security Checklist
               </h3>
@@ -187,7 +189,7 @@ export default function GuidesPage({ selectedGuideSlug, onNavigate }) {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: '2rem'
           }}
         >

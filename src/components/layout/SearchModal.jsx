@@ -56,12 +56,14 @@ export default function SearchModal({ isOpen, onClose, onSelectResult }) {
 
   return (
     <div
+      className="search-modal-backdrop"
       style={{
         position: 'fixed',
         inset: 0,
         zIndex: 100,
         background: 'rgba(3, 6, 14, 0.85)',
         backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'center',
@@ -70,32 +72,34 @@ export default function SearchModal({ isOpen, onClose, onSelectResult }) {
       onClick={onClose}
     >
       <div
-        className="glass-panel"
+        className="glass-panel search-modal-panel"
         style={{
           width: '100%',
           maxWidth: '680px',
           background: 'rgba(10, 15, 29, 0.95)',
           border: '1px solid rgba(0, 240, 255, 0.3)',
           boxShadow: '0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 240, 255, 0.2)',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          borderRadius: '16px'
         }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Header Input */}
         <div
+          className="search-input-header"
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '0.85rem',
-            padding: '1.25rem 1.5rem',
+            gap: '0.75rem',
+            padding: '1.15rem 1.25rem',
             borderBottom: '1px solid #1e293b'
           }}
         >
-          <Search size={22} color="#00f0ff" />
+          <Search size={20} color="#00f0ff" style={{ flexShrink: 0 }} />
           <input
             ref={inputRef}
             type="text"
-            placeholder="Search cybersecurity analysis, AI safety, guides, CVEs..."
+            placeholder="Search cybersecurity, AI safety, CVEs..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             style={{
@@ -104,14 +108,16 @@ export default function SearchModal({ isOpen, onClose, onSelectResult }) {
               border: 'none',
               outline: 'none',
               color: '#f8fafc',
-              fontSize: '1.1rem',
-              fontFamily: 'var(--font-sans)'
+              fontSize: '1rem',
+              fontFamily: 'var(--font-sans)',
+              minWidth: 0
             }}
           />
           {query && (
             <button
               onClick={() => setQuery('')}
-              style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer' }}
+              style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '0.2rem' }}
+              aria-label="Clear query"
             >
               <X size={18} />
             </button>
@@ -126,7 +132,8 @@ export default function SearchModal({ isOpen, onClose, onSelectResult }) {
               borderRadius: '6px',
               fontSize: '0.75rem',
               fontFamily: 'var(--font-mono)',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              flexShrink: 0
             }}
           >
             ESC
@@ -139,14 +146,16 @@ export default function SearchModal({ isOpen, onClose, onSelectResult }) {
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
-            padding: '0.75rem 1.5rem',
+            padding: '0.65rem 1.25rem',
             background: 'rgba(15, 23, 42, 0.5)',
             borderBottom: '1px solid #1e293b',
             overflowX: 'auto',
+            whiteSpace: 'nowrap',
+            WebkitOverflowScrolling: 'touch',
             fontSize: '0.75rem'
           }}
         >
-          <span style={{ color: '#64748b', fontFamily: 'var(--font-mono)' }}>POPULAR:</span>
+          <span style={{ color: '#64748b', fontFamily: 'var(--font-mono)', flexShrink: 0 }}>POPULAR:</span>
           {["AI Agents", "Passkeys", "Prompt Injection", "Gmail 2FA", "Apple Silicon", "Deepfake"].map((tag) => (
             <button
               key={tag}
@@ -155,11 +164,12 @@ export default function SearchModal({ isOpen, onClose, onSelectResult }) {
                 background: 'rgba(30, 41, 59, 0.8)',
                 border: '1px solid #334155',
                 color: '#cbd5e1',
-                padding: '0.2rem 0.55rem',
+                padding: '0.25rem 0.6rem',
                 borderRadius: '4px',
                 cursor: 'pointer',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.75rem'
+                fontSize: '0.75rem',
+                flexShrink: 0
               }}
             >
               {tag}
@@ -168,7 +178,7 @@ export default function SearchModal({ isOpen, onClose, onSelectResult }) {
         </div>
 
         {/* Results Container */}
-        <div style={{ maxHeight: '420px', overflowY: 'auto', padding: '1rem 1.5rem' }}>
+        <div style={{ maxHeight: '60vh', overflowY: 'auto', padding: '1rem 1.25rem' }}>
           {/* Articles Section */}
           <div style={{ marginBottom: '1.5rem' }}>
             <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#00f0ff', marginBottom: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>

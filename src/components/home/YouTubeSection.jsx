@@ -10,12 +10,12 @@ export default function YouTubeSection() {
         <div
           className="glass-panel"
           style={{
-            padding: '2.5rem',
+            padding: 'clamp(1.25rem, 3vw, 2.5rem)',
             borderRadius: '16px',
             border: '1px solid rgba(239, 68, 68, 0.25)',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '2.5rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+            gap: '2rem',
             alignItems: 'center'
           }}
         >

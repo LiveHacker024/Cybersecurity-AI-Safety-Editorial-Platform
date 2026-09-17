@@ -41,7 +41,7 @@ export default function NewsletterBox() {
         <div
           className="glass-panel"
           style={{
-            padding: '3rem 2rem',
+            padding: 'clamp(1.75rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)',
             borderRadius: '20px',
             border: '1px solid rgba(0, 240, 255, 0.3)',
             background: 'linear-gradient(135deg, rgba(5, 8, 17, 0.95) 0%, rgba(15, 23, 42, 0.8) 100%)',
@@ -108,8 +108,9 @@ export default function NewsletterBox() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     style={{
-                      flex: 1,
-                      minWidth: '180px',
+                      flex: '1 1 180px',
+                      minWidth: 0,
+                      width: '100%',
                       padding: '0.75rem 1rem',
                       background: 'rgba(5, 8, 17, 0.8)',
                       border: '1px solid rgba(255, 255, 255, 0.15)',
@@ -126,8 +127,9 @@ export default function NewsletterBox() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     style={{
-                      flex: 2,
-                      minWidth: '240px',
+                      flex: '2 1 200px',
+                      minWidth: 0,
+                      width: '100%',
                       padding: '0.75rem 1rem',
                       background: 'rgba(5, 8, 17, 0.8)',
                       border: '1px solid rgba(0, 240, 255, 0.3)',

@@ -45,20 +45,20 @@ export default function AuthorPage({ onNavigate }) {
         <header
           className="glass-panel"
           style={{
-            padding: '3rem 2.5rem',
+            padding: 'clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem)',
             borderRadius: '16px',
             marginBottom: '3rem',
             border: '1px solid rgba(0, 240, 255, 0.25)',
             background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0, 240, 255, 0.12) 0%, rgba(5, 8, 17, 0.9) 100%)'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
             <img
               src={founderData.images.avatar}
               alt={founderData.name}
               style={{
-                width: '120px',
-                height: '120px',
+                width: '100px',
+                height: '100px',
                 borderRadius: '50%',
                 objectFit: 'cover',
                 border: '3px solid #00f0ff',
@@ -66,9 +66,9 @@ export default function AuthorPage({ onNavigate }) {
               }}
             />
 
-            <div style={{ flex: 1, minWidth: '260px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.35rem' }}>
-                <h1 className="font-heading" style={{ fontSize: '2.2rem', fontWeight: 900, color: '#ffffff', margin: 0 }}>
+            <div style={{ flex: '1 1 240px', minWidth: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.35rem', flexWrap: 'wrap' }}>
+                <h1 className="font-heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.2rem)', fontWeight: 900, color: '#ffffff', margin: 0 }}>
                   {founderData.name}
                 </h1>
                 <span style={{ padding: '0.15rem 0.5rem', borderRadius: '4px', background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', fontSize: '0.72rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
@@ -137,7 +137,7 @@ export default function AuthorPage({ onNavigate }) {
         </header>
 
         {/* Technical Focus & Certifications */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.75rem', marginBottom: '3.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '1.75rem', marginBottom: '3.5rem' }}>
           <div className="glass-panel" style={{ padding: '1.75rem', borderRadius: '12px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', color: '#00f0ff' }}>
               <Terminal size={18} />

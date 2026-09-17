@@ -39,14 +39,14 @@ export default function LegalPage({ policyKey = "about", onNavigate }) {
         <header
           className="glass-panel"
           style={{
-            padding: '2.5rem',
+            padding: 'clamp(1.5rem, 4vw, 2.5rem)',
             borderRadius: '16px',
             marginBottom: '3rem',
             border: '1px solid rgba(0, 240, 255, 0.25)',
             background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0, 240, 255, 0.1) 0%, rgba(5, 8, 17, 0.9) 100%)'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
             <span
               style={{
                 padding: '0.2rem 0.65rem',
@@ -66,7 +66,7 @@ export default function LegalPage({ policyKey = "about", onNavigate }) {
             </span>
           </div>
 
-          <h1 className="font-heading" style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 900, color: '#ffffff', marginBottom: '0.75rem' }}>
+          <h1 className="font-heading" style={{ fontSize: 'clamp(1.85rem, 4vw, 2.75rem)', fontWeight: 900, color: '#ffffff', marginBottom: '0.75rem' }}>
             {policy.title}
           </h1>
 
@@ -82,7 +82,7 @@ export default function LegalPage({ policyKey = "about", onNavigate }) {
               key={idx}
               className="glass-panel"
               style={{
-                padding: '2rem',
+                padding: 'clamp(1.25rem, 3vw, 2rem)',
                 borderRadius: '12px',
                 border: '1px solid rgba(255, 255, 255, 0.08)'
               }}

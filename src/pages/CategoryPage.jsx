@@ -49,14 +49,14 @@ export default function CategoryPage({ categorySlug, onNavigate }) {
         <header
           className="glass-panel"
           style={{
-            padding: '3rem 2.5rem',
+            padding: 'clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem)',
             borderRadius: '16px',
             marginBottom: '3rem',
             border: '1px solid rgba(0, 240, 255, 0.25)',
             background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0, 240, 255, 0.1) 0%, rgba(5, 8, 17, 0.9) 100%)'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
             <span
               style={{
                 padding: '0.2rem 0.65rem',
@@ -138,7 +138,7 @@ export default function CategoryPage({ categorySlug, onNavigate }) {
             </button>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '2rem' }}>
             {filteredArticles.map((article) => (
               <div
                 key={article.slug}

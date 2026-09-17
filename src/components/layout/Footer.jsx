@@ -17,18 +17,19 @@ export default function Footer({ onNavigate }) {
         background: '#030712',
         borderTop: '1px solid rgba(56, 189, 248, 0.15)',
         color: '#94a3b8',
-        padding: '4.5rem 0 2.5rem',
+        padding: '3.5rem 0 2rem',
         marginTop: 'auto'
       }}
     >
       <div className="container-custom">
         {/* Main Footer Grid */}
         <div
+          className="footer-main-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '3rem',
-            marginBottom: '3.5rem'
+            gap: '2.5rem',
+            marginBottom: '3rem'
           }}
         >
           {/* Column 1: Brand & Editorial Identity */}
@@ -46,7 +47,8 @@ export default function Footer({ onNavigate }) {
                   border: '1px solid #00f0ff',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  flexShrink: 0
                 }}
               >
                 <Shield size={20} color="#00f0ff" />
@@ -126,10 +128,10 @@ export default function Footer({ onNavigate }) {
 
           {/* Column 2: Editorial Hubs */}
           <div>
-            <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1.25rem', fontFamily: 'var(--font-mono)' }}>
+            <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem', fontFamily: 'var(--font-mono)' }}>
               Editorial Hubs
             </h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <li>
                 <button onClick={() => handleLinkClick('/cybersecurity')} className="footer-link">Cybersecurity News</button>
               </li>
@@ -159,10 +161,10 @@ export default function Footer({ onNavigate }) {
 
           {/* Column 3: Trust & Author */}
           <div>
-            <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1.25rem', fontFamily: 'var(--font-mono)' }}>
+            <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem', fontFamily: 'var(--font-mono)' }}>
               Editorial Team
             </h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <li>
                 <button onClick={() => handleLinkClick('/author/kunal-rajput')} className="footer-link">
                   Kunal Rajput (Founder & Editor)
@@ -198,10 +200,10 @@ export default function Footer({ onNavigate }) {
 
           {/* Column 4: Legal & Standards */}
           <div>
-            <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1.25rem', fontFamily: 'var(--font-mono)' }}>
+            <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem', fontFamily: 'var(--font-mono)' }}>
               Standards & Policies
             </h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <li>
                 <button onClick={() => handleLinkClick('/editorial-policy')} className="footer-link">Editorial Standards & Fact-Check</button>
               </li>
@@ -233,7 +235,7 @@ export default function Footer({ onNavigate }) {
         {/* Bottom Attribution & Integrity Row */}
         <div
           style={{
-            paddingTop: '2rem',
+            paddingTop: '1.75rem',
             borderTop: '1px solid rgba(255, 255, 255, 0.06)',
             display: 'flex',
             alignItems: 'center',
@@ -248,7 +250,7 @@ export default function Footer({ onNavigate }) {
             © {currentYear} <strong>{siteConfig.name}</strong>. Directed by <strong>{siteConfig.founder.name}</strong> ({siteConfig.founder.brand}). All rights reserved.
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" style={{ color: '#64748b', textDecoration: 'none' }}>
               Sitemap
             </a>
@@ -258,7 +260,7 @@ export default function Footer({ onNavigate }) {
             <a href="/ads.txt" target="_blank" rel="noopener noreferrer" style={{ color: '#64748b', textDecoration: 'none' }}>
               Ads.txt
             </a>
-            <span style={{ color: '#00f0ff', fontFamily: 'var(--font-mono)' }}>
+            <span style={{ color: '#00f0ff', fontFamily: 'var(--font-mono)', fontSize: '0.72rem' }}>
               PEOPLE FIRST. SEARCH SECOND.
             </span>
           </div>
@@ -271,14 +273,21 @@ export default function Footer({ onNavigate }) {
           border: none;
           color: #94a3b8;
           font-size: 0.85rem;
-          padding: 0;
+          padding: 0.2rem 0;
           cursor: pointer;
           text-align: left;
           transition: all 0.15s ease;
+          display: inline-block;
         }
         .footer-link:hover {
           color: #00f0ff;
           transform: translateX(2px);
+        }
+        @media (max-width: 640px) {
+          .footer-main-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
         }
       `}</style>
     </footer>

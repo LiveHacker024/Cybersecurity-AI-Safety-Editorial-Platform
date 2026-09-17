@@ -18,7 +18,7 @@ export default function NotFoundPage({ onNavigate }) {
         style={{
           maxWidth: '560px',
           width: '100%',
-          padding: '3rem 2rem',
+          padding: 'clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)',
           borderRadius: '16px',
           border: '1px solid rgba(239, 68, 68, 0.3)',
           textAlign: 'center',

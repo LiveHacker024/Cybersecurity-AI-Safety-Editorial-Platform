@@ -252,7 +252,7 @@ export default function ThreatIntelligence3D() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
             gap: '2rem',
             alignItems: 'center'
           }}
@@ -262,12 +262,12 @@ export default function ThreatIntelligence3D() {
             className="glass-panel"
             style={{
               position: 'relative',
-              height: '460px',
+              height: 'clamp(280px, 45vw, 460px)',
               overflow: 'hidden',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'flex-end',
-              padding: '1.5rem',
+              padding: '1.25rem',
               border: '1px solid rgba(56, 189, 248, 0.2)'
             }}
           >
@@ -307,7 +307,9 @@ export default function ThreatIntelligence3D() {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                padding: '0.75rem 1rem',
+                flexWrap: 'wrap',
+                gap: '0.5rem',
+                padding: '0.65rem 0.85rem',
                 background: 'rgba(5, 8, 17, 0.85)',
                 backdropFilter: 'blur(8px)',
                 borderRadius: '8px',
@@ -328,7 +330,7 @@ export default function ThreatIntelligence3D() {
           <div
             className="glass-panel"
             style={{
-              padding: '2rem',
+              padding: 'clamp(1.25rem, 3vw, 2rem)',
               borderLeft: `4px solid ${selectedThreat.severity === 'CRITICAL' ? '#f43f5e' : (selectedThreat.severity === 'HIGH' ? '#f59e0b' : '#00f0ff')}`
             }}
           >

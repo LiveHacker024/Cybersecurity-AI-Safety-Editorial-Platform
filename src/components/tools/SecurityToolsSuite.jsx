@@ -178,11 +178,11 @@ export default function SecurityToolsSuite() {
         </div>
 
         {/* Tab Buttons */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '2.5rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', marginBottom: '2.5rem', flexWrap: 'wrap' }}>
           <button
             onClick={() => setActiveTab('password')}
             style={{
-              padding: '0.75rem 1.5rem',
+              padding: '0.75rem 1.25rem',
               borderRadius: '10px',
               fontFamily: 'var(--font-display)',
               fontWeight: 700,
@@ -203,7 +203,7 @@ export default function SecurityToolsSuite() {
           <button
             onClick={() => setActiveTab('phishing')}
             style={{
-              padding: '0.75rem 1.5rem',
+              padding: '0.75rem 1.25rem',
               borderRadius: '10px',
               fontFamily: 'var(--font-display)',
               fontWeight: 700,
@@ -229,7 +229,7 @@ export default function SecurityToolsSuite() {
             style={{
               maxWidth: '820px',
               margin: '0 auto',
-              padding: '2.5rem',
+              padding: 'clamp(1.25rem, 3vw, 2.5rem)',
               border: '1px solid rgba(56, 189, 248, 0.25)'
             }}
           >
@@ -237,14 +237,16 @@ export default function SecurityToolsSuite() {
               <label style={{ display: 'block', fontSize: '0.85rem', fontFamily: 'var(--font-mono)', color: '#94a3b8', marginBottom: '0.5rem' }}>
                 ENTER PASSPHRASE TO CALCULATE ENTROPY BITS:
               </label>
-              <div style={{ display: 'flex', gap: '0.75rem' }}>
+              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                 <input
                   type="text"
                   placeholder="Type a sample password or generated passphrase..."
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   style={{
-                    flex: 1,
+                    flex: '1 1 220px',
+                    minWidth: 0,
+                    width: '100%',
                     padding: '0.85rem 1.25rem',
                     background: 'rgba(5, 8, 17, 0.9)',
                     border: '1px solid #1e293b',
@@ -258,7 +260,7 @@ export default function SecurityToolsSuite() {
                 <button
                   onClick={generatePassphrase}
                   className="btn-cyber-secondary"
-                  style={{ padding: '0.85rem 1.25rem' }}
+                  style={{ padding: '0.85rem 1.25rem', flexShrink: 0 }}
                 >
                   <RefreshCw size={16} /> Generate Passphrase
                 </button>
@@ -308,7 +310,7 @@ export default function SecurityToolsSuite() {
             style={{
               maxWidth: '820px',
               margin: '0 auto',
-              padding: '2.5rem',
+              padding: 'clamp(1.25rem, 3vw, 2.5rem)',
               border: '1px solid rgba(56, 189, 248, 0.25)'
             }}
           >
@@ -316,14 +318,16 @@ export default function SecurityToolsSuite() {
               <label style={{ display: 'block', fontSize: '0.85rem', fontFamily: 'var(--font-mono)', color: '#94a3b8', marginBottom: '0.5rem' }}>
                 PASTE SUSPICIOUS URL OR DOMAIN TO INSPECT HEURISTICS:
               </label>
-              <div style={{ display: 'flex', gap: '0.75rem' }}>
+              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                 <input
                   type="text"
                   placeholder="e.g. https://login.microsoft.verify-secure-portal.xyz/auth"
                   value={urlInput}
                   onChange={(e) => setUrlInput(e.target.value)}
                   style={{
-                    flex: 1,
+                    flex: '1 1 220px',
+                    minWidth: 0,
+                    width: '100%',
                     padding: '0.85rem 1.25rem',
                     background: 'rgba(5, 8, 17, 0.9)',
                     border: '1px solid #1e293b',
@@ -333,7 +337,7 @@ export default function SecurityToolsSuite() {
                     outline: 'none'
                   }}
                 />
-                <button type="submit" className="btn-cyber-primary" style={{ padding: '0.85rem 1.5rem' }}>
+                <button type="submit" className="btn-cyber-primary" style={{ padding: '0.85rem 1.5rem', flexShrink: 0 }}>
                   Inspect URL
                 </button>
               </div>
@@ -348,7 +352,7 @@ export default function SecurityToolsSuite() {
                   border: `1px solid ${urlReport.riskScore < 50 ? '#f43f5e' : (urlReport.riskScore < 80 ? '#f59e0b' : '#10b981')}`
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1rem' }}>
                   <div>
                     <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#94a3b8' }}>INSPECTED HOSTNAME</div>
                     <div style={{ fontSize: '1.15rem', fontWeight: 700, fontFamily: 'var(--font-mono)', color: '#00f0ff' }}>

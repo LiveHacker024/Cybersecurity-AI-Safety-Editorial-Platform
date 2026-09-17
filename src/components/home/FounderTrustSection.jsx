@@ -12,31 +12,31 @@ export default function FounderTrustSection({ onNavigate }) {
         <div
           className="glass-panel"
           style={{
-            padding: '2.5rem',
+            padding: 'clamp(1.25rem, 3vw, 2.5rem)',
             borderRadius: '16px',
             border: '1px solid rgba(0, 240, 255, 0.25)',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '2.5rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+            gap: '2rem',
             alignItems: 'center'
           }}
         >
           {/* Left Column: Founder Profile Card */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
             <img
               src={founder.avatar}
               alt={founder.name}
               style={{
-                width: '96px',
-                height: '96px',
+                width: '88px',
+                height: '88px',
                 borderRadius: '50%',
                 objectFit: 'cover',
                 border: '3px solid #00f0ff',
                 boxShadow: '0 0 25px rgba(0, 240, 255, 0.25)'
               }}
             />
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.25rem' }}>
+            <div style={{ minWidth: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.25rem', flexWrap: 'wrap' }}>
                 <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
                   {founder.name}
                 </h3>
@@ -54,7 +54,7 @@ export default function FounderTrustSection({ onNavigate }) {
           </div>
 
           {/* Right Column: Editorial Pledge & Links */}
-          <div style={{ borderLeft: '1px solid rgba(255, 255, 255, 0.08)', paddingLeft: '1.5rem' }}>
+          <div className="founder-pledge-column" style={{ borderLeft: '1px solid rgba(255, 255, 255, 0.08)', paddingLeft: '1.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.5rem' }}>
               <FileCheck size={18} color="#10b981" />
               <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#10b981', letterSpacing: '0.06em', fontFamily: 'var(--font-mono)', textTransform: 'uppercase' }}>
@@ -106,6 +106,16 @@ export default function FounderTrustSection({ onNavigate }) {
           </div>
         </div>
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .founder-pledge-column {
+            border-left: none !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+            padding-left: 0 !important;
+            padding-top: 1.5rem !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

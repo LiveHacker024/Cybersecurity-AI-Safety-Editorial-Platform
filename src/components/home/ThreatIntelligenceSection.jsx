@@ -52,7 +52,7 @@ export default function ThreatIntelligenceSection({ onNavigate }) {
           </button>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
+        <div className="threat-intel-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
           {intelItems.map((item, idx) => (
             <div
               key={idx}
@@ -66,7 +66,7 @@ export default function ThreatIntelligenceSection({ onNavigate }) {
               }}
             >
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.35rem' }}>
                   <span
                     style={{
                       padding: '0.15rem 0.5rem',
@@ -105,7 +105,8 @@ export default function ThreatIntelligenceSection({ onNavigate }) {
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '0.3rem'
+                    gap: '0.3rem',
+                    padding: '0.2rem 0'
                   }}
                 >
                   <span>Intelligence Briefing</span>
@@ -116,6 +117,14 @@ export default function ThreatIntelligenceSection({ onNavigate }) {
           ))}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .threat-intel-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

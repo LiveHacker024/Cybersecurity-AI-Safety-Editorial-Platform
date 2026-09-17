@@ -55,7 +55,7 @@ export default function YouTubePage({ onNavigate }) {
         <header
           className="glass-panel"
           style={{
-            padding: '3rem 2.5rem',
+            padding: 'clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem)',
             borderRadius: '16px',
             marginBottom: '3rem',
             border: '1px solid rgba(239, 68, 68, 0.3)',
@@ -102,12 +102,13 @@ export default function YouTubePage({ onNavigate }) {
               gap: '0.65rem',
               background: '#ef4444',
               color: '#ffffff',
-              padding: '0.85rem 2rem',
+              padding: '0.85rem 1.75rem',
               borderRadius: '8px',
               fontSize: '0.95rem',
               fontWeight: 700,
               textDecoration: 'none',
-              boxShadow: '0 4px 25px rgba(239, 68, 68, 0.4)'
+              boxShadow: '0 4px 25px rgba(239, 68, 68, 0.4)',
+              maxWidth: '100%'
             }}
           >
             <Youtube size={20} />
@@ -129,7 +130,7 @@ export default function YouTubePage({ onNavigate }) {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.75rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '1.75rem' }}>
             {videoTopics.map((vid, idx) => (
               <div
                 key={idx}
