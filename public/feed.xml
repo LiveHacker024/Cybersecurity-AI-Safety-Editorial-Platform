@@ -5,8 +5,17 @@
   <link>https://cyberaiwatch.com</link>
   <description>Independent international editorial publication dedicated to cybersecurity journalism, AI safety research, vulnerability tracking, threat intelligence, and defensive security tutorials.</description>
   <language>en-us</language>
-  <lastBuildDate>Wed, 16 Sep 2026 12:20:11 GMT</lastBuildDate>
+  <lastBuildDate>Thu, 17 Sep 2026 13:06:58 GMT</lastBuildDate>
   <atom:link href="https://cyberaiwatch.com/rss.xml" rel="self" type="application/rss+xml" />
+  <item>
+    <title><![CDATA[Why Did Jacob Coxon Quit Anthropic? AI Safety Concerns Explained]]></title>
+    <link>https://cyberaiwatch.com/ai-safety/why-did-jacob-coxon-quit-anthropic-ai-safety</link>
+    <guid>https://cyberaiwatch.com/ai-safety/why-did-jacob-coxon-quit-anthropic-ai-safety</guid>
+    <description><![CDATA[Jacob Coxon left Anthropic warning about the pace of advanced AI development. Here’s what he said, what is confirmed, and what remains uncertain.]]></description>
+    <category>AI Safety</category>
+    <author>CyberAI Watch Editorial Team</author>
+    <pubDate>Wed, 16 Sep 2026 18:30:00 GMT</pubDate>
+  </item>
   <item>
     <title><![CDATA[AI Agents Are Becoming a New Cybersecurity Target: Architecture & Threat Vectors]]></title>
     <link>https://cyberaiwatch.com/ai-safety/ai-agents-cybersecurity-target</link>

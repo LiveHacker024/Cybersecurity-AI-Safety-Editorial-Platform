@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Clock, Calendar, User, Share2, Bookmark, CheckCircle2,
   AlertTriangle, Shield, ArrowLeft, ChevronRight, Lock,
-  Copy, Check, ExternalLink, ListOrdered
+  Copy, Check, ExternalLink, ListOrdered, HelpCircle
 } from 'lucide-react';
 import { Linkedin, Youtube } from '../components/common/SocialIcons';
 import { getAllArticles } from '../utils/storage';
@@ -24,10 +24,13 @@ export default function ArticlePage({ slug, onNavigate }) {
   useEffect(() => {
     if (!article) return;
     
+    const canonicalUrl = `${siteConfig.domain}/${article.category}/${article.slug}`;
     updateMetaTags({
       title: `${article.title} — ${siteConfig.name}`,
       description: article.subtitle || article.excerpt,
+      keywords: article.keywords || `${article.title}, AI safety, cybersecurity, ${siteConfig.name}`,
       image: article.heroImage,
+      url: canonicalUrl,
       type: "article",
       publishedTime: article.publishedAt,
       modifiedTime: article.updatedAt || article.publishedAt,
@@ -222,6 +225,33 @@ export default function ArticlePage({ slug, onNavigate }) {
         <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 280px', gap: '3rem', alignItems: 'start' }} className="article-grid">
           {/* Main Article Content */}
           <div style={{ minWidth: 0 }}>
+            {/* Hero Image Visual */}
+            {article.heroImage && (
+              <div
+                style={{
+                  marginBottom: '2rem',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  border: '1px solid rgba(56, 189, 248, 0.2)',
+                  background: '#0b0f19',
+                  boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.7)'
+                }}
+              >
+                <img
+                  src={article.heroImage}
+                  alt={article.heroImageAlt || article.title}
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    maxHeight: '480px',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                  loading="eager"
+                />
+              </div>
+            )}
+
             {/* Key Takeaways Box */}
             {article.keyTakeaways && article.keyTakeaways.length > 0 && (
               <div
@@ -266,12 +296,27 @@ export default function ArticlePage({ slug, onNavigate }) {
             </div>
 
             {/* Markdown Body Content */}
-            <div className="article-body" style={{ fontSize: '1.05rem', lineHeight: 1.8, color: '#cbd5e1' }}>
+            <div
+              className="article-body"
+              style={{ fontSize: '1.05rem', lineHeight: 1.8, color: '#cbd5e1' }}
+              onClick={(e) => {
+                const link = e.target.closest('a');
+                if (link) {
+                  const href = link.getAttribute('href');
+                  if (href && href.startsWith('/') && !href.startsWith('//')) {
+                    e.preventDefault();
+                    onNavigate(href);
+                  }
+                }
+              }}
+            >
               {article.content ? (
                 <div
                   dangerouslySetInnerHTML={{
                     __html: (() => {
                       let html = article.content;
+                      // Replace horizontal rules
+                      html = html.replace(/^---$/gim, '<hr style="border: 0; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 2.5rem 0;" />');
                       // Replace h2 headings with IDs derived from text/TOC
                       html = html.replace(/^## (.*$)/gim, (match, headingText) => {
                         const cleanText = headingText.trim();
@@ -282,9 +327,15 @@ export default function ArticlePage({ slug, onNavigate }) {
                       });
                       html = html.replace(/^### (.*$)/gim, '<h3 style="font-size: 1.35rem; color: #ffffff; margin: 2rem 0 1rem; font-weight: 800; scroll-margin-top: 100px;">$1</h3>');
                       html = html.replace(/^# (.*$)/gim, '<h1 style="font-size: 2rem; color: #ffffff; margin: 2.5rem 0 1rem; font-weight: 900;">$1</h1>');
+                      // Markdown links [text](url)
+                      html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color: #00f0ff; text-decoration: underline; text-underline-offset: 3px; font-weight: 600;">$1</a>');
+                      // Markdown bold and italics
                       html = html.replace(/\*\*(.*?)\*\*/gim, '<strong style="color: #ffffff; font-weight: 700;">$1</strong>');
                       html = html.replace(/\*(.*?)\*/gim, '<em>$1</em>');
+                      // Markdown blockquotes
                       html = html.replace(/^> (.*$)/gim, '<blockquote style="border-left: 3px solid #00f0ff; padding-left: 1.25rem; margin: 1.75rem 0; color: #e2e8f0; font-style: italic; background: rgba(0, 240, 255, 0.04); padding: 1rem 1.25rem; border-radius: 0 8px 8px 0;">$1</blockquote>');
+                      // Markdown unordered lists
+                      html = html.replace(/^\s*-\s+(.*$)/gim, '<li style="margin-bottom: 0.5rem; margin-left: 1.5rem; list-style-type: disc; color: #cbd5e1;">$1</li>');
                       html = html.replace(/```([\s\S]*?)```/gim, '<pre style="background: #0b0f19; border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 1.25rem; overflow-x: auto; font-family: var(--font-mono); font-size: 0.85rem; color: #38bdf8; margin: 1.75rem 0;"><code>$1</code></pre>');
                       html = html.replace(/\n\n/gim, '<p style="margin-bottom: 1.5rem;"></p>');
                       return html;
@@ -298,6 +349,39 @@ export default function ArticlePage({ slug, onNavigate }) {
 
             {/* In-Content Ad Placement */}
             <AdSlot type="in-content" />
+
+            {/* Frequently Asked Questions (FAQ) Section */}
+            {article.faqs && article.faqs.length > 0 && (
+              <div id="frequently-asked-questions" style={{ marginTop: '3.5rem', marginBottom: '2.5rem', scrollMarginTop: '100px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
+                  <HelpCircle size={22} color="#00f0ff" />
+                  <h3 className="font-heading" style={{ fontSize: '1.45rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+                    Frequently Asked Questions
+                  </h3>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  {article.faqs.map((faq, index) => (
+                    <div
+                      key={index}
+                      className="glass-panel"
+                      style={{
+                        padding: '1.25rem 1.5rem',
+                        borderRadius: '10px',
+                        border: '1px solid rgba(56, 189, 248, 0.15)',
+                        background: 'rgba(15, 23, 42, 0.6)'
+                      }}
+                    >
+                      <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#00f0ff', marginBottom: '0.5rem', lineHeight: 1.4 }}>
+                        {faq.question}
+                      </h4>
+                      <p style={{ fontSize: '0.925rem', color: '#cbd5e1', lineHeight: 1.6, margin: 0 }}>
+                        {faq.answer}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Verified Sources & References */}
             {article.sources && <SourceList sources={article.sources} />}

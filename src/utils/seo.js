@@ -97,35 +97,88 @@ export function updateMetaTags({
 }
 
 export function generateArticleSchema(article) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    "headline": article.title,
-    "description": article.subtitle || article.excerpt,
-    "image": [
-      article.heroImage?.startsWith('http') ? article.heroImage : `${PRODUCTION_DOMAIN}${article.heroImage}`
-    ],
-    "datePublished": article.publishedAt,
-    "dateModified": article.updatedAt || article.publishedAt,
-    "author": [{
-      "@type": "Person",
-      "name": article.author?.name || siteConfig.founder.name,
-      "jobTitle": article.author?.role || siteConfig.founder.title,
-      "url": siteConfig.founder.socials.linkedin
-    }],
-    "publisher": {
-      "@type": "NewsMediaOrganization",
-      "name": siteConfig.name,
-      "url": PRODUCTION_DOMAIN,
-      "logo": {
-        "@type": "ImageObject",
-        "url": `${PRODUCTION_DOMAIN}/assets/founder/founder-photo.png`
+  const articleUrl = `${PRODUCTION_DOMAIN}/${article.category}/${article.slug}`;
+  const imageUrl = article.heroImage
+    ? (article.heroImage.startsWith('http') ? article.heroImage : `${PRODUCTION_DOMAIN}${article.heroImage.startsWith('/') ? article.heroImage : '/' + article.heroImage}`)
+    : `${PRODUCTION_DOMAIN}/assets/founder/founder-photo.png`;
+
+  const schemas = [
+    {
+      "@type": "NewsArticle",
+      "@id": `${articleUrl}#article`,
+      "isPartOf": {
+        "@type": "WebPage",
+        "@id": articleUrl
+      },
+      "headline": article.title,
+      "description": article.subtitle || article.excerpt,
+      "image": [imageUrl],
+      "datePublished": article.publishedAt,
+      "dateModified": article.updatedAt || article.publishedAt,
+      "author": [{
+        "@type": "Person",
+        "name": article.author?.name || siteConfig.founder.name,
+        "jobTitle": article.author?.role || siteConfig.founder.title,
+        "url": siteConfig.founder.socials.linkedin
+      }],
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": siteConfig.name,
+        "url": PRODUCTION_DOMAIN,
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${PRODUCTION_DOMAIN}/assets/founder/founder-photo.png`
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": articleUrl
       }
     },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `${PRODUCTION_DOMAIN}/${article.category}/${article.slug}`
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${articleUrl}#breadcrumb`,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": PRODUCTION_DOMAIN
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": article.categoryName || article.category,
+          "item": `${PRODUCTION_DOMAIN}/${article.category}`
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": article.title,
+          "item": articleUrl
+        }
+      ]
     }
+  ];
+
+  if (article.faqs && article.faqs.length > 0) {
+    schemas.push({
+      "@type": "FAQPage",
+      "@id": `${articleUrl}#faq`,
+      "mainEntity": article.faqs.map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    });
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": schemas
   };
 }
 
