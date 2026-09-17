@@ -151,16 +151,42 @@ function run() {
       console.log('✓ Created dist/404.html for SPA routing');
     }
 
-    // Copy _redirects and _headers if present in public
-    const redirectsPath = path.join(publicDir, '_redirects');
-    if (fs.existsSync(redirectsPath)) {
-      fs.copyFileSync(redirectsPath, path.join(distDir, '_redirects'));
-      console.log('✓ Copied _redirects to dist/');
-    }
-    const headersPath = path.join(publicDir, '_headers');
-    if (fs.existsSync(headersPath)) {
-      fs.copyFileSync(headersPath, path.join(distDir, '_headers'));
-      console.log('✓ Copied _headers to dist/');
+    // Pre-render static route entrypoints in dist for guaranteed HTTP 200 responses
+    try {
+      const indexHtml = fs.readFileSync(indexPath, 'utf8');
+
+      // Categories
+      for (const cat of categoriesData) {
+        const catDir = path.join(distDir, cat.slug);
+        fs.mkdirSync(catDir, { recursive: true });
+        fs.writeFileSync(path.join(catDir, 'index.html'), indexHtml);
+      }
+
+      // Articles
+      for (const art of articlesData) {
+        if (art.status === 'PUBLISHED') {
+          const artDir = path.join(distDir, art.category, art.slug);
+          fs.mkdirSync(artDir, { recursive: true });
+          fs.writeFileSync(path.join(artDir, 'index.html'), indexHtml);
+        }
+      }
+
+      // Static routes
+      const staticPaths = [
+        'vulnerabilities', 'search', 'trending', 'youtube', 'newsletter',
+        'about', 'contact', 'editorial-policy', 'correction-policy',
+        'privacy-policy', 'terms', 'cookie-policy', 'disclaimer',
+        'affiliate-disclosure', 'advertising-policy'
+      ];
+      for (const sp of staticPaths) {
+        const sDir = path.join(distDir, sp);
+        fs.mkdirSync(sDir, { recursive: true });
+        fs.writeFileSync(path.join(sDir, 'index.html'), indexHtml);
+      }
+
+      console.log('✓ Created static HTML route entrypoints for all articles and categories in dist/');
+    } catch (err) {
+      console.warn('Warning creating static route entrypoints:', err.message);
     }
 
     console.log('✓ Wrote sitemap.xml, robots.txt, rss.xml, feed.xml, ads.txt to dist/');
