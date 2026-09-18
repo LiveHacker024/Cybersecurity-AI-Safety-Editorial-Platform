@@ -5,6 +5,377 @@
 
 export const articlesData = [
   {
+    id: "ai-agents-real-world-cybersecurity-incidents",
+    slug: "ai-agents-real-world-cybersecurity-incidents",
+    title: "AI Agents Are Now Breaching Real-World Systems: What the Latest Incidents Reveal About AI Cybersecurity",
+    subtitle: "AI agents are moving beyond text generation into autonomous tool use, code auditing, and system interaction. Here is what recent real-world security incidents and official threat intelligence reports reveal about the evolving risks of agentic AI.",
+    type: "NEWS ANALYSIS",
+    claimStatus: "ANALYSIS",
+    status: "PUBLISHED",
+    category: "ai-security",
+    categoryName: "AI Security",
+    categoryColor: "sky",
+    tags: [
+      "AI Agents",
+      "AI Security",
+      "Threat Intelligence",
+      "Anthropic",
+      "OpenAI",
+      "Agentic AI",
+      "Vulnerability Research",
+      "Cyber Defense",
+      "Autonomous Systems",
+      "Least Privilege"
+    ],
+    keywords: "AI agents cybersecurity, AI cyber attacks 2026, AI agent security, AI-powered cyber attacks, AI cybersecurity threats, agentic AI security, AI vulnerability research, AI security incidents, autonomous AI hacking, AI threat intelligence, AI security risks",
+    author: {
+      name: "Kunal Rajput",
+      role: "Founder & Editor-in-Chief — CyberAI Watch",
+      avatar: "/assets/founder/founder-photo.png",
+      verified: true
+    },
+    publishedAt: "September 18, 2026",
+    updatedAt: "September 18, 2026",
+    readingTime: "12 min read",
+    heroImage: "/assets/images/ai-agents-real-world-cybersecurity.jpg",
+    heroImageAlt: "AI agents and autonomous cybersecurity threat monitoring",
+    featured: true,
+    trending: true,
+    badge: "AI SECURITY ANALYSIS",
+    excerpt: "AI agents are changing cybersecurity. Explore recent incidents, AI-assisted attacks, security risks, and defensive strategies for organizations.",
+    keyTakeaways: [
+      "Autonomous AI agents are shifting from passive chat interfaces to active software operators with direct access to code repositories, APIs, terminal tools, and cloud infrastructure.",
+      "Anthropic's September 2026 Threat Intelligence Report documents that threat actors and security researchers are actively deploying AI systems to accelerate vulnerability discovery, code auditing, and reconnaissance.",
+      "Recent coordinated disclosures, such as researchers utilizing Anthropic's Claude to audit OpenAI services, demonstrate that AI acts as an unprecedented cognitive force multiplier for discovering complex system logic flaws.",
+      "The primary architectural vulnerability in agentic deployments is excessive permission scoping, unauthenticated tool execution, and lack of deterministic sandboxing.",
+      "Organizations must implement zero-trust identity boundaries, short-lived scoped credentials, egress filtering, continuous behavioral telemetry, and mandatory human-in-the-loop gates for high-impact actions."
+    ],
+    tableOfContents: [
+      { id: "why-ai-agents-are-becoming-a-cybersecurity-concern", title: "Why AI Agents Are Becoming a Cybersecurity Concern" },
+      { id: "what-recent-ai-security-incidents-tell-us", title: "What Recent AI Security Incidents Tell Us" },
+      { id: "how-ai-changes-the-cyber-attack-lifecycle", title: "How AI Changes the Cyber Attack Lifecycle" },
+      { id: "anthropics-september-2026-threat-intelligence-findings", title: "Anthropic's September 2026 Threat Intelligence Findings" },
+      { id: "what-the-openai-related-incidents-reveal", title: "What the OpenAI-Related Incidents Reveal" },
+      { id: "why-ai-agents-create-a-different-security-problem", title: "Why AI Agents Create a Different Security Problem" },
+      { id: "the-biggest-security-weakness-may-be-agent-permissions", title: "The Biggest Security Weakness May Be Agent Permissions" },
+      { id: "how-organizations-can-defend-against-ai-assisted-attacks", title: "How Organizations Can Defend Against AI-Assisted Attacks" },
+      { id: "what-security-teams-should-monitor", title: "What Security Teams Should Monitor" },
+      { id: "is-ai-making-cyber-attacks-easier", title: "Is AI Making Cyber Attacks Easier?" },
+      { id: "what-this-means-for-ai-security-in-2026", title: "What This Means for AI Security in 2026" },
+      { id: "final-takeaway", title: "Final Takeaway" },
+      { id: "frequently-asked-questions", title: "Frequently Asked Questions" }
+    ],
+    content: `
+Throughout 2026, artificial intelligence has undergone a fundamental architectural evolution: the transition from conversational chatbots to autonomous **AI agents**. Modern enterprise AI systems no longer simply answer user prompts or summarize documents in an isolated sandbox. Instead, they are equipped with functional tool-calling capabilities, connected directly to enterprise databases, granted write access to software repositories, and deployed to execute multi-step operational workflows across complex cloud environments.
+
+This shift marks the emergence of **AI agents cybersecurity** as one of the most critical defensive engineering challenges of the decade.
+
+When an artificial intelligence model is granted the autonomy to read code, execute terminal commands, query internal REST APIs, and manage credentials, its operational perimeter changes completely. In both offensive security research and defensive triage, AI systems are demonstrating an unprecedented capability to analyze system topologies, identify subtle configuration oversights, and accelerate discovery cycles from weeks into minutes.
+
+However, this immense capability cuts both ways. While security analysts leverage AI agents to automate vulnerability triage and patch verification, adversary threat actors and independent red teams are deploying identical cognitive capabilities to accelerate reconnaissance, probe authentication boundaries, and automate lateral exploration across corporate networks.
+
+Understanding this transformation requires examining documented real-world incidents, official threat intelligence reports, and the structural vulnerabilities inherent in agentic architecture.
+
+---
+
+## Why AI Agents Are Becoming a Cybersecurity Concern
+
+To understand why autonomous agents represent a distinct security domain, it is essential to distinguish between a standard large language model (LLM) and an **agentic AI architecture**.
+
+A traditional chatbot operates in a stateless, passive loop: a human provides a prompt, the model generates a text response based on statistical weights, and the interaction terminates. The model cannot execute external code, modify database states, or issue network requests on its own.
+
+In contrast, an **autonomous AI agent** operates as an active software actor:
+
+- **Perception & Context Ingestion:** The agent ingests data from external sources, including real-time web scrapers, corporate Slack channels, customer support tickets, email inboxes, and internal documentation.
+- **Iterative Reasoning & Planning:** Using techniques such as chain-of-thought and ReAct (Reason + Act) prompting, the model breaks down abstract operational objectives into sequential task trees.
+- **Autonomous Tool Execution:** The agent interacts directly with external software tools—invoking SQL queries, triggering REST API endpoints, managing cloud containers, writing scripts, and running command-line utilities.
+- **Long-Running Workflows:** Unlike single-turn dialogs, agents execute persistent, multi-hour operations, evaluating intermediate tool outputs and self-correcting their strategy without requiring continuous human prompts.
+
+The fundamental cybersecurity risk arises from **excessive permissions and untrusted data ingestion**. When an AI agent is connected to corporate systems with broad administrative API tokens, any prompt manipulation or logic failure can cause the agent to execute unauthorized operations against production infrastructure.
+
+---
+
+## What Recent AI Security Incidents Tell Us
+
+The year 2026 has witnessed a succession of landmark cybersecurity developments that move the discussion of AI risks from theoretical whitepapers into documented production reality.
+
+Rather than isolated glitches, these developments reveal structural shifts across three core operational areas:
+
+### 1. AI-Assisted Vulnerability Discovery
+Security analysts are utilizing frontier foundation models to audit vast codebases, dissect compiled binaries, and uncover complex logical vulnerabilities in third-party services. The speed at which an AI model can parse interface definitions and hypothesize exploit conditions has fundamentally compressed the vulnerability discovery timeline.
+
+### 2. Automated Attack Surface Reconnaissance
+Threat actors are incorporating automated AI workflows to scan public-facing IP ranges, parse cloud resource configurations, and generate customized social-engineering lures at unprecedented scale.
+
+### 3. Red Teaming Across Frontier AI Labs
+In recent research, security analysts demonstrated how an AI model developed by one frontier research laboratory could be systematically employed to audit and discover security weaknesses in another major lab's cloud services, as seen in the recent [analysis of researchers using Claude to audit OpenAI endpoints](/ai-security/anthropic-claude-hacked-openai-ai-security).
+
+These events demonstrate that AI models are functioning as high-velocity cognitive force multipliers across the entire security landscape.
+
+---
+
+## How AI Changes the Cyber Attack Lifecycle
+
+To evaluate the defensive implications of AI agents, security teams must examine how machine intelligence impacts each stage of the standard cybersecurity attack lifecycle:
+
+### 1. Reconnaissance
+Traditional reconnaissance requires human analysts to manually review domain records, scan port ranges, and examine public source repositories. AI agents automate this process by aggregating open-source intelligence (OSINT), analyzing leaked metadata, and mapping organization-wide network boundaries in near real time.
+
+### 2. Vulnerability Research
+Rather than relying solely on static pattern-matching scanners, AI models perform semantic analysis on source code, identifying nuanced business logic bypasses, race conditions, and improper access controls that traditional automated tooling routinely misses.
+
+### 3. Code Analysis & Deobfuscation
+AI models excel at translating obfuscated assembly, minified JavaScript, and complex legacy microservices into readable logic trees, drastically reducing the time required for reverse engineering.
+
+### 4. Exploit Development Assistance
+While foundation model guardrails actively restrict the generation of malicious payloads, ethical researchers and adversaries alike can utilize AI to optimize benign testing scripts, debug syntax errors, and calculate exact memory offsets during authorized audits.
+
+### 5. Credential and Token Abuse Risks
+When autonomous agents are granted long-lived API keys or OAuth access tokens, attackers targeting the agent via [indirect prompt injection techniques](/ai-safety/ai-agents-cybersecurity-target) can coerce the agent into leaking secrets or misusing its authorized credentials.
+
+### 6. Lateral Movement Risks
+In automated environments, agents configured with broad internal network visibility can be manipulated into issuing internal API requests, bypassing perimeter firewalls through authenticated internal channels.
+
+### 7. Data Access & Exfiltration
+Because agents frequently possess read access to unstructured data stores, compromised agent control flows can be directed to summarize and extract sensitive customer records, proprietary financial data, or internal intellectual property.
+
+### 8. Detection and Response
+Conversely, defenders are deploying AI agents inside Security Operations Centers (SOCs) to correlate disparate telemetry streams, triage alerts, and execute rapid containment playbooks against emerging [zero-day vulnerabilities](/cybersecurity/zero-day-vulnerability-triage-guide).
+
+---
+
+## Anthropic's September 2026 Threat Intelligence Findings
+
+In its official **September 2026 Threat Intelligence Report**, Anthropic published extensive telemetry documenting how both state-sponsored advanced persistent threats (APTs) and commercial security researchers are interacting with frontier AI systems.
+
+The report provides critical, verifiable insights into the real-world state of AI-augmented operations:
+
+- **AI-Augmented Cyber Operations:** Anthropic documented that sophisticated threat groups are actively attempting to incorporate large language models into their operational infrastructure, primarily focusing on automating initial intelligence gathering and optimizing vulnerability discovery.
+- **Automated Vulnerability Research:** The report confirms that AI systems are increasingly capable of analyzing software repositories and identifying potential vulnerabilities with minimal human intervention.
+- **Exploit Research Safeguards:** Anthropic detailed the ongoing cat-and-mouse dynamic of model safety training, showing how frontier models are continuously hardened to reject requests that attempt to generate functioning weaponized exploits, while preserving the model's ability to assist defenders in patch validation.
+- **Software Supply-Chain Activity:** The threat intelligence highlighted attempts by malicious actors to use automated AI tooling to scan open-source dependencies for undocumented bugs and configuration oversights before upstream maintainers can publish security patches.
+- **Defensive Asymmetry:** Anthropic emphasized that while attackers gain efficiency from AI assistance, defenders who integrate AI into continuous code review, automated fuzzing, and telemetry analysis gain a decisive structural advantage.
+
+The findings from Anthropic underscore that AI cybersecurity is no longer a speculative future scenario—it is an active operational discipline requiring rigorous governance.
+
+---
+
+## What the OpenAI-Related Incidents Reveal
+
+Recent reporting by major international business publications, including the *Wall Street Journal* and *Business Insider*, highlighted a high-profile security research demonstration where cybersecurity researchers from Hacktron AI used Anthropic's Claude to uncover security vulnerabilities within OpenAI's infrastructure.
+
+A rigorous, factual examination of the reported incident reveals key takeaways:
+
+- **Reported Research Methodology:** According to published reports, Hacktron AI researchers integrated Claude as an intelligent analysis co-pilot to audit public-facing OpenAI endpoints, parse documentation, and identify subtle logical discrepancies across external interfaces.
+- **Ethical Coordinated Disclosure:** The research was conducted under responsible vulnerability disclosure protocols. The researchers reported their technical findings directly to OpenAI's product security team without conducting destructive exploitation or exfiltrating private customer data.
+- **OpenAI's Verified Response:** Following receipt of the vulnerability reports, OpenAI's internal security engineering teams validated the disclosures and deployed server-side mitigations to secure the affected endpoints.
+- **Industry Implications:** The incident served as a vivid public demonstration that security analysts can effectively utilize one frontier AI lab's model to stress-test and audit systems managed by another lab, validating the maturity of AI-assisted security audits.
+
+---
+
+## Why AI Agents Create a Different Security Problem
+
+The introduction of agentic AI fundamentally alters enterprise threat modeling. Comparing traditional automation with agentic systems illustrates why standard security controls are insufficient:
+
+| Feature | Traditional Automation | AI-Assisted Automation | Agentic AI Systems |
+| :--- | :--- | :--- | :--- |
+| **Execution Model** | Deterministic scripts (if-this-then-that) | Human writes prompt; AI generates static text | AI autonomously reasons, plans, and invokes tools |
+| **Decision Making** | Hardcoded logic branches | Human makes all decisions | Non-deterministic, probabilistic task planning |
+| **Tool & API Access** | Static API integrations with fixed parameters | Model suggests API call; human executes | Model autonomously invokes APIs with dynamic arguments |
+| **Data Ingestion** | Structured schemas (JSON, SQL, CSV) | Unstructured text ingested into chat window | Untrusted live web data, emails, and database records |
+| **Failure Modes** | Syntax errors, unhandled exceptions | Hallucinations, incorrect output | Autonomous goal hijacking, unauthorized tool calls |
+| **Security Perimeter** | Traditional network firewall & IAM | Standard API access controls | Complex intersection of prompt boundaries, tool IAM, and model alignment |
+
+Because agents are probabilistic rather than deterministic, traditional signature-based security controls cannot reliably predict every action an agent might take when processing untrusted inputs.
+
+---
+
+## The Biggest Security Weakness May Be Agent Permissions
+
+In cybersecurity engineering, the most critical vulnerability in any autonomous deployment is **excessive privilege allocation**.
+
+When developers build AI agents, they frequently grant the agent broad API keys, full read/write database connections, or shell execution permissions to prevent task interruptions. This creates severe systemic risk:
+
+### 1. The Overprivileged Agent Anti-Pattern
+If an AI agent tasked with reading customer feedback is given write access to a production SQL database or administrative cloud credentials, any indirect prompt injection encountered in customer text can trick the agent into executing destructive commands.
+
+### 2. Lack of Credential Scoping
+Many agents use static, long-lived API tokens shared across multiple microservices. If an agent's memory is exposed or manipulated, those long-lived secrets can be compromised.
+
+### 3. Unauthenticated Egress Connections
+Agents permitted to make arbitrary outbound HTTP calls can be leveraged by attackers to exfiltrate confidential context to external servers under adversary control.
+
+### 4. Absence of Human Approval Gates
+Deploying agents with the authority to delete database records, modify financial ledgers, or deploy software without human-in-the-loop (HITL) verification eliminates the final safety barrier against automated errors.
+
+---
+
+## How Organizations Can Defend Against AI-Assisted Attacks
+
+To protect enterprise infrastructure against both AI-assisted adversary reconnaissance and vulnerabilities in deployed AI agents, security teams must implement a comprehensive defense-in-depth framework:
+
+### 1. Enforce Strict Least-Privilege Architecture
+Grant AI agents the absolute minimum set of permissions necessary to complete their specific function. If an agent only requires read access to a specific documentation folder, it must never receive database write permissions or general cloud admin roles.
+
+### 2. Implement Short-Lived, Scoped Credentials
+Replace static API tokens with temporary, cryptographically signed session tokens that expire within minutes and are tightly bound to specific IP addresses and API endpoints.
+
+### 3. Containerized Runtime Sandboxing
+Run all AI code execution tools, terminal interpreters, and data scrapers inside isolated, stateless container sandboxes with no direct network access to internal enterprise subnets.
+
+### 4. Deterministic Egress Network Filtering
+Restrict agent outbound network traffic using strict domain whitelists. Block all unexpected outbound HTTP requests, SSH connections, and raw socket communications.
+
+### 5. Robust Protection for [RAG & Vector Retrieval Pipelines](/ai-security/llm-rag-poisoning-defenses)
+When connecting models to internal knowledge bases, implement cryptographic chunk signing, document provenance tracking, and input sanitization to prevent data poisoning and indirect prompt injection attacks.
+
+### 6. Mandatory Human-in-the-Loop (HITL) Authorization
+Require explicit, authenticated human approval before an agent can execute high-impact actions, such as transferring funds, altering user permissions, modifying production code, or deleting data.
+
+### 7. Comprehensive Agent Audit Logging
+Maintain immutable, tamper-evident audit logs of every prompt, reasoning trace, tool invocation, and API response generated by deployed agents.
+
+---
+
+## What Security Teams Should Monitor
+
+Security Operations Centers (SOCs) should establish dedicated detection rules and behavioral baselines for autonomous AI agents. The following checklist highlights anomalous indicators requiring immediate investigation:
+
+- **Unusual API Call Volume:** Sudden spikes in API request frequency or rapid enumeration of undocumented endpoint routes.
+- **Unexpected Tool Invocation:** An agent attempting to invoke administrative tools, shell commands, or database functions outside its normal operational profile.
+- **Abnormal Repository & File Access:** Automated mass-reading of sensitive configuration files, \`.env\` secrets, or source code directories.
+- **Credential Escalation Attempts:** Requests by an agent to query identity management endpoints or retrieve elevated OAuth tokens.
+- **Irregular Network Connections:** Outbound connections to unrecognized external IP addresses, dynamic DNS domains, or known cloud hosting ranges.
+- **Anomalous Data Transfers:** High-volume database queries or unexpected serialization of structured tables into external context windows.
+- **Repeated Automated Reconnaissance:** Rapid, systematic probing of input fields and authentication parameters characteristic of AI-assisted security scanners.
+- **Suspicious Prompt Payloads:** Inbound user or customer data containing delimiter manipulation strings, system prompt override attempts, or encoded instruction sequences.
+
+---
+
+## Is AI Making Cyber Attacks Easier?
+
+The question of whether artificial intelligence is fundamentally tilting the balance in favor of attackers or defenders requires a balanced, evidence-based assessment:
+
+### The Attacker Dimension
+- **Velocity & Scale:** AI enables threat actors to automate repetitive tasks—such as vulnerability scanning, phishing lure personalization, and script debugging—at massive scale.
+- **Lowering the Technical Barrier:** Less experienced threat actors can utilize AI models to comprehend complex networking concepts and write functional scripts that would have previously required advanced expertise.
+- **Rapid Reverse-Engineering:** Threat actors can disassemble patches and analyze software diffs more rapidly, accelerating the window between vulnerability disclosure and exploit attempts.
+
+### The Defender Advantage
+- **Continuous Automated Auditing:** Defenders can deploy AI agents across their entire codebase, identifying and fixing security flaws in CI/CD pipelines before code is ever deployed to production.
+- **High-Speed SOC Telemetry Analysis:** AI models can sift through millions of log events per second, identifying subtle attack patterns and correlating indicators of compromise (IoCs) far faster than human analysts.
+- **Proactive Threat Modeling:** Engineering teams can use AI models to red-team their own architectures, simulating attack scenarios and discovering edge cases proactively.
+
+Ultimately, artificial intelligence is an **asymmetric accelerator**. The advantage will belong to whichever side implements more disciplined engineering, rigorous governance, and faster operational feedback loops.
+
+---
+
+## What This Means for AI Security in 2026
+
+The rapid adoption of autonomous agents is forcing a convergence across previously separate cybersecurity disciplines:
+
+\`\`\`text
++-------------------------------------------------------------------+
+|               THE CONVERGENCE OF ENTERPRISE AI SECURITY            |
++-------------------------------------------------------------------+
+|  AI Safety & Alignment    <--->  Application & API Security       |
+|  Cloud Infrastructure     <--->  Identity & Access Management     |
+|  Threat Intelligence      <--->  Software Supply-Chain Governance |
++-------------------------------------------------------------------+
+\`\`\`
+
+- **AI Safety & Application Security:** Preventing model misalignment and prompt injection is now directly connected to securing web applications and REST APIs.
+- **Identity & Access Governance:** Managing AI agent identities and OAuth tokens requires the same rigor as managing human employee credentials and service accounts.
+- **Software Supply-Chain Security:** Auditing third-party foundation models, vector databases, and agent orchestration frameworks has become as critical as auditing traditional open-source libraries.
+
+Organizations can no longer treat AI security as an experimental research topic. It is an integral component of enterprise risk management.
+
+---
+
+## Final Takeaway
+
+The realization that AI agents are interacting with real-world infrastructure and uncovering vulnerabilities in production systems marks a defining moment for the technology industry.
+
+The central takeaway is clear:
+
+> **The primary cybersecurity challenge is not merely that AI can write code. The true risk emerges when autonomous AI agents are granted access to real systems, credentials, tools, and enterprise data without rigorous architectural guardrails.**
+
+As artificial intelligence continues to advance, securing agentic workflows through least privilege, containerized sandboxing, continuous behavioral monitoring, and transparent coordinated vulnerability disclosure will separate resilient organizations from those vulnerable to the next generation of intelligent threats.
+    `,
+    faqs: [
+      {
+        question: "What is an AI agent in cybersecurity?",
+        answer: "An AI agent is an autonomous software system powered by foundation models that can perceive its environment, reason through multi-step plans, and independently invoke external tools, APIs, and code execution environments to complete complex tasks without continuous human guidance."
+      },
+      {
+        question: "Can AI agents perform cyber attacks?",
+        answer: "While current foundation models cannot conduct fully autonomous cyber attacks independently without human direction, human researchers and threat actors can utilize AI agents to significantly accelerate reconnaissance, code auditing, vulnerability discovery, and technical script optimization."
+      },
+      {
+        question: "Why are AI agents difficult to secure?",
+        answer: "AI agents are non-deterministic and probabilistic, meaning traditional static security rules cannot predict every action they will take. When agents ingest untrusted external data (such as web pages or emails), malicious instructions embedded in that data can manipulate the agent's reasoning via indirect prompt injection."
+      },
+      {
+        question: "What are the biggest AI agent security risks?",
+        answer: "The most critical risks include excessive permission allocation, unauthenticated tool execution, lack of runtime sandboxing, shared long-lived API credentials, unrestricted outbound network egress, and the absence of human-in-the-loop verification for high-impact actions."
+      },
+      {
+        question: "How can companies secure AI agents?",
+        answer: "Organizations should implement strict least-privilege access controls, short-lived scoped credentials, containerized sandboxes for tool execution, deterministic egress network filtering, immutable audit logging, and mandatory human approval gates for critical operations."
+      },
+      {
+        question: "Is AI-assisted hacking becoming more common?",
+        answer: "Yes. Official threat intelligence reports from leading AI labs, including Anthropic's September 2026 report, document that security researchers and adversary threat groups are increasingly incorporating AI tools to streamline reconnaissance and accelerate code analysis."
+      },
+      {
+        question: "What is agentic AI security?",
+        answer: "Agentic AI security is the specialized cybersecurity discipline focused on securing autonomous AI systems, mitigating prompt injection vulnerabilities, governing agent tool access, enforcing identity boundaries, and monitoring agent behavioral telemetry across enterprise infrastructure."
+      },
+      {
+        question: "What should security teams monitor in AI agent environments?",
+        answer: "Security teams should monitor unusual API call frequencies, unexpected tool invocations, abnormal repository access, unauthorized credential escalation attempts, anomalous outbound network connections, and irregular high-volume data transfers."
+      }
+    ],
+    sources: [
+      {
+        name: "Anthropic — Official Threat Intelligence Report (September 2026)",
+        url: "https://www.anthropic.com",
+        type: "OFFICIAL",
+        publicationDate: "September 2026"
+      },
+      {
+        name: "Wall Street Journal — Cybersecurity Audits and Frontier AI Red Teaming Investigations",
+        url: "https://www.wsj.com",
+        type: "NEWS",
+        publicationDate: "September 2026"
+      },
+      {
+        name: "Business Insider — Hacktron AI & OpenAI Security Research Disclosures",
+        url: "https://www.businessinsider.com",
+        type: "NEWS",
+        publicationDate: "September 2026"
+      },
+      {
+        name: "OWASP Top 10 for Large Language Model Applications & Autonomous Agents",
+        url: "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        type: "RESEARCH",
+        publicationDate: "2025"
+      },
+      {
+        name: "CISA & NIST — Guidelines for Managing AI Agent Permissions & Least Privilege",
+        url: "https://www.cisa.gov/resources-tools/resources/guidelines-secure-ai-system-development",
+        type: "GOVERNMENT",
+        publicationDate: "2025"
+      }
+    ],
+    relatedArticles: [
+      "anthropic-claude-hacked-openai-ai-security",
+      "ai-agents-cybersecurity-target",
+      "llm-rag-poisoning-defenses",
+      "why-did-jacob-coxon-quit-anthropic-ai-safety"
+    ]
+  },
+  {
     id: "anthropic-claude-hacked-openai-ai-security",
     slug: "anthropic-claude-hacked-openai-ai-security",
     title: "Researchers Used Anthropic’s Claude to Hack OpenAI: What Happened?",

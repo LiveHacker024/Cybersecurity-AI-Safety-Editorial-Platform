@@ -5,8 +5,17 @@
   <link>https://cyberaiwatch.com</link>
   <description>Independent international editorial publication dedicated to cybersecurity journalism, AI safety research, vulnerability tracking, threat intelligence, and defensive security tutorials.</description>
   <language>en-us</language>
-  <lastBuildDate>Fri, 18 Sep 2026 10:28:23 GMT</lastBuildDate>
+  <lastBuildDate>Fri, 18 Sep 2026 10:50:05 GMT</lastBuildDate>
   <atom:link href="https://cyberaiwatch.com/rss.xml" rel="self" type="application/rss+xml" />
+  <item>
+    <title><![CDATA[AI Agents Are Now Breaching Real-World Systems: What the Latest Incidents Reveal About AI Cybersecurity]]></title>
+    <link>https://cyberaiwatch.com/ai-security/ai-agents-real-world-cybersecurity-incidents</link>
+    <guid isPermaLink="true">https://cyberaiwatch.com/ai-security/ai-agents-real-world-cybersecurity-incidents</guid>
+    <description><![CDATA[AI agents are moving beyond text generation into autonomous tool use, code auditing, and system interaction. Here is what recent real-world security incidents and official threat intelligence reports reveal about the evolving risks of agentic AI.]]></description>
+    <category>AI Security</category>
+    <author>Kunal Rajput</author>
+    <pubDate>Thu, 17 Sep 2026 18:30:00 GMT</pubDate>
+  </item>
   <item>
     <title><![CDATA[Researchers Used Anthropic’s Claude to Hack OpenAI: What Happened?]]></title>
     <link>https://cyberaiwatch.com/ai-security/anthropic-claude-hacked-openai-ai-security</link>
