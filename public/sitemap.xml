@@ -131,6 +131,11 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://cyberaiwatch.com/ai-security/anthropic-claude-hacked-openai-ai-security</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://cyberaiwatch.com/ai-safety/why-did-jacob-coxon-quit-anthropic-ai-safety</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

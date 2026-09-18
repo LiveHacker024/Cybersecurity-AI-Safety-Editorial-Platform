@@ -5,8 +5,17 @@
   <link>https://cyberaiwatch.com</link>
   <description>Independent international editorial publication dedicated to cybersecurity journalism, AI safety research, vulnerability tracking, threat intelligence, and defensive security tutorials.</description>
   <language>en-us</language>
-  <lastBuildDate>Fri, 18 Sep 2026 09:08:04 GMT</lastBuildDate>
+  <lastBuildDate>Fri, 18 Sep 2026 09:46:27 GMT</lastBuildDate>
   <atom:link href="https://cyberaiwatch.com/rss.xml" rel="self" type="application/rss+xml" />
+  <item>
+    <title><![CDATA[Researchers Used Anthropic’s Claude to Hack OpenAI: What Happened?]]></title>
+    <link>https://cyberaiwatch.com/ai-security/anthropic-claude-hacked-openai-ai-security</link>
+    <guid>https://cyberaiwatch.com/ai-security/anthropic-claude-hacked-openai-ai-security</guid>
+    <description><![CDATA[Hacktron AI researchers used Anthropic’s Claude to uncover vulnerabilities in OpenAI systems. Here is what happened and what it means for AI security.]]></description>
+    <category>AI Security</category>
+    <author>Kunal Rajput</author>
+    <pubDate>Thu, 17 Sep 2026 18:30:00 GMT</pubDate>
+  </item>
   <item>
     <title><![CDATA[Why Did Jacob Coxon Quit Anthropic? AI Safety Concerns Explained]]></title>
     <link>https://cyberaiwatch.com/ai-safety/why-did-jacob-coxon-quit-anthropic-ai-safety</link>
