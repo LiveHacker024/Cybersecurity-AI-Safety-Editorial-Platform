@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
   <title>CyberAI Watch — Cybersecurity • AI Safety • Digital Threat Intelligence</title>
   <link>https://cyberaiwatch.com</link>
   <description>Independent international editorial publication dedicated to cybersecurity journalism, AI safety research, vulnerability tracking, threat intelligence, and defensive security tutorials.</description>
   <language>en-us</language>
-  <lastBuildDate>Fri, 18 Sep 2026 09:46:27 GMT</lastBuildDate>
+  <lastBuildDate>Fri, 18 Sep 2026 10:28:23 GMT</lastBuildDate>
   <atom:link href="https://cyberaiwatch.com/rss.xml" rel="self" type="application/rss+xml" />
   <item>
     <title><![CDATA[Researchers Used Anthropic’s Claude to Hack OpenAI: What Happened?]]></title>
     <link>https://cyberaiwatch.com/ai-security/anthropic-claude-hacked-openai-ai-security</link>
-    <guid>https://cyberaiwatch.com/ai-security/anthropic-claude-hacked-openai-ai-security</guid>
+    <guid isPermaLink="true">https://cyberaiwatch.com/ai-security/anthropic-claude-hacked-openai-ai-security</guid>
     <description><![CDATA[Hacktron AI researchers used Anthropic’s Claude to uncover vulnerabilities in OpenAI systems. Here is what happened and what it means for AI security.]]></description>
     <category>AI Security</category>
     <author>Kunal Rajput</author>
@@ -19,7 +19,7 @@
   <item>
     <title><![CDATA[Why Did Jacob Coxon Quit Anthropic? AI Safety Concerns Explained]]></title>
     <link>https://cyberaiwatch.com/ai-safety/why-did-jacob-coxon-quit-anthropic-ai-safety</link>
-    <guid>https://cyberaiwatch.com/ai-safety/why-did-jacob-coxon-quit-anthropic-ai-safety</guid>
+    <guid isPermaLink="true">https://cyberaiwatch.com/ai-safety/why-did-jacob-coxon-quit-anthropic-ai-safety</guid>
     <description><![CDATA[Jacob Coxon left Anthropic warning about the pace of advanced AI development. Here’s what he said, what is confirmed, and what remains uncertain.]]></description>
     <category>AI Safety</category>
     <author>CyberAI Watch Editorial Team</author>
@@ -28,7 +28,7 @@
   <item>
     <title><![CDATA[AI Agents Are Becoming a New Cybersecurity Target: Architecture & Threat Vectors]]></title>
     <link>https://cyberaiwatch.com/ai-safety/ai-agents-cybersecurity-target</link>
-    <guid>https://cyberaiwatch.com/ai-safety/ai-agents-cybersecurity-target</guid>
+    <guid isPermaLink="true">https://cyberaiwatch.com/ai-safety/ai-agents-cybersecurity-target</guid>
     <description><![CDATA[As autonomous AI agents gain access to software APIs, file systems, and enterprise databases, the agent itself becomes a primary attack surface. Learn the core threat models and defensive guardrails.]]></description>
     <category>AI Safety</category>
     <author>Kunal Rajput</author>
@@ -37,7 +37,7 @@
   <item>
     <title><![CDATA[Securing Retrieval-Augmented Generation (RAG) Against Data Poisoning & Injection]]></title>
     <link>https://cyberaiwatch.com/ai-security/llm-rag-poisoning-defenses</link>
-    <guid>https://cyberaiwatch.com/ai-security/llm-rag-poisoning-defenses</guid>
+    <guid isPermaLink="true">https://cyberaiwatch.com/ai-security/llm-rag-poisoning-defenses</guid>
     <description><![CDATA[How malicious embeddings and poisoned document chunks compromise enterprise vector databases, and how to build resilient defensive pipelines.]]></description>
     <category>AI Security</category>
     <author>Kunal Rajput</author>
@@ -46,7 +46,7 @@
   <item>
     <title><![CDATA[Zero-Day Vulnerability Triage: Enterprise Incident Response Framework]]></title>
     <link>https://cyberaiwatch.com/cybersecurity/zero-day-vulnerability-triage-guide</link>
-    <guid>https://cyberaiwatch.com/cybersecurity/zero-day-vulnerability-triage-guide</guid>
+    <guid isPermaLink="true">https://cyberaiwatch.com/cybersecurity/zero-day-vulnerability-triage-guide</guid>
     <description><![CDATA[A step-by-step defensive engineering methodology for identifying, scoring, and mitigating unpatched zero-day vulnerabilities across edge appliances.]]></description>
     <category>Cybersecurity</category>
     <author>Kunal Rajput</author>
@@ -55,7 +55,7 @@
   <item>
     <title><![CDATA[Deep Technical Analysis: CVE-2024-3400 PAN-OS Command Injection Vulnerability]]></title>
     <link>https://cyberaiwatch.com/vulnerabilities/pan-os-cve-2024-3400-breakdown</link>
-    <guid>https://cyberaiwatch.com/vulnerabilities/pan-os-cve-2024-3400-breakdown</guid>
+    <guid isPermaLink="true">https://cyberaiwatch.com/vulnerabilities/pan-os-cve-2024-3400-breakdown</guid>
     <description><![CDATA[Detailed examination of the root-cause command injection vulnerability in Palo Alto Networks PAN-OS GlobalProtect gateways, detection IoCs, and permanent mitigations.]]></description>
     <category>Vulnerabilities</category>
     <author>Kunal Rajput</author>
@@ -64,9 +64,9 @@
   <item>
     <title><![CDATA[The Defensive Guide to Hardware Security Keys: FIDO2, WebAuthn & Phishing Defense]]></title>
     <link>https://cyberaiwatch.com/tutorials/hardware-security-keys-yubikey-guide</link>
-    <guid>https://cyberaiwatch.com/tutorials/hardware-security-keys-yubikey-guide</guid>
+    <guid isPermaLink="true">https://cyberaiwatch.com/tutorials/hardware-security-keys-yubikey-guide</guid>
     <description><![CDATA[A practical hardening tutorial explaining why SMS and TOTP authenticator apps are vulnerable to real-time reverse proxies, and how hardware keys eliminate phishing.]]></description>
-    <category>Tutorials & How-To</category>
+    <category>Tutorials &amp; How-To</category>
     <author>Kunal Rajput</author>
     <pubDate>Mon, 31 Aug 2026 18:30:00 GMT</pubDate>
   </item>

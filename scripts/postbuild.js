@@ -13,6 +13,30 @@ const publicDir = path.resolve(rootDir, 'public');
 
 const DOMAIN = siteConfig.domain; // https://cyberaiwatch.com
 
+/**
+ * Strict XML 1.0 entity escaping helper
+ * Converts special characters (&, <, >, ", ') into standard XML entities.
+ */
+function escapeXml(value) {
+  if (value === null || value === undefined) return '';
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+/**
+ * Safe XML CDATA helper
+ * Wraps dynamic content in <![CDATA[...]]> and escapes any internal ']]>' sequences
+ */
+function escapeCdata(value) {
+  if (value === null || value === undefined) return '';
+  const safe = String(value).replace(/\]\]>/g, ']]]]><![CDATA[>');
+  return `<![CDATA[${safe}]]>`;
+}
+
 // 1. Generate Sitemap XML
 function generateSitemap() {
   const staticRoutes = [
@@ -54,9 +78,9 @@ function generateSitemap() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${allUrls.map(u => `  <url>
-    <loc>${u.loc}</loc>
-    <changefreq>${u.changefreq}</changefreq>
-    <priority>${u.priority}</priority>
+    <loc>${escapeXml(u.loc)}</loc>
+    <changefreq>${escapeXml(u.changefreq)}</changefreq>
+    <priority>${escapeXml(u.priority)}</priority>
   </url>`).join('\n')}
 </urlset>`;
 
@@ -80,24 +104,36 @@ function generateRss() {
   const published = articlesData.filter(a => a.status === 'PUBLISHED');
   const now = new Date().toUTCString();
 
-  const xml = `<?xml version="1.0" encoding="UTF-8" ?>
+  const channelTitle = `${siteConfig.name} — ${siteConfig.tagline}`;
+  const channelDesc = siteConfig.description;
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>${siteConfig.name} — ${siteConfig.tagline}</title>
-  <link>${DOMAIN}</link>
-  <description>${siteConfig.description}</description>
+  <title>${escapeXml(channelTitle)}</title>
+  <link>${escapeXml(DOMAIN)}</link>
+  <description>${escapeXml(channelDesc)}</description>
   <language>en-us</language>
   <lastBuildDate>${now}</lastBuildDate>
-  <atom:link href="${DOMAIN}/rss.xml" rel="self" type="application/rss+xml" />
-${published.map(a => `  <item>
-    <title><![CDATA[${a.title}]]></title>
-    <link>${DOMAIN}/${a.category}/${a.slug}</link>
-    <guid>${DOMAIN}/${a.category}/${a.slug}</guid>
-    <description><![CDATA[${a.subtitle || a.excerpt}]]></description>
-    <category>${a.categoryName || a.category}</category>
-    <author>${a.author?.name || siteConfig.founder.name}</author>
-    <pubDate>${new Date(a.publishedAt || Date.now()).toUTCString()}</pubDate>
-  </item>`).join('\n')}
+  <atom:link href="${escapeXml(DOMAIN)}/rss.xml" rel="self" type="application/rss+xml" />
+${published.map(a => {
+  const itemUrl = `${DOMAIN}/${a.category}/${a.slug}`;
+  const itemTitle = a.title || '';
+  const itemDesc = a.subtitle || a.excerpt || '';
+  const itemCategory = a.categoryName || a.category || '';
+  const itemAuthor = a.author?.name || siteConfig.founder.name || '';
+  const itemPubDate = new Date(a.publishedAt || Date.now()).toUTCString();
+
+  return `  <item>
+    <title>${escapeCdata(itemTitle)}</title>
+    <link>${escapeXml(itemUrl)}</link>
+    <guid isPermaLink="true">${escapeXml(itemUrl)}</guid>
+    <description>${escapeCdata(itemDesc)}</description>
+    <category>${escapeXml(itemCategory)}</category>
+    <author>${escapeXml(itemAuthor)}</author>
+    <pubDate>${itemPubDate}</pubDate>
+  </item>`;
+}).join('\n')}
 </channel>
 </rss>`;
 
@@ -188,6 +224,35 @@ function run() {
     }
 
     console.log('✓ Wrote sitemap.xml, robots.txt, rss.xml, feed.xml, ads.txt to dist/');
+  }
+
+  // Verify XML well-formedness of generated files
+  const xmlFilesToCheck = [
+    path.join(publicDir, 'rss.xml'),
+    path.join(publicDir, 'feed.xml'),
+    path.join(publicDir, 'sitemap.xml'),
+    path.join(distDir, 'rss.xml'),
+    path.join(distDir, 'feed.xml'),
+    path.join(distDir, 'sitemap.xml')
+  ];
+
+  for (const xmlFile of xmlFilesToCheck) {
+    if (fs.existsSync(xmlFile)) {
+      const content = fs.readFileSync(xmlFile, 'utf8');
+      // Verify basic XML structure
+      if (!content.trim().startsWith('<?xml')) {
+        throw new Error(`XML Validation Error in ${path.relative(rootDir, xmlFile)}: Missing XML declaration`);
+      }
+      // Check for illegal unescaped & characters outside CDATA and comments
+      const stripped = content
+        .replace(/<!--[\s\S]*?-->/g, '')
+        .replace(/<!\[CDATA\[[\s\S]*?\]\]>/g, '');
+      const unescapedAmp = stripped.match(/&(?!amp;|lt;|gt;|quot;|apos;|#[0-9]+;|#x[0-9a-fA-F]+;)/);
+      if (unescapedAmp) {
+        throw new Error(`XML Validation Error in ${path.relative(rootDir, xmlFile)}: Unescaped raw '&' found`);
+      }
+      console.log(`✓ Validated XML well-formedness for ${path.relative(rootDir, xmlFile)}`);
+    }
   }
 
   console.log('--- Asset Generation Complete ---');
