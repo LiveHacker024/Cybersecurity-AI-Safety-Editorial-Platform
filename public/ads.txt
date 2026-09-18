@@ -1,2 +1,1 @@
-# CyberAI Watch ads.txt
-# Populate when Google AdSense account publisher ID is configured.
+google.com, pub-4302057692753259, DIRECT, f08c47fec0942fa0

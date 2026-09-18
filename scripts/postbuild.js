@@ -106,14 +106,12 @@ ${published.map(a => `  <item>
 
 // 4. Generate Ads TXT
 function generateAdsTxt() {
-  const clientId = process.env.VITE_ADSENSE_CLIENT_ID || process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || '';
+  const clientId = process.env.VITE_ADSENSE_CLIENT_ID || process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-4302057692753259';
   if (clientId && clientId.startsWith('ca-pub-')) {
     const pubId = clientId.replace('ca-', '');
     return `google.com, ${pubId}, DIRECT, f08c47fec0942fa0\n`;
   }
-  return `# CyberAI Watch ads.txt
-# Populate when Google AdSense account publisher ID is configured.
-`;
+  return `google.com, pub-4302057692753259, DIRECT, f08c47fec0942fa0\n`;
 }
 
 // Execute File Generation
