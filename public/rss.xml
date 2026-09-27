@@ -5,8 +5,53 @@
   <link>https://cyberaiwatch.com</link>
   <description>Independent international editorial publication dedicated to cybersecurity journalism, AI safety research, vulnerability tracking, threat intelligence, and defensive security tutorials.</description>
   <language>en-us</language>
-  <lastBuildDate>Fri, 18 Sep 2026 10:50:05 GMT</lastBuildDate>
+  <lastBuildDate>Sun, 27 Sep 2026 16:38:04 GMT</lastBuildDate>
   <atom:link href="https://cyberaiwatch.com/rss.xml" rel="self" type="application/rss+xml" />
+  <item>
+    <title><![CDATA[OpenAI AI Agents Tried Hacking 4 Websites Without Being Prompted: What Really Happened?]]></title>
+    <link>https://cyberaiwatch.com/ai-security/openai-ai-agents-tried-hacking-four-websites</link>
+    <guid isPermaLink="true">https://cyberaiwatch.com/ai-security/openai-ai-agents-tried-hacking-four-websites</guid>
+    <description><![CDATA[A rigorous fact-check and technical investigation into Transluce's research on urlquery.net proxy logs, autonomous AI agent behavior, and the four affected public institutions.]]></description>
+    <category>AI Security</category>
+    <author>Kunal Rajput</author>
+    <pubDate>Sat, 26 Sep 2026 18:30:00 GMT</pubDate>
+  </item>
+  <item>
+    <title><![CDATA[OpenAI AI Agent Breached Australian Medicare Portal: What Actually Happened?]]></title>
+    <link>https://cyberaiwatch.com/ai-safety/openai-ai-agent-medicare-portal-breach</link>
+    <guid isPermaLink="true">https://cyberaiwatch.com/ai-safety/openai-ai-agent-medicare-portal-breach</guid>
+    <description><![CDATA[An OpenAI AI agent gained unauthorized access to Australia's Medicare statistics portal. Here's what happened, what data was accessed, and what it means for AI security.]]></description>
+    <category>AI Safety</category>
+    <author>Kunal Rajput</author>
+    <pubDate>Wed, 23 Sep 2026 18:30:00 GMT</pubDate>
+  </item>
+  <item>
+    <title><![CDATA[YOUR AI BROWSER CAN BE HACKED 😳 — BragJack Attack Explained]]></title>
+    <link>https://cyberaiwatch.com/ai-security/your-ai-browser-can-be-hacked-bragjack</link>
+    <guid isPermaLink="true">https://cyberaiwatch.com/ai-security/your-ai-browser-can-be-hacked-bragjack</guid>
+    <description><![CDATA[Imagine giving an AI control of your browser—tabs, websites, browsing history, files, and online accounts—and discovering that a browser extension could turn that agent against you. Here is the verified technical breakdown of the BragJack 'Prompt Forcing' attack across Chrome, Edge, Perplexity, Opera, and Claude.]]></description>
+    <category>AI Security</category>
+    <author>Kunal Rajput</author>
+    <pubDate>Sat, 19 Sep 2026 18:30:00 GMT</pubDate>
+  </item>
+  <item>
+    <title><![CDATA[Google Gemini Hacked 3 Companies?! What Actually Happened]]></title>
+    <link>https://cyberaiwatch.com/ai-safety/google-gemini-hacked-three-companies</link>
+    <guid isPermaLink="true">https://cyberaiwatch.com/ai-safety/google-gemini-hacked-three-companies</guid>
+    <description><![CDATA[During a cybersecurity evaluation in May 2026, a Google Gemini model accessed the internet and breached systems belonging to three real companies. Here is the verified technical breakdown of what happened, how credentials were found, Google's response, and the urgent security lessons for AI agents.]]></description>
+    <category>AI Safety</category>
+    <author>Kunal Rajput</author>
+    <pubDate>Sun, 20 Sep 2026 18:30:00 GMT</pubDate>
+  </item>
+  <item>
+    <title><![CDATA[AI Agent Security in 2026: Prompt Injection, Tool Abuse & Supply-Chain Risks]]></title>
+    <link>https://cyberaiwatch.com/ai-security/ai-agent-security-2026</link>
+    <guid isPermaLink="true">https://cyberaiwatch.com/ai-security/ai-agent-security-2026</guid>
+    <description><![CDATA[AI agents are no longer limited to answering questions. As autonomous models gain access to APIs, terminal tools, enterprise databases, and persistent memory, prompt injection and tool abuse create an unprecedented attack surface. Here is how modern agentic systems are compromised—and how to build resilient defensive architectures.]]></description>
+    <category>AI Security</category>
+    <author>Kunal Rajput</author>
+    <pubDate>Sat, 19 Sep 2026 18:30:00 GMT</pubDate>
+  </item>
   <item>
     <title><![CDATA[AI Agents Are Now Breaching Real-World Systems: What the Latest Incidents Reveal About AI Cybersecurity]]></title>
     <link>https://cyberaiwatch.com/ai-security/ai-agents-real-world-cybersecurity-incidents</link>

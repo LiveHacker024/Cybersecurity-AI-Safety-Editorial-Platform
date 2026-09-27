@@ -4,7 +4,7 @@
  * Supports: NewsArticle, Organization, Person, BreadcrumbList, WebSite, FAQPage
  */
 
-import { siteConfig } from "../config/site";
+import { siteConfig } from "../config/site.js";
 
 const PRODUCTION_DOMAIN = siteConfig.domain;
 
