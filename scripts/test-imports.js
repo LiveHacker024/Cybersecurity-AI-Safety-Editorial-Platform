@@ -33,6 +33,16 @@ async function testAll() {
     console.log('Testing AdSlot import...');
     const AdSlot = (await import('../src/components/ads/AdSlot.jsx')).default;
 
+    console.log('Testing SecurityTestingHubPage import...');
+    const SecurityTestingHubPage = (await import('../src/pages/securityTesting/SecurityTestingHubPage.jsx')).default;
+    console.log('Testing CategoryTestingPage import...');
+    const CategoryTestingPage = (await import('../src/pages/securityTesting/CategoryTestingPage.jsx')).default;
+    console.log('Testing VulnerabilityDetailPage import...');
+    const VulnerabilityDetailPage = (await import('../src/pages/securityTesting/VulnerabilityDetailPage.jsx')).default;
+    console.log('Testing securityTesting data import...');
+    const secData = await import('../src/data/securityTesting/index.js');
+    console.log(`Loaded ${secData.allSecurityTestingVulnerabilities.length} verified vulnerabilities across ${secData.securityCategories.length} categories.`);
+
     console.log('All modules imported successfully without syntax or module errors!');
   } catch (err) {
     console.error('ERROR during module import or execution:', err);

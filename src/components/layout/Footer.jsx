@@ -133,6 +133,11 @@ export default function Footer({ onNavigate }) {
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <li>
+                <button onClick={() => handleLinkClick('/security-testing')} className="footer-link" style={{ color: '#00f0ff', fontWeight: 600 }}>
+                  Security Testing Hub
+                </button>
+              </li>
+              <li>
                 <button onClick={() => handleLinkClick('/cybersecurity')} className="footer-link">Cybersecurity News</button>
               </li>
               <li>

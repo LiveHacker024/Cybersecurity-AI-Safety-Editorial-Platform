@@ -20,6 +20,9 @@ import AdminPage from './pages/AdminPage';
 import NotFoundPage from './pages/NotFoundPage';
 import SecurityToolsSuite from './components/tools/SecurityToolsSuite';
 import NewsletterBox from './components/home/NewsletterBox';
+import SecurityTestingHubPage from './pages/securityTesting/SecurityTestingHubPage';
+import CategoryTestingPage from './pages/securityTesting/CategoryTestingPage';
+import VulnerabilityDetailPage from './pages/securityTesting/VulnerabilityDetailPage';
 import { getAllArticles } from './utils/storage';
 
 export default function App() {
@@ -96,6 +99,26 @@ export default function App() {
           <SecurityToolsSuite />
         </div>
       );
+    }
+
+    // Security Testing Knowledge Hub
+    if (currentPath === '/security-testing' || currentPath === '/security-testing/') {
+      return <SecurityTestingHubPage onNavigate={navigate} />;
+    }
+    if (currentPath === '/security-testing/api-security' || currentPath === '/security-testing/api-security/') {
+      return <CategoryTestingPage categorySlug="api-security" onNavigate={navigate} />;
+    }
+    if (currentPath === '/security-testing/web-security' || currentPath === '/security-testing/web-security/') {
+      return <CategoryTestingPage categorySlug="web-security" onNavigate={navigate} />;
+    }
+    if (currentPath === '/security-testing/mobile-security' || currentPath === '/security-testing/mobile-security/') {
+      return <CategoryTestingPage categorySlug="mobile-security" onNavigate={navigate} />;
+    }
+    if (currentPath.startsWith('/security-testing/')) {
+      const secSegments = currentPath.split('/').filter(Boolean);
+      if (secSegments.length >= 3 && secSegments[0] === 'security-testing') {
+        return <VulnerabilityDetailPage categorySlug={secSegments[1]} slug={secSegments[2]} onNavigate={navigate} />;
+      }
     }
 
     // 3. Legal & Editorial Policy Pages

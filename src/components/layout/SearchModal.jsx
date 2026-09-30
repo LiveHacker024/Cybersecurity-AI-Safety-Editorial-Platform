@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Search, X, ArrowRight, FileText, Tag, User, ShieldCheck } from 'lucide-react';
 import { articlesData } from '../../data/articles';
 import { guidesData } from '../../data/guides';
+import { allSecurityTestingVulnerabilities } from '../../data/securityTesting';
 
 export default function SearchModal({ isOpen, onClose, onSelectResult }) {
   const [query, setQuery] = useState('');
@@ -48,6 +49,15 @@ export default function SearchModal({ isOpen, onClose, onSelectResult }) {
         g.summary?.toLowerCase().includes(trimmedQuery)
       )
     : guidesData.slice(0, 2);
+
+  const matchedSecurityTesting = trimmedQuery
+    ? allSecurityTestingVulnerabilities.filter(v =>
+        v.name.toLowerCase().includes(trimmedQuery) ||
+        v.shortDefinition?.toLowerCase().includes(trimmedQuery) ||
+        v.cweClassification?.toLowerCase().includes(trimmedQuery) ||
+        v.owaspClassification?.toLowerCase().includes(trimmedQuery)
+      ).slice(0, 4)
+    : allSecurityTestingVulnerabilities.slice(0, 3);
 
   const handleItemClick = (path) => {
     onSelectResult(path);
@@ -270,6 +280,55 @@ export default function SearchModal({ isOpen, onClose, onSelectResult }) {
                       </div>
                     </div>
                     <ArrowRight size={16} color="#fb7185" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Security Testing Section */}
+          {matchedSecurityTesting.length > 0 && (
+            <div style={{ marginTop: '1.25rem' }}>
+              <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#00f0ff', marginBottom: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                Security Testing Hub ({matchedSecurityTesting.length})
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                {matchedSecurityTesting.map((vuln) => (
+                  <div
+                    key={`${vuln.category}-${vuln.slug}`}
+                    onClick={() => handleItemClick(`/security-testing/${vuln.category}/${vuln.slug}`)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '0.75rem 1rem',
+                      borderRadius: '8px',
+                      background: 'rgba(15, 23, 42, 0.6)',
+                      border: '1px solid #1e293b',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = '#00f0ff';
+                      e.currentTarget.style.background = 'rgba(0, 240, 255, 0.08)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = '#1e293b';
+                      e.currentTarget.style.background = 'rgba(15, 23, 42, 0.6)';
+                    }}
+                  >
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem' }}>
+                        <span style={{ fontSize: '0.7rem', color: '#00f0ff', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+                          {vuln.categoryName.toUpperCase()}
+                        </span>
+                        <span style={{ fontSize: '0.7rem', color: '#94a3b8' }}>• {vuln.applicablePlatform || 'Platform'}</span>
+                      </div>
+                      <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#f8fafc' }}>
+                        {vuln.name}
+                      </div>
+                    </div>
+                    <ArrowRight size={16} color="#00f0ff" />
                   </div>
                 ))}
               </div>

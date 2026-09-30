@@ -59,6 +59,7 @@ export const siteConfig = {
 
   nav: [
     { label: "Home", path: "/" },
+    { label: "Security Testing", path: "/security-testing" },
     { label: "Cybersecurity", path: "/cybersecurity" },
     { label: "AI Safety", path: "/ai-safety" },
     { label: "AI Security", path: "/ai-security" },

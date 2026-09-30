@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { articlesData } from '../src/data/articles.js';
 import { categoriesData } from '../src/data/categories.js';
+import { securityCategories, allSecurityTestingVulnerabilities } from '../src/data/securityTesting/index.js';
 import { siteConfig } from '../src/config/site.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -41,6 +42,10 @@ function escapeCdata(value) {
 function generateSitemap() {
   const staticRoutes = [
     { loc: `${DOMAIN}/`, changefreq: 'daily', priority: '1.0' },
+    { loc: `${DOMAIN}/security-testing`, changefreq: 'daily', priority: '0.9' },
+    { loc: `${DOMAIN}/security-testing/api-security`, changefreq: 'daily', priority: '0.85' },
+    { loc: `${DOMAIN}/security-testing/web-security`, changefreq: 'daily', priority: '0.85' },
+    { loc: `${DOMAIN}/security-testing/mobile-security`, changefreq: 'daily', priority: '0.85' },
     { loc: `${DOMAIN}/vulnerabilities`, changefreq: 'daily', priority: '0.9' },
     { loc: `${DOMAIN}/search`, changefreq: 'weekly', priority: '0.7' },
     { loc: `${DOMAIN}/trending`, changefreq: 'daily', priority: '0.8' },
@@ -73,7 +78,13 @@ function generateSitemap() {
       priority: '0.8'
     }));
 
-  const allUrls = [...staticRoutes, ...categoryRoutes, ...articleRoutes];
+  const securityTestingRoutes = allSecurityTestingVulnerabilities.map(v => ({
+    loc: `${DOMAIN}/security-testing/${v.category}/${v.slug}`,
+    changefreq: 'weekly',
+    priority: '0.8'
+  }));
+
+  const allUrls = [...staticRoutes, ...categoryRoutes, ...articleRoutes, ...securityTestingRoutes];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -196,6 +207,24 @@ function run() {
         fs.writeFileSync(path.join(catDir, 'index.html'), indexHtml);
       }
 
+      // Security Testing Knowledge Hub & Categories
+      const secHubDir = path.join(distDir, 'security-testing');
+      fs.mkdirSync(secHubDir, { recursive: true });
+      fs.writeFileSync(path.join(secHubDir, 'index.html'), indexHtml);
+
+      for (const sc of securityCategories) {
+        const scDir = path.join(distDir, 'security-testing', sc.slug);
+        fs.mkdirSync(scDir, { recursive: true });
+        fs.writeFileSync(path.join(scDir, 'index.html'), indexHtml);
+      }
+
+      // Security Testing Individual Vulnerability Pages
+      for (const sv of allSecurityTestingVulnerabilities) {
+        const svDir = path.join(distDir, 'security-testing', sv.category, sv.slug);
+        fs.mkdirSync(svDir, { recursive: true });
+        fs.writeFileSync(path.join(svDir, 'index.html'), indexHtml);
+      }
+
       // Articles
       for (const art of articlesData) {
         if (art.status === 'PUBLISHED') {
@@ -218,7 +247,7 @@ function run() {
         fs.writeFileSync(path.join(sDir, 'index.html'), indexHtml);
       }
 
-      console.log('✓ Created static HTML route entrypoints for all articles and categories in dist/');
+      console.log('✓ Created static HTML route entrypoints for all articles, security testing hubs, and categories in dist/');
     } catch (err) {
       console.warn('Warning creating static route entrypoints:', err.message);
     }
