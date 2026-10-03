@@ -160,11 +160,13 @@ export default function App() {
       'ai-safety',
       'ai-security',
       'threat-intelligence',
+      'vulnerabilities',
       'privacy',
       'tutorials',
       'guides',
       'analysis',
       'news',
+      'security-news',
       'technology'
     ];
 

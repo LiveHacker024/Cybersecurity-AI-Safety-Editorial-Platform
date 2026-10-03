@@ -1,51 +1,112 @@
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import esbuild from 'esbuild';
 
-// Test importing all components and data
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const rootDir = path.resolve(__dirname, '..');
+
 async function testAll() {
+  console.log('--- CyberAI Watch Import & Architecture Validation ---');
+  let errors = 0;
+
+  // 1. Test pure JavaScript ESM modules & data integrity
   try {
-    console.log('Testing App import...');
-    const App = (await import('../src/App.jsx')).default;
-    console.log('Testing HomePage import...');
-    const HomePage = (await import('../src/pages/HomePage.jsx')).default;
-    console.log('Testing HeroSection import...');
-    const HeroSection = (await import('../src/components/home/HeroSection.jsx')).default;
-    console.log('Testing FeaturedStory import...');
-    const FeaturedStory = (await import('../src/components/home/FeaturedStory.jsx')).default;
-    console.log('Testing LatestNewsGrid import...');
-    const LatestNewsGrid = (await import('../src/components/home/LatestNewsGrid.jsx')).default;
-    console.log('Testing VulnerabilitiesWidget import...');
-    const VulnerabilitiesWidget = (await import('../src/components/home/VulnerabilitiesWidget.jsx')).default;
-    console.log('Testing AiBattlefieldSection import...');
-    const AiBattlefieldSection = (await import('../src/components/home/AiBattlefieldSection.jsx')).default;
-    console.log('Testing ThreatIntelligenceSection import...');
-    const ThreatIntelligenceSection = (await import('../src/components/home/ThreatIntelligenceSection.jsx')).default;
-    console.log('Testing CyberGuidesSection import...');
-    const CyberGuidesSection = (await import('../src/components/home/CyberGuidesSection.jsx')).default;
-    console.log('Testing SecurityToolsSuite import...');
-    const SecurityToolsSuite = (await import('../src/components/tools/SecurityToolsSuite.jsx')).default;
-    console.log('Testing YouTubeSection import...');
-    const YouTubeSection = (await import('../src/components/home/YouTubeSection.jsx')).default;
-    console.log('Testing FounderTrustSection import...');
-    const FounderTrustSection = (await import('../src/components/home/FounderTrustSection.jsx')).default;
-    console.log('Testing NewsletterBox import...');
-    const NewsletterBox = (await import('../src/components/home/NewsletterBox.jsx')).default;
-    console.log('Testing AdSlot import...');
-    const AdSlot = (await import('../src/components/ads/AdSlot.jsx')).default;
+    console.log('Testing data and configuration modules...');
+    const { articlesData } = await import('../src/data/articles.js');
+    const { categoriesData } = await import('../src/data/categories.js');
+    const { vulnerabilitiesData } = await import('../src/data/vulnerabilities.js');
+    const { guidesData } = await import('../src/data/guides.js');
+    const { securityCategories, allSecurityTestingVulnerabilities } = await import('../src/data/securityTesting/index.js');
+    const { siteConfig } = await import('../src/config/site.js');
+    const { updateMetaTags, generateArticleSchema, generateBreadcrumbSchema } = await import('../src/utils/seo.js');
+    const { getAllArticles } = await import('../src/utils/storage.js');
+    const { recordPageView } = await import('../src/utils/analytics.js');
 
-    console.log('Testing SecurityTestingHubPage import...');
-    const SecurityTestingHubPage = (await import('../src/pages/securityTesting/SecurityTestingHubPage.jsx')).default;
-    console.log('Testing CategoryTestingPage import...');
-    const CategoryTestingPage = (await import('../src/pages/securityTesting/CategoryTestingPage.jsx')).default;
-    console.log('Testing VulnerabilityDetailPage import...');
-    const VulnerabilityDetailPage = (await import('../src/pages/securityTesting/VulnerabilityDetailPage.jsx')).default;
-    console.log('Testing securityTesting data import...');
-    const secData = await import('../src/data/securityTesting/index.js');
-    console.log(`Loaded ${secData.allSecurityTestingVulnerabilities.length} verified vulnerabilities across ${secData.securityCategories.length} categories.`);
-
-    console.log('All modules imported successfully without syntax or module errors!');
+    console.log(`  ✓ Loaded ${articlesData.length} published articles.`);
+    console.log(`  ✓ Loaded ${categoriesData.length} editorial categories.`);
+    console.log(`  ✓ Loaded ${vulnerabilitiesData.length} CVE tracking advisories.`);
+    console.log(`  ✓ Loaded ${guidesData.length} defensive guides.`);
+    console.log(`  ✓ Loaded ${allSecurityTestingVulnerabilities.length} Security Testing entries across ${securityCategories.length} categories.`);
+    console.log(`  ✓ Verified domain configuration: ${siteConfig.domain}`);
   } catch (err) {
-    console.error('ERROR during module import or execution:', err);
+    console.error('  ✗ Error importing ESM modules:', err);
+    errors++;
+  }
+
+  // 2. Test JSX components using esbuild compilation
+  const jsxFiles = [
+    'src/App.jsx',
+    'src/pages/HomePage.jsx',
+    'src/pages/ArticlePage.jsx',
+    'src/pages/CategoryPage.jsx',
+    'src/pages/VulnerabilitiesPage.jsx',
+    'src/pages/GuidesPage.jsx',
+    'src/pages/AboutPage.jsx',
+    'src/pages/ContactPage.jsx',
+    'src/pages/PrivacyPolicyPage.jsx',
+    'src/pages/TermsPage.jsx',
+    'src/pages/LegalPage.jsx',
+    'src/pages/EditorialStandardsPage.jsx',
+    'src/pages/AuthorPage.jsx',
+    'src/pages/AdminPage.jsx',
+    'src/pages/TrendingPage.jsx',
+    'src/pages/NewsletterPage.jsx',
+    'src/pages/YouTubePage.jsx',
+    'src/pages/SearchPage.jsx',
+    'src/pages/UnsubscribePage.jsx',
+    'src/pages/NotFoundPage.jsx',
+    'src/pages/securityTesting/SecurityTestingHubPage.jsx',
+    'src/pages/securityTesting/CategoryTestingPage.jsx',
+    'src/pages/securityTesting/VulnerabilityDetailPage.jsx',
+    'src/components/layout/Navbar.jsx',
+    'src/components/layout/Footer.jsx',
+    'src/components/layout/SearchModal.jsx',
+    'src/components/home/HeroSection.jsx',
+    'src/components/home/FeaturedStory.jsx',
+    'src/components/home/LatestNewsGrid.jsx',
+    'src/components/home/AiBattlefieldSection.jsx',
+    'src/components/home/ThreatIntelligenceSection.jsx',
+    'src/components/home/CyberGuidesSection.jsx',
+    'src/components/home/FounderTrustSection.jsx',
+    'src/components/home/YouTubeSection.jsx',
+    'src/components/home/NewsletterBox.jsx',
+    'src/components/tools/SecurityToolsSuite.jsx',
+    'src/components/ads/AdSlot.jsx',
+    'src/components/common/ClaimBadge.jsx',
+    'src/components/common/SourceList.jsx',
+    'src/components/common/SocialIcons.jsx'
+  ];
+
+  console.log(`\nValidating ${jsxFiles.length} React JSX component files...`);
+  for (const relPath of jsxFiles) {
+    const fullPath = path.resolve(rootDir, relPath);
+    if (!fs.existsSync(fullPath)) {
+      console.error(`  ✗ Missing file: ${relPath}`);
+      errors++;
+      continue;
+    }
+    const code = fs.readFileSync(fullPath, 'utf8');
+    try {
+      esbuild.transformSync(code, {
+        loader: 'jsx',
+        sourcefile: relPath
+      });
+      console.log(`  ✓ ${relPath}`);
+    } catch (err) {
+      console.error(`  ✗ Syntax / compilation error in ${relPath}:`, err.message);
+      errors++;
+    }
+  }
+
+  console.log('\n------------------------------------------------------');
+  if (errors === 0) {
+    console.log('✅ ALL MODULES, DATA, AND JSX COMPONENTS VALIDATED SUCCESSFULLY!');
+    process.exit(0);
+  } else {
+    console.error(`❌ Validation finished with ${errors} error(s).`);
+    process.exit(1);
   }
 }
 

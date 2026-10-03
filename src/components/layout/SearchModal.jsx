@@ -67,6 +67,9 @@ export default function SearchModal({ isOpen, onClose, onSelectResult }) {
   return (
     <div
       className="search-modal-backdrop"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Site Search"
       style={{
         position: 'fixed',
         inset: 0,
@@ -77,7 +80,8 @@ export default function SearchModal({ isOpen, onClose, onSelectResult }) {
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'center',
-        padding: '5rem 1rem 2rem'
+        padding: 'clamp(1.5rem, 6vh, 4.5rem) clamp(0.5rem, 2vw, 1rem) 2rem',
+        overflowY: 'auto'
       }}
       onClick={onClose}
     >
@@ -85,12 +89,13 @@ export default function SearchModal({ isOpen, onClose, onSelectResult }) {
         className="glass-panel search-modal-panel"
         style={{
           width: '100%',
-          maxWidth: '680px',
+          maxWidth: 'min(94vw, 680px)',
           background: 'rgba(10, 15, 29, 0.95)',
           border: '1px solid rgba(0, 240, 255, 0.3)',
           boxShadow: '0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 240, 255, 0.2)',
           overflow: 'hidden',
-          borderRadius: '16px'
+          borderRadius: '16px',
+          margin: '0 auto'
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -222,18 +227,18 @@ export default function SearchModal({ isOpen, onClose, onSelectResult }) {
                       e.currentTarget.style.background = 'rgba(15, 23, 42, 0.6)';
                     }}
                   >
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem' }}>
+                    <div style={{ flex: 1, minWidth: 0, paddingRight: '0.75rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem', flexWrap: 'wrap' }}>
                         <span style={{ fontSize: '0.7rem', color: '#38bdf8', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>
                           {article.categoryName}
                         </span>
                         <span style={{ fontSize: '0.7rem', color: '#64748b' }}>• {article.readingTime}</span>
                       </div>
-                      <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#f8fafc' }}>
+                      <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#f8fafc', overflowWrap: 'anywhere' }}>
                         {article.title}
                       </div>
                     </div>
-                    <ArrowRight size={16} color="#00f0ff" />
+                    <ArrowRight size={16} color="#00f0ff" style={{ flexShrink: 0 }} />
                   </div>
                 ))}
               </div>
@@ -271,15 +276,15 @@ export default function SearchModal({ isOpen, onClose, onSelectResult }) {
                       e.currentTarget.style.background = 'rgba(15, 23, 42, 0.6)';
                     }}
                   >
-                    <div>
+                    <div style={{ flex: 1, minWidth: 0, paddingRight: '0.75rem' }}>
                       <div style={{ fontSize: '0.7rem', color: '#fb7185', fontFamily: 'var(--font-mono)', fontWeight: 600, marginBottom: '0.2rem' }}>
                         DEFENSIVE GUIDE • {guide.timeToComplete}
                       </div>
-                      <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#f8fafc' }}>
+                      <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#f8fafc', overflowWrap: 'anywhere' }}>
                         {guide.title}
                       </div>
                     </div>
-                    <ArrowRight size={16} color="#fb7185" />
+                    <ArrowRight size={16} color="#fb7185" style={{ flexShrink: 0 }} />
                   </div>
                 ))}
               </div>
@@ -317,18 +322,18 @@ export default function SearchModal({ isOpen, onClose, onSelectResult }) {
                       e.currentTarget.style.background = 'rgba(15, 23, 42, 0.6)';
                     }}
                   >
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem' }}>
+                    <div style={{ flex: 1, minWidth: 0, paddingRight: '0.75rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem', flexWrap: 'wrap' }}>
                         <span style={{ fontSize: '0.7rem', color: '#00f0ff', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
                           {vuln.categoryName.toUpperCase()}
                         </span>
                         <span style={{ fontSize: '0.7rem', color: '#94a3b8' }}>• {vuln.applicablePlatform || 'Platform'}</span>
                       </div>
-                      <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#f8fafc' }}>
+                      <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#f8fafc', overflowWrap: 'anywhere' }}>
                         {vuln.name}
                       </div>
                     </div>
-                    <ArrowRight size={16} color="#00f0ff" />
+                    <ArrowRight size={16} color="#00f0ff" style={{ flexShrink: 0 }} />
                   </div>
                 ))}
               </div>

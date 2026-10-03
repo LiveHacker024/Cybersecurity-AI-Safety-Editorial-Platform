@@ -231,6 +231,10 @@ function run() {
           const artDir = path.join(distDir, art.category, art.slug);
           fs.mkdirSync(artDir, { recursive: true });
           fs.writeFileSync(path.join(artDir, 'index.html'), indexHtml);
+
+          const secNewsDir = path.join(distDir, 'security-news', art.slug);
+          fs.mkdirSync(secNewsDir, { recursive: true });
+          fs.writeFileSync(path.join(secNewsDir, 'index.html'), indexHtml);
         }
       }
 

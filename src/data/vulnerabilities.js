@@ -6,6 +6,29 @@
 
 export const vulnerabilitiesData = [
   {
+    cveId: "CVE-2026-104286",
+    name: "Fortinet FortiMail IBE Path Traversal & File Write",
+    vendor: "Fortinet",
+    product: "FortiMail (Identity-Based Encryption Component)",
+    affectedVersions: "FortiMail 8.0.0 through 8.0.1, 7.6.0 through 7.6.6, 7.4.0 through 7.4.8, 7.2.0 through 7.2.9",
+    fixedVersions: "FortiMail 8.0.2, 7.6.7, 7.4.9 and later (7.2 branch upgrade to 7.4+)",
+    severity: "CRITICAL",
+    cvss: 9.8,
+    attackVector: "Network (AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H)",
+    impact: "Unauthenticated Arbitrary File Write leading to Remote Command Execution",
+    exploitationStatus: "Active in Wild (CISA KEV)",
+    disclosureDate: "October 1, 2026",
+    vendorAdvisory: "https://www.fortiguard.com/psirt/FG-IR-26-175",
+    mitigation: "Upgrade to fixed FortiMail versions or disable the Identity-Based Encryption (IBE) feature via CLI (config system encryption ibe -> set status disable -> end) or GUI. Restrict internet access to FortiMail management interfaces.",
+    detectionGuidance: "Inspect HTTP/HTTPS web access logs for anomalous POST requests directed at /ibe containing path traversal characters ('../') or NULL bytes (%00). Review system logs and file integrity in /data/ and /bin/ for unauthorized additions.",
+    references: [
+      { name: "Fortinet PSIRT FG-IR-26-175", url: "https://www.fortiguard.com/psirt/FG-IR-26-175", type: "VENDOR" },
+      { name: "CERT-In Vulnerability Alert", url: "https://www.cert-in.org.in", type: "GOVERNMENT" },
+      { name: "CISA KEV Catalog", url: "https://www.cisa.gov/known-exploited-vulnerabilities-catalog", type: "GOVERNMENT" },
+      { name: "NVD Detail CVE-2026-104286", url: "https://nvd.nist.gov/vuln/detail/CVE-2026-104286", type: "OFFICIAL" }
+    ]
+  },
+  {
     cveId: "CVE-2024-3400",
     name: "Palo Alto Networks PAN-OS Command Injection",
     vendor: "Palo Alto Networks",

@@ -5,8 +5,17 @@
   <link>https://cyberaiwatch.com</link>
   <description>Independent international editorial publication dedicated to cybersecurity journalism, AI safety research, vulnerability tracking, threat intelligence, and defensive security tutorials.</description>
   <language>en-us</language>
-  <lastBuildDate>Wed, 30 Sep 2026 11:55:18 GMT</lastBuildDate>
+  <lastBuildDate>Sat, 03 Oct 2026 10:22:59 GMT</lastBuildDate>
   <atom:link href="https://cyberaiwatch.com/rss.xml" rel="self" type="application/rss+xml" />
+  <item>
+    <title><![CDATA[Critical FortiMail Vulnerability CVE-2026-104286: CERT-In Alert Explained]]></title>
+    <link>https://cyberaiwatch.com/vulnerabilities/fortimail-cve-2026-104286-cert-in-alert</link>
+    <guid isPermaLink="true">https://cyberaiwatch.com/vulnerabilities/fortimail-cve-2026-104286-cert-in-alert</guid>
+    <description><![CDATA[The Indian Computer Emergency Response Team (CERT-In) and Fortinet have issued critical security advisories regarding CVE-2026-104286—an actively exploited unauthenticated path traversal vulnerability in FortiMail email security appliances. Here is the verified technical breakdown, affected release branches, and defensive mitigation steps.]]></description>
+    <category>Vulnerabilities</category>
+    <author>Kunal Rajput</author>
+    <pubDate>Fri, 02 Oct 2026 18:30:00 GMT</pubDate>
+  </item>
   <item>
     <title><![CDATA[OpenAI AI Agents Tried Hacking 4 Websites Without Being Prompted: What Really Happened?]]></title>
     <link>https://cyberaiwatch.com/ai-security/openai-ai-agents-tried-hacking-four-websites</link>

@@ -17,6 +17,7 @@ import { siteConfig } from '../config/site';
 export default function ArticlePage({ slug, onNavigate }) {
   const [copied, setCopied] = useState(false);
   const [activeHeading, setActiveHeading] = useState('');
+  const [isMobileTocOpen, setIsMobileTocOpen] = useState(false);
 
   const allArticles = getAllArticles();
   const article = allArticles.find(a => a.slug === slug) || allArticles[0];
@@ -297,31 +298,55 @@ export default function ArticlePage({ slug, onNavigate }) {
 
             {/* Mobile-Only Table of Contents */}
             {article.tableOfContents && article.tableOfContents.length > 0 && (
-              <div className="mobile-toc-box glass-panel" style={{ padding: '1.25rem', borderRadius: '12px', marginBottom: '2rem', border: '1px solid rgba(56, 189, 248, 0.25)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.75rem' }}>
-                  <ListOrdered size={16} color="#00f0ff" />
-                  <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#f8fafc', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    Quick Navigation / Table of Contents
+              <div className="mobile-toc-box glass-panel" style={{ padding: '1rem 1.25rem', borderRadius: '12px', marginBottom: '2rem', border: '1px solid rgba(56, 189, 248, 0.25)' }}>
+                <button
+                  onClick={() => setIsMobileTocOpen(!isMobileTocOpen)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                    background: 'transparent',
+                    border: 'none',
+                    padding: 0,
+                    cursor: 'pointer',
+                    color: '#f8fafc',
+                    textAlign: 'left'
+                  }}
+                  aria-expanded={isMobileTocOpen}
+                  aria-label="Toggle Table of Contents"
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                    <ListOrdered size={16} color="#00f0ff" />
+                    <span style={{ fontSize: '0.825rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                      Table of Contents ({article.tableOfContents.length})
+                    </span>
+                  </div>
+                  <span style={{ fontSize: '0.75rem', color: '#00f0ff', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                    {isMobileTocOpen ? 'Hide ▲' : 'Show ▼'}
                   </span>
-                </div>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
-                  {article.tableOfContents.map((item) => (
-                    <li key={item.id}>
-                      <a
-                        href={`#${item.id}`}
-                        style={{
-                          fontSize: '0.825rem',
-                          color: '#00f0ff',
-                          textDecoration: 'none',
-                          lineHeight: 1.4,
-                          display: 'block'
-                        }}
-                      >
-                        • {item.title}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                </button>
+                {isMobileTocOpen && (
+                  <ul style={{ listStyle: 'none', padding: 0, margin: '1rem 0 0', display: 'flex', flexDirection: 'column', gap: '0.55rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '0.75rem' }}>
+                    {article.tableOfContents.map((item) => (
+                      <li key={item.id}>
+                        <a
+                          href={`#${item.id}`}
+                          onClick={() => setIsMobileTocOpen(false)}
+                          style={{
+                            fontSize: '0.85rem',
+                            color: '#00f0ff',
+                            textDecoration: 'none',
+                            lineHeight: 1.4,
+                            display: 'block'
+                          }}
+                        >
+                          • {item.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             )}
 
@@ -576,10 +601,18 @@ export default function ArticlePage({ slug, onNavigate }) {
 
       <style>{`
         .mobile-toc-box { display: none; }
+        .article-body { overflow-wrap: anywhere; word-break: normal; max-width: 100%; }
+        .article-body a { overflow-wrap: anywhere; word-break: break-word; }
+        .article-body pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .article-body table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; overflow-x: auto; display: block; max-width: 100%; }
+        .article-body img { max-width: 100%; height: auto; border-radius: 8px; }
         @media (max-width: 900px) {
-          .article-grid { grid-template-columns: 1fr !important; }
+          .article-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
           .article-sidebar { display: none !important; }
           .mobile-toc-box { display: block !important; }
+        }
+        @media (max-width: 480px) {
+          .article-grid { gap: 1.5rem !important; }
         }
       `}</style>
     </article>
