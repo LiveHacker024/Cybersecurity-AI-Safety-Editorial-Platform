@@ -42,16 +42,16 @@ export default function HomePage({ onNavigate }) {
         <AdSlot type="leaderboard" />
       </div>
 
-      {/* 4 & 5. Latest Cybersecurity News Feed */}
+      {/* 4. Latest Cybersecurity News Feed */}
       <LatestNewsGrid onNavigate={onNavigate} />
 
-      {/* 6 & 7. AI Safety & Model Security Hub Spotlight */}
-      <AiBattlefieldSection onNavigate={onNavigate} />
-
-      {/* 8. Authentic Vulnerabilities & CVE Tracker Widget */}
+      {/* 5. Authentic Vulnerabilities & CVE Tracker Widget */}
       <VulnerabilitiesWidget onNavigate={onNavigate} />
 
-      {/* 9. Threat Intelligence Grid */}
+      {/* 6. AI Safety & Model Security Hub Spotlight */}
+      <AiBattlefieldSection onNavigate={onNavigate} />
+
+      {/* 7. Threat Intelligence Grid */}
       <ThreatIntelligenceSection onNavigate={onNavigate} />
 
       {/* Monetization Slot: Billboard */}

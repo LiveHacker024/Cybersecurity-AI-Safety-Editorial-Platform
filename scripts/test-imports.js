@@ -60,6 +60,7 @@ async function testAll() {
     'src/pages/securityTesting/SecurityTestingHubPage.jsx',
     'src/pages/securityTesting/CategoryTestingPage.jsx',
     'src/pages/securityTesting/VulnerabilityDetailPage.jsx',
+    'src/pages/BypassMethodsPage.jsx',
     'src/components/layout/Navbar.jsx',
     'src/components/layout/Footer.jsx',
     'src/components/layout/SearchModal.jsx',

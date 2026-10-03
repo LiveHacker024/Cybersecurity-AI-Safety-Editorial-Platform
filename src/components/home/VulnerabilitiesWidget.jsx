@@ -14,10 +14,10 @@ export default function VulnerabilitiesWidget({ onNavigate }) {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.25rem' }}>
               <Activity size={16} color="#ef4444" />
               <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#ef4444', letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
-                AUTHENTIC CVE TRACKER • CISA KEV & NVD
+                LATEST VULNERABILITIES • CISA KEV & NVD
               </span>
             </div>
-            <h2 className="font-heading" style={{ fontSize: '1.6rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+            <h2 className="font-heading" style={{ fontSize: 'clamp(1.35rem, 2.8vw, 1.75rem)', fontWeight: 800, color: '#ffffff', margin: 0 }}>
               Active Exploits & Critical Vulnerability Advisories
             </h2>
           </div>

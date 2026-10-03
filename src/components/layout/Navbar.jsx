@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Search, Menu, X, Bell, ExternalLink, ChevronRight, Terminal } from 'lucide-react';
+import { Shield, Search, Menu, X, Bell, ChevronRight } from 'lucide-react';
 import { Youtube } from '../common/SocialIcons';
 import { siteConfig } from '../../config/site';
 
@@ -15,18 +15,28 @@ export default function Navbar({ onNavigate, currentPath, onOpenSearch, onOpenSu
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll and handle Escape key for mobile menu accessibility
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = '';
     }
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [isMobileMenuOpen]);
 
-  const navItems = siteConfig.nav;
+  const navItems = siteConfig.nav; // Exactly 5 tabs: Home, Bypass Methods, News, Vulnerabilities, Tutorials
 
   const handleNavClick = (path) => {
     onNavigate(path);
@@ -41,14 +51,14 @@ export default function Navbar({ onNavigate, currentPath, onOpenSearch, onOpenSu
           position: 'sticky',
           top: 0,
           zIndex: 50,
-          background: isScrolled ? 'rgba(3, 7, 18, 0.94)' : 'rgba(3, 7, 18, 0.82)',
+          background: isScrolled ? 'rgba(3, 7, 18, 0.96)' : 'rgba(3, 7, 18, 0.9)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
           borderBottom: '1px solid rgba(56, 189, 248, 0.15)',
-          transition: 'all 0.3s ease'
+          transition: 'all 0.25s ease'
         }}
       >
-        <div className="container-custom" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '72px', gap: '0.75rem' }}>
+        <div className="container-custom" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '66px', gap: '0.75rem' }}>
           {/* Brand Logo & Editorial Wordmark */}
           <div
             onClick={() => handleNavClick('/')}
@@ -61,40 +71,44 @@ export default function Navbar({ onNavigate, currentPath, onOpenSearch, onOpenSu
               flexShrink: 0,
               minWidth: 0
             }}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && handleNavClick('/')}
+            aria-label="CyberAI Watch Home"
           >
             <div
               style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '10px',
+                width: '38px',
+                height: '38px',
+                borderRadius: '9px',
                 background: 'linear-gradient(135deg, rgba(0, 240, 255, 0.25) 0%, rgba(16, 185, 129, 0.3) 100%)',
                 border: '1px solid #00f0ff',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 0 15px rgba(0, 240, 255, 0.25)',
+                boxShadow: '0 0 12px rgba(0, 240, 255, 0.2)',
                 flexShrink: 0
               }}
             >
-              <Shield size={20} color="#00f0ff" />
+              <Shield size={19} color="#00f0ff" />
             </div>
             <div style={{ minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexWrap: 'nowrap' }}>
-                <span className="font-heading" style={{ fontSize: '1.15rem', fontWeight: 900, letterSpacing: '-0.02em', color: '#ffffff', whiteSpace: 'nowrap' }}>
+                <span className="font-heading" style={{ fontSize: '1.1rem', fontWeight: 900, letterSpacing: '-0.02em', color: '#ffffff', whiteSpace: 'nowrap' }}>
                   CYBER<span style={{ color: '#00f0ff' }}>AI</span> WATCH
                 </span>
-                <span className="nav-intel-badge" style={{ fontSize: '0.6rem', padding: '0.1rem 0.35rem', borderRadius: '4px', background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', fontFamily: 'var(--font-mono)', fontWeight: 700, border: '1px solid rgba(16, 185, 129, 0.3)' }}>
+                <span className="nav-intel-badge" style={{ fontSize: '0.58rem', padding: '0.1rem 0.3rem', borderRadius: '4px', background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', fontFamily: 'var(--font-mono)', fontWeight: 700, border: '1px solid rgba(16, 185, 129, 0.3)' }}>
                   INTEL
                 </span>
               </div>
-              <div className="brand-subtext" style={{ fontSize: '0.65rem', color: '#94a3b8', letterSpacing: '0.04em', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                BY KUNAL RAJPUT • HACKWITHKUNAL
+              <div className="brand-subtext" style={{ fontSize: '0.62rem', color: '#94a3b8', letterSpacing: '0.04em', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                EDITORIAL PUBLICATION
               </div>
             </div>
           </div>
 
-          {/* Desktop Navigation Links */}
-          <nav style={{ display: 'none', gap: '0.2rem', alignItems: 'center', flexWrap: 'nowrap' }} className="desktop-nav">
+          {/* Desktop Navigation Links — Exactly 5 Primary Tabs */}
+          <nav style={{ display: 'none', gap: '0.35rem', alignItems: 'center', flexWrap: 'nowrap' }} className="desktop-nav" aria-label="Main Navigation">
             {navItems.map((item) => {
               const isActive = currentPath === item.path || (item.path !== '/' && currentPath.startsWith(item.path));
               return (
@@ -102,17 +116,18 @@ export default function Navbar({ onNavigate, currentPath, onOpenSearch, onOpenSu
                   key={item.path}
                   onClick={() => handleNavClick(item.path)}
                   style={{
-                    background: isActive ? 'rgba(0, 240, 255, 0.1)' : 'transparent',
-                    border: isActive ? '1px solid rgba(0, 240, 255, 0.25)' : '1px solid transparent',
+                    background: isActive ? 'rgba(0, 240, 255, 0.12)' : 'transparent',
+                    border: isActive ? '1px solid rgba(0, 240, 255, 0.4)' : '1px solid transparent',
                     color: isActive ? '#00f0ff' : '#cbd5e1',
-                    padding: '0.4rem 0.65rem',
-                    borderRadius: '6px',
-                    fontSize: '0.825rem',
-                    fontWeight: isActive ? 600 : 500,
+                    padding: '0.45rem 0.75rem',
+                    borderRadius: '7px',
+                    fontSize: '0.85rem',
+                    fontWeight: isActive ? 700 : 600,
                     cursor: 'pointer',
                     transition: 'all 0.15s ease',
                     whiteSpace: 'nowrap',
-                    fontFamily: 'var(--font-display)'
+                    fontFamily: 'var(--font-display)',
+                    boxShadow: isActive ? '0 0 12px rgba(0, 240, 255, 0.2)' : 'none'
                   }}
                   onMouseEnter={(e) => {
                     if (!isActive) e.currentTarget.style.color = '#00f0ff';
@@ -127,9 +142,9 @@ export default function Navbar({ onNavigate, currentPath, onOpenSearch, onOpenSu
             })}
           </nav>
 
-          {/* Right Action Icons & YouTube link */}
+          {/* Right Action Icons & Mobile Hamburger */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
-            {/* YouTube Channel Quick Link */}
+            {/* YouTube Quick Link */}
             <a
               href={siteConfig.socials.youtube}
               target="_blank"
@@ -141,16 +156,16 @@ export default function Navbar({ onNavigate, currentPath, onOpenSearch, onOpenSu
                 background: 'rgba(239, 68, 68, 0.12)',
                 border: '1px solid rgba(239, 68, 68, 0.3)',
                 color: '#f87171',
-                padding: '0.45rem 0.75rem',
-                borderRadius: '8px',
-                fontSize: '0.8rem',
+                padding: '0.4rem 0.65rem',
+                borderRadius: '7px',
+                fontSize: '0.78rem',
                 fontWeight: 600,
                 textDecoration: 'none'
               }}
               className="youtube-nav-btn"
               title="Official YouTube Channel @HackWithKunal"
             >
-              <Youtube size={15} />
+              <Youtube size={14} />
               <span>YouTube</span>
             </a>
 
@@ -160,24 +175,24 @@ export default function Navbar({ onNavigate, currentPath, onOpenSearch, onOpenSu
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.45rem',
+                gap: '0.4rem',
                 background: 'rgba(15, 23, 42, 0.8)',
-                border: '1px solid rgba(56, 189, 248, 0.2)',
+                border: '1px solid rgba(56, 189, 248, 0.25)',
                 color: '#94a3b8',
-                padding: '0.45rem 0.65rem',
-                borderRadius: '8px',
+                padding: '0.4rem 0.65rem',
+                borderRadius: '7px',
                 cursor: 'pointer',
-                fontSize: '0.8rem',
+                fontSize: '0.78rem',
                 transition: 'all 0.2s ease',
-                minWidth: '38px',
-                minHeight: '38px',
+                minWidth: '36px',
+                minHeight: '36px',
                 justifyContent: 'center'
               }}
-              aria-label="Search articles and CVEs"
+              aria-label="Search articles and CVEs (Ctrl+K)"
             >
-              <Search size={16} color="#00f0ff" />
+              <Search size={15} color="#00f0ff" />
               <span style={{ display: 'none' }} className="search-text">Search</span>
-              <kbd style={{ display: 'none', padding: '0.1rem 0.35rem', background: '#1e293b', borderRadius: '4px', fontSize: '0.62rem', fontFamily: 'var(--font-mono)' }} className="search-kbd">
+              <kbd style={{ display: 'none', padding: '0.1rem 0.3rem', background: '#1e293b', borderRadius: '4px', fontSize: '0.6rem', fontFamily: 'var(--font-mono)' }} className="search-kbd">
                 Ctrl K
               </kbd>
             </button>
@@ -186,9 +201,10 @@ export default function Navbar({ onNavigate, currentPath, onOpenSearch, onOpenSu
             <button
               onClick={onOpenSubscribe}
               className="btn-cyber-primary nav-subscribe-btn"
-              style={{ padding: '0.45rem 0.85rem', fontSize: '0.8rem', minHeight: '38px', whiteSpace: 'nowrap' }}
+              style={{ padding: '0.4rem 0.75rem', fontSize: '0.78rem', minHeight: '36px', whiteSpace: 'nowrap' }}
+              aria-label="Subscribe to weekly newsletter"
             >
-              <Bell size={13} />
+              <Bell size={12} />
               <span className="subscribe-btn-text">Subscribe</span>
             </button>
 
@@ -203,13 +219,14 @@ export default function Navbar({ onNavigate, currentPath, onOpenSearch, onOpenSu
                 border: '1px solid #1e293b',
                 color: '#f8fafc',
                 padding: '0.45rem',
-                borderRadius: '8px',
+                borderRadius: '7px',
                 cursor: 'pointer',
-                minWidth: '38px',
-                minHeight: '38px'
+                minWidth: '40px',
+                minHeight: '40px'
               }}
               className="mobile-toggle"
-              aria-label="Toggle navigation menu"
+              aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? <X size={20} color="#00f0ff" /> : <Menu size={20} />}
             </button>
@@ -217,7 +234,7 @@ export default function Navbar({ onNavigate, currentPath, onOpenSearch, onOpenSu
         </div>
       </header>
 
-      {/* Mobile Drawer Menu */}
+      {/* Accessible Mobile Drawer Menu */}
       {isMobileMenuOpen && (
         <div
           style={{
@@ -229,12 +246,47 @@ export default function Navbar({ onNavigate, currentPath, onOpenSearch, onOpenSu
             WebkitBackdropFilter: 'blur(20px)',
             display: 'flex',
             flexDirection: 'column',
-            padding: '5rem 1.25rem 2rem',
+            padding: '1.25rem',
+            paddingTop: '5rem',
             overflowY: 'auto',
             overscrollBehavior: 'contain'
           }}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile Navigation"
         >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginBottom: '1.5rem' }}>
+          {/* Drawer Header with Close Button */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', paddingBottom: '0.75rem', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Shield size={18} color="#00f0ff" />
+              <span className="font-heading" style={{ fontSize: '1rem', fontWeight: 800, color: '#ffffff' }}>
+                PRIMARY SECTIONS
+              </span>
+            </div>
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              style={{
+                background: 'rgba(15, 23, 42, 0.8)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                color: '#f8fafc',
+                borderRadius: '6px',
+                padding: '0.35rem 0.65rem',
+                fontSize: '0.78rem',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.3rem',
+                minHeight: '40px'
+              }}
+              aria-label="Close menu"
+            >
+              <X size={15} color="#00f0ff" />
+              <span>Close</span>
+            </button>
+          </div>
+
+          {/* 5 Primary Navigation Tabs ONLY */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', marginBottom: '1.5rem' }}>
             {navItems.map((item) => {
               const isActive = currentPath === item.path || (item.path !== '/' && currentPath.startsWith(item.path));
               return (
@@ -245,27 +297,57 @@ export default function Navbar({ onNavigate, currentPath, onOpenSearch, onOpenSu
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    padding: '0.85rem 1.15rem',
-                    borderRadius: '10px',
-                    background: isActive ? 'rgba(0, 240, 255, 0.12)' : 'rgba(15, 23, 42, 0.6)',
+                    padding: '0.85rem 1rem',
+                    borderRadius: '8px',
+                    background: isActive ? 'rgba(0, 240, 255, 0.15)' : 'rgba(15, 23, 42, 0.6)',
                     border: isActive ? '1px solid #00f0ff' : '1px solid rgba(255, 255, 255, 0.06)',
                     color: isActive ? '#00f0ff' : '#f8fafc',
-                    fontSize: '0.98rem',
-                    fontWeight: 600,
+                    fontSize: '0.95rem',
+                    fontWeight: 700,
                     textAlign: 'left',
                     cursor: 'pointer',
-                    minHeight: '48px'
+                    minHeight: '48px',
+                    width: '100%'
                   }}
                 >
                   <span>{item.label}</span>
-                  <ChevronRight size={16} opacity={0.6} />
+                  <ChevronRight size={16} opacity={0.7} />
                 </button>
               );
             })}
           </div>
 
-          {/* Mobile YouTube & Quick Links */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem' }}>
+          {/* Divider */}
+          <div style={{ height: '1px', background: 'rgba(255, 255, 255, 0.08)', marginBottom: '1.5rem' }} />
+
+          {/* Secondary Actions: Search, YouTube, Subscribe */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', marginBottom: '1.5rem' }}>
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                onOpenSearch();
+              }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                background: 'rgba(14, 165, 233, 0.12)',
+                border: '1px solid rgba(14, 165, 233, 0.35)',
+                color: '#38bdf8',
+                padding: '0.75rem',
+                borderRadius: '8px',
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+                minHeight: '46px',
+                width: '100%'
+              }}
+            >
+              <Search size={16} />
+              <span>Search All Articles & CVEs</span>
+            </button>
+
             <a
               href={siteConfig.socials.youtube}
               target="_blank"
@@ -275,57 +357,50 @@ export default function Navbar({ onNavigate, currentPath, onOpenSearch, onOpenSu
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '0.5rem',
-                background: 'rgba(239, 68, 68, 0.15)',
-                border: '1px solid rgba(239, 68, 68, 0.4)',
+                background: 'rgba(239, 68, 68, 0.12)',
+                border: '1px solid rgba(239, 68, 68, 0.35)',
                 color: '#f87171',
-                padding: '0.85rem',
-                borderRadius: '10px',
-                fontSize: '0.9rem',
-                fontWeight: 700,
+                padding: '0.75rem',
+                borderRadius: '8px',
+                fontSize: '0.85rem',
+                fontWeight: 600,
                 textDecoration: 'none',
-                minHeight: '48px'
+                minHeight: '46px',
+                width: '100%'
               }}
             >
-              <Youtube size={18} />
+              <Youtube size={16} />
               <span>Watch on YouTube (@HackWithKunal)</span>
             </a>
-          </div>
 
-          {/* Founder Quick Card in Mobile Drawer */}
-          <div className="glass-panel" style={{ padding: '1.25rem', marginTop: 'auto' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-              <img
-                src={siteConfig.founder.avatar}
-                alt={siteConfig.founder.name}
-                style={{ width: '42px', height: '42px', borderRadius: '50%', objectFit: 'cover', border: '2px solid #00f0ff' }}
-              />
-              <div>
-                <div style={{ fontWeight: 700, fontSize: '0.92rem', color: '#ffffff' }}>{siteConfig.founder.name}</div>
-                <div style={{ fontSize: '0.72rem', color: '#00f0ff', fontFamily: 'var(--font-mono)' }}>Founder & Editor-in-Chief</div>
-              </div>
-            </div>
-            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-              <button
-                onClick={() => handleNavClick('/author/kunal-rajput')}
-                className="btn-cyber-secondary"
-                style={{ flex: 1, padding: '0.55rem', fontSize: '0.78rem', minWidth: '120px', minHeight: '38px', justifyContent: 'center' }}
-              >
-                Author Profile
-              </button>
-              <button
-                onClick={() => handleNavClick('/about')}
-                className="btn-cyber-secondary"
-                style={{ flex: 1, padding: '0.55rem', fontSize: '0.78rem', minWidth: '120px', minHeight: '38px', justifyContent: 'center' }}
-              >
-                Editorial Mission
-              </button>
-            </div>
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                onOpenSubscribe();
+              }}
+              className="btn-cyber-primary"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                padding: '0.75rem',
+                borderRadius: '8px',
+                fontSize: '0.85rem',
+                fontWeight: 700,
+                minHeight: '46px',
+                width: '100%'
+              }}
+            >
+              <Bell size={15} />
+              <span>Subscribe to Newsletter</span>
+            </button>
           </div>
         </div>
       )}
 
       <style>{`
-        @media (min-width: 1100px) {
+        @media (min-width: 960px) {
           .desktop-nav { display: flex !important; }
           .mobile-toggle { display: none !important; }
           .search-text { display: inline !important; }
@@ -338,7 +413,7 @@ export default function Navbar({ onNavigate, currentPath, onOpenSearch, onOpenSu
         }
         @media (max-width: 360px) {
           .subscribe-btn-text { display: none !important; }
-          .nav-subscribe-btn { padding: 0.45rem 0.6rem !important; }
+          .nav-subscribe-btn { padding: 0.35rem 0.55rem !important; }
         }
       `}</style>
     </>

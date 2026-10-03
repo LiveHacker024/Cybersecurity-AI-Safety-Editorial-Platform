@@ -42,6 +42,7 @@ function escapeCdata(value) {
 function generateSitemap() {
   const staticRoutes = [
     { loc: `${DOMAIN}/`, changefreq: 'daily', priority: '1.0' },
+    { loc: `${DOMAIN}/bypass-methods`, changefreq: 'daily', priority: '0.85' },
     { loc: `${DOMAIN}/security-testing`, changefreq: 'daily', priority: '0.9' },
     { loc: `${DOMAIN}/security-testing/api-security`, changefreq: 'daily', priority: '0.85' },
     { loc: `${DOMAIN}/security-testing/web-security`, changefreq: 'daily', priority: '0.85' },
@@ -240,7 +241,7 @@ function run() {
 
       // Static routes
       const staticPaths = [
-        'vulnerabilities', 'search', 'trending', 'youtube', 'newsletter',
+        'bypass-methods', 'vulnerabilities', 'search', 'trending', 'youtube', 'newsletter',
         'about', 'contact', 'editorial-policy', 'correction-policy',
         'privacy-policy', 'terms', 'cookie-policy', 'disclaimer',
         'affiliate-disclosure', 'advertising-policy'

@@ -10,43 +10,43 @@ export default function AiBattlefieldSection({ onNavigate }) {
       icon: Bot,
       color: "#00f0ff",
       description: "Agents empowered with API execution privileges create lateral exfiltration pathways when exposed to indirect prompt injections.",
-      targetSlug: "/ai-safety/ai-agent-security-threats-2026"
+      targetSlug: "/ai-security/ai-agent-security-2026"
     },
     {
       id: "deepfakes",
-      title: "Deepfakes",
+      title: "Deepfakes & Spoofing",
       subtitle: "Zero-Shot Acoustic & Video Spoofing",
       icon: UserCheck,
       color: "#fb7185",
-      description: "Generative voice cloning bypasses telephonic verification and KYC identity checkpoints in high-urgency financial fraud.",
-      targetSlug: "/ai-safety/deepfake-voice-cloning-defense"
+      description: "Generative voice cloning and multimodal synthetic identity attacks bypass traditional biometric verification checkpoints.",
+      targetSlug: "/ai-safety"
     },
     {
       id: "ai-phishing",
-      title: "AI Phishing",
-      subtitle: "Hyper-Targeted Synthesized Lures",
+      title: "Phishing Defense",
+      subtitle: "FIDO2 & Hardware-Key Resistance",
       icon: ShieldAlert,
       color: "#38bdf8",
-      description: "Automated LLM reconnaissance writes grammatically flawless, highly contextual Spear-Phishing campaigns at mass scale.",
-      targetSlug: "/cybersecurity/passkey-migration-phishing-resistance"
+      description: "Countering synthesized Spear-Phishing campaigns with cryptographic, origin-bound hardware tokens and passkeys.",
+      targetSlug: "/tutorials/hardware-security-keys-yubikey-guide"
     },
     {
       id: "ai-security",
-      title: "AI Security",
+      title: "RAG & Pipeline Defense",
       subtitle: "Model Weight & Pipeline Integrity",
       icon: Cpu,
       color: "#34d399",
       description: "Protecting training datasets from data poisoning, preventing model inversion, and securing vector database retrieval pipelines.",
-      targetSlug: "/ai-safety/ai-governance-red-teaming"
+      targetSlug: "/ai-security/llm-rag-poisoning-defenses"
     },
     {
       id: "ai-governance",
-      title: "AI Governance",
+      title: "AI Safety & Governance",
       subtitle: "Red-Teaming & Guardrail Audits",
       icon: Scale,
       color: "#c084fc",
-      description: "Establishing deterministic policy boundaries, constitutional alignment, and regulatory compliance frameworks for frontier models.",
-      targetSlug: "/ai-safety/ai-governance-red-teaming"
+      description: "Establishing deterministic policy boundaries, constitutional alignment, and verifiable safety frameworks for frontier AI systems.",
+      targetSlug: "/ai-safety"
     }
   ];
 

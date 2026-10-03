@@ -3,8 +3,8 @@
  * Enables Admin CRUD actions, draft saving, fact-checking workflows, and subscriber exports.
  */
 
-import { articlesData } from "../data/articles";
-import { vulnerabilitiesData } from "../data/vulnerabilities";
+import { articlesData } from "../data/articles.js";
+import { vulnerabilitiesData } from "../data/vulnerabilities.js";
 
 const CMS_ARTICLES_KEY = "cyberaiwatch_cms_articles_v1";
 const CMS_VULNS_KEY = "cyberaiwatch_cms_vulns_v1";

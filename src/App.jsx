@@ -23,6 +23,7 @@ import NewsletterBox from './components/home/NewsletterBox';
 import SecurityTestingHubPage from './pages/securityTesting/SecurityTestingHubPage';
 import CategoryTestingPage from './pages/securityTesting/CategoryTestingPage';
 import VulnerabilityDetailPage from './pages/securityTesting/VulnerabilityDetailPage';
+import BypassMethodsPage from './pages/BypassMethodsPage';
 import { getAllArticles } from './utils/storage';
 
 export default function App() {
@@ -33,7 +34,7 @@ export default function App() {
   // Sync with browser history back/forward
   useEffect(() => {
     const handlePopState = () => {
-      setCurrentPath(window.location.pathname || '/');
+      setCurrentPath((window.location.pathname + window.location.search) || '/');
     };
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
@@ -63,37 +64,40 @@ export default function App() {
 
   // Route Resolver
   const renderContent = () => {
+    const pathWithoutQuery = currentPath.split('?')[0];
+    const cleanPath = pathWithoutQuery === '/' ? '/' : pathWithoutQuery.replace(/\/+$/, '');
+
     // 1. Home
-    if (currentPath === '/' || currentPath === '') {
+    if (cleanPath === '/' || cleanPath === '') {
       return <HomePage onNavigate={navigate} />;
     }
 
     // 2. Specialized Hubs & Features
-    if (currentPath === '/vulnerabilities') {
+    if (cleanPath === '/vulnerabilities') {
       return <VulnerabilitiesPage onNavigate={navigate} />;
     }
-    if (currentPath === '/search') {
-      return <SearchPage onNavigate={navigate} />;
+    if (cleanPath === '/search') {
+      return <SearchPage onNavigate={navigate} currentPath={currentPath} />;
     }
-    if (currentPath === '/trending' || currentPath === '/most-read') {
+    if (cleanPath === '/trending' || cleanPath === '/most-read') {
       return <TrendingPage onNavigate={navigate} />;
     }
-    if (currentPath === '/author/kunal-rajput' || currentPath === '/author') {
+    if (cleanPath === '/author/kunal-rajput' || cleanPath === '/author') {
       return <AuthorPage onNavigate={navigate} />;
     }
-    if (currentPath === '/youtube') {
+    if (cleanPath === '/youtube') {
       return <YouTubePage onNavigate={navigate} />;
     }
-    if (currentPath === '/newsletter') {
+    if (cleanPath === '/newsletter') {
       return <NewsletterPage onNavigate={navigate} />;
     }
-    if (currentPath === '/unsubscribe') {
+    if (cleanPath === '/unsubscribe') {
       return <UnsubscribePage onNavigate={navigate} />;
     }
-    if (currentPath === '/admin') {
+    if (cleanPath === '/admin') {
       return <AdminPage onNavigate={navigate} />;
     }
-    if (currentPath === '/tools') {
+    if (cleanPath === '/tools') {
       return (
         <div style={{ minHeight: '100vh', background: '#030712', padding: '3.5rem 0' }}>
           <SecurityToolsSuite />
@@ -101,60 +105,65 @@ export default function App() {
       );
     }
 
+    // Bypass Methods Hub
+    if (cleanPath === '/bypass-methods') {
+      return <BypassMethodsPage onNavigate={navigate} />;
+    }
+
     // Security Testing Knowledge Hub
-    if (currentPath === '/security-testing' || currentPath === '/security-testing/') {
+    if (cleanPath === '/security-testing') {
       return <SecurityTestingHubPage onNavigate={navigate} />;
     }
-    if (currentPath === '/security-testing/api-security' || currentPath === '/security-testing/api-security/') {
+    if (cleanPath === '/security-testing/api-security') {
       return <CategoryTestingPage categorySlug="api-security" onNavigate={navigate} />;
     }
-    if (currentPath === '/security-testing/web-security' || currentPath === '/security-testing/web-security/') {
+    if (cleanPath === '/security-testing/web-security') {
       return <CategoryTestingPage categorySlug="web-security" onNavigate={navigate} />;
     }
-    if (currentPath === '/security-testing/mobile-security' || currentPath === '/security-testing/mobile-security/') {
+    if (cleanPath === '/security-testing/mobile-security') {
       return <CategoryTestingPage categorySlug="mobile-security" onNavigate={navigate} />;
     }
-    if (currentPath.startsWith('/security-testing/')) {
-      const secSegments = currentPath.split('/').filter(Boolean);
+    if (cleanPath.startsWith('/security-testing/')) {
+      const secSegments = cleanPath.split('/').filter(Boolean);
       if (secSegments.length >= 3 && secSegments[0] === 'security-testing') {
         return <VulnerabilityDetailPage categorySlug={secSegments[1]} slug={secSegments[2]} onNavigate={navigate} />;
       }
     }
 
     // 3. Legal & Editorial Policy Pages
-    if (currentPath === '/about') {
+    if (cleanPath === '/about') {
       return <AboutPage onNavigate={navigate} />;
     }
-    if (currentPath === '/contact') {
+    if (cleanPath === '/contact') {
       return <ContactPage onNavigate={navigate} />;
     }
-    if (currentPath === '/privacy-policy') {
+    if (cleanPath === '/privacy-policy') {
       return <LegalPage policyKey="privacyPolicy" onNavigate={navigate} />;
     }
-    if (currentPath === '/terms') {
+    if (cleanPath === '/terms') {
       return <LegalPage policyKey="terms" onNavigate={navigate} />;
     }
-    if (currentPath === '/cookie-policy') {
+    if (cleanPath === '/cookie-policy') {
       return <LegalPage policyKey="cookiePolicy" onNavigate={navigate} />;
     }
-    if (currentPath === '/disclaimer') {
+    if (cleanPath === '/disclaimer') {
       return <LegalPage policyKey="disclaimer" onNavigate={navigate} />;
     }
-    if (currentPath === '/editorial-policy' || currentPath === '/editorial-standards') {
+    if (cleanPath === '/editorial-policy' || cleanPath === '/editorial-standards') {
       return <LegalPage policyKey="editorialPolicy" onNavigate={navigate} />;
     }
-    if (currentPath === '/correction-policy') {
+    if (cleanPath === '/correction-policy') {
       return <LegalPage policyKey="correctionPolicy" onNavigate={navigate} />;
     }
-    if (currentPath === '/affiliate-disclosure') {
+    if (cleanPath === '/affiliate-disclosure') {
       return <LegalPage policyKey="affiliateDisclosure" onNavigate={navigate} />;
     }
-    if (currentPath === '/advertising-policy') {
+    if (cleanPath === '/advertising-policy') {
       return <LegalPage policyKey="advertisingPolicy" onNavigate={navigate} />;
     }
 
     // 4. Categories & Direct Articles
-    const segments = currentPath.split('/').filter(Boolean);
+    const segments = cleanPath.split('/').filter(Boolean);
     const categorySlugs = [
       'cybersecurity',
       'ai-safety',

@@ -59,16 +59,10 @@ export const siteConfig = {
 
   nav: [
     { label: "Home", path: "/" },
-    { label: "Security Testing", path: "/security-testing" },
-    { label: "Cybersecurity", path: "/cybersecurity" },
-    { label: "AI Safety", path: "/ai-safety" },
-    { label: "AI Security", path: "/ai-security" },
-    { label: "Threat Intelligence", path: "/threat-intelligence" },
+    { label: "Bypass Methods", path: "/bypass-methods" },
+    { label: "News", path: "/news" },
     { label: "Vulnerabilities", path: "/vulnerabilities" },
-    { label: "Privacy", path: "/privacy" },
-    { label: "Tutorials", path: "/tutorials" },
-    { label: "Analysis", path: "/analysis" },
-    { label: "News", path: "/news" }
+    { label: "Tutorials", path: "/tutorials" }
   ],
 
   legalLinks: [
