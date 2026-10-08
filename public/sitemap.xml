@@ -156,6 +156,11 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://cyberaiwatch.com/ai-security/ai-agents-south-korean-bank-hacks-artex-claude</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://cyberaiwatch.com/vulnerabilities/fortimail-cve-2026-104286-cert-in-alert</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

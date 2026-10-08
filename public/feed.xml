@@ -5,8 +5,17 @@
   <link>https://cyberaiwatch.com</link>
   <description>Independent international editorial publication dedicated to cybersecurity journalism, AI safety research, vulnerability tracking, threat intelligence, and defensive security tutorials.</description>
   <language>en-us</language>
-  <lastBuildDate>Sat, 03 Oct 2026 11:45:12 GMT</lastBuildDate>
+  <lastBuildDate>Thu, 08 Oct 2026 06:19:44 GMT</lastBuildDate>
   <atom:link href="https://cyberaiwatch.com/rss.xml" rel="self" type="application/rss+xml" />
+  <item>
+    <title><![CDATA[AI Agents Used in South Korean Bank Hacks: ARTEX, Claude Code & the New AI Cyber Threat]]></title>
+    <link>https://cyberaiwatch.com/ai-security/ai-agents-south-korean-bank-hacks-artex-claude</link>
+    <guid isPermaLink="true">https://cyberaiwatch.com/ai-security/ai-agents-south-korean-bank-hacks-artex-claude</guid>
+    <description><![CDATA[CrowdStrike says AI-agent tools including ARTEX and Claude Code were used during attacks targeting South Korean financial organizations. Here's what happened and what defenders should know.]]></description>
+    <category>AI Security</category>
+    <author>Kunal Rajput</author>
+    <pubDate>Wed, 07 Oct 2026 18:30:00 GMT</pubDate>
+  </item>
   <item>
     <title><![CDATA[Critical FortiMail Vulnerability CVE-2026-104286: CERT-In Alert Explained]]></title>
     <link>https://cyberaiwatch.com/vulnerabilities/fortimail-cve-2026-104286-cert-in-alert</link>
