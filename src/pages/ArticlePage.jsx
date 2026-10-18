@@ -20,10 +20,17 @@ export default function ArticlePage({ slug, onNavigate }) {
   const [isMobileTocOpen, setIsMobileTocOpen] = useState(false);
 
   const allArticles = getAllArticles();
-  const article = allArticles.find(a => a.slug === slug) || allArticles[0];
+  const article = allArticles.find(a => a.slug === slug);
 
   useEffect(() => {
-    if (!article) return;
+    if (!article) {
+      updateMetaTags({
+        title: `Article Not Found — ${siteConfig.name}`,
+        description: "The requested editorial report or research analysis could not be located.",
+        type: "website"
+      });
+      return;
+    }
     
     const canonicalUrl = `${siteConfig.domain}/${article.category}/${article.slug}`;
     updateMetaTags({

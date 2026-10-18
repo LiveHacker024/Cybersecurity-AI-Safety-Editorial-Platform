@@ -21,7 +21,58 @@ export default function CategoryPage({ categorySlug, onNavigate }) {
   };
 
   const allArticles = getAllArticles().filter(a => a.status === 'PUBLISHED');
-  const catArticles = allArticles.filter(a => a.category === category.slug || a.categorySlug === category.slug);
+  const catArticles = allArticles.filter(a => {
+    if (a.category === category.slug || a.categorySlug === category.slug) return true;
+    if (a.categories && a.categories.includes(category.slug)) return true;
+    
+    // Cross-topic relevance mapping to ensure editorial hubs deliver comprehensive coverage
+    if (category.slug === 'news') {
+      return (
+        a.category === 'vulnerabilities' ||
+        a.type === 'VERIFIED INVESTIGATION' ||
+        a.type === 'NEWS' ||
+        (a.badge && a.badge.includes('ALERT')) ||
+        (a.tags && a.tags.some(t => t.toLowerCase().includes('news') || t.toLowerCase().includes('incident') || t.toLowerCase().includes('hack') || t.toLowerCase().includes('alert')))
+      );
+    }
+    if (category.slug === 'threat-intelligence') {
+      return (
+        a.tags && a.tags.some(t => 
+          t.toLowerCase().includes('threat') || 
+          t.toLowerCase().includes('agent') || 
+          t.toLowerCase().includes('telemetry') || 
+          t.toLowerCase().includes('cve') || 
+          t.toLowerCase().includes('breach') ||
+          t.toLowerCase().includes('proxy')
+        )
+      );
+    }
+    if (category.slug === 'analysis') {
+      return (
+        a.type === 'ANALYSIS' ||
+        a.type === 'VERIFIED INVESTIGATION' ||
+        a.type === 'EXPLAINER' ||
+        a.type === 'VULNERABILITY' ||
+        (a.tags && a.tags.some(t => t.toLowerCase().includes('analysis') || t.toLowerCase().includes('architecture') || t.toLowerCase().includes('breakdown')))
+      );
+    }
+    if (category.slug === 'privacy') {
+      return (
+        a.tags && a.tags.some(t => 
+          t.toLowerCase().includes('privacy') || 
+          t.toLowerCase().includes('fido2') || 
+          t.toLowerCase().includes('yubikey') || 
+          t.toLowerCase().includes('auth') || 
+          t.toLowerCase().includes('telemetry') ||
+          t.toLowerCase().includes('phishing')
+        )
+      );
+    }
+    if (category.slug === 'cybersecurity') {
+      return a.category === 'cybersecurity' || a.category === 'vulnerabilities' || a.category === 'tutorials';
+    }
+    return false;
+  });
 
   const filteredArticles = selectedSubcat === 'all'
     ? catArticles

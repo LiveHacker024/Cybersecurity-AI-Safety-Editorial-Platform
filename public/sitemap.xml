@@ -46,6 +46,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://cyberaiwatch.com/tools</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://cyberaiwatch.com/author/kunal-rajput</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
