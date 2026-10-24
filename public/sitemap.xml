@@ -161,79 +161,84 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://cyberaiwatch.com/vulnerabilities/php2shell-php-vulnerability-fix-2026</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://cyberaiwatch.com/ai-security/ai-agents-south-korean-bank-hacks-artex-claude</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cyberaiwatch.com/vulnerabilities/fortimail-cve-2026-104286-cert-in-alert</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cyberaiwatch.com/ai-security/openai-ai-agents-tried-hacking-four-websites</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cyberaiwatch.com/ai-safety/openai-ai-agent-medicare-portal-breach</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cyberaiwatch.com/ai-security/your-ai-browser-can-be-hacked-bragjack</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cyberaiwatch.com/ai-safety/google-gemini-hacked-three-companies</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cyberaiwatch.com/ai-security/ai-agent-security-2026</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cyberaiwatch.com/ai-security/ai-agents-real-world-cybersecurity-incidents</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cyberaiwatch.com/ai-security/anthropic-claude-hacked-openai-ai-security</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cyberaiwatch.com/ai-safety/why-did-jacob-coxon-quit-anthropic-ai-safety</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cyberaiwatch.com/ai-safety/ai-agents-cybersecurity-target</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cyberaiwatch.com/ai-security/llm-rag-poisoning-defenses</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cyberaiwatch.com/cybersecurity/zero-day-vulnerability-triage-guide</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cyberaiwatch.com/vulnerabilities/pan-os-cve-2024-3400-breakdown</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cyberaiwatch.com/tutorials/hardware-security-keys-yubikey-guide</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cyberaiwatch.com/security-testing/api-security/broken-object-level-authorization</loc>

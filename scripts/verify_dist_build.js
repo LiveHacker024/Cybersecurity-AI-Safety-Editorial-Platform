@@ -76,7 +76,8 @@ for (const art of articlesData) {
 
     // Verify canonical tag matches exactly
     const content = fs.readFileSync(artFile, 'utf8');
-    const canonicalTag = `<link rel="canonical" href="https://cyberaiwatch.com/${art.category}/${art.slug}" />`;
+    const expectedCanonical = art.canonicalUrl || `https://cyberaiwatch.com/${art.category}/${art.slug}`;
+    const canonicalTag = `<link rel="canonical" href="${expectedCanonical}" />`;
     if (!content.includes(canonicalTag)) {
       console.error(`✗ Missing canonical tag in ${art.slug}`);
       errors++;

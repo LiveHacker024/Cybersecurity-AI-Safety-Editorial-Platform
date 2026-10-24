@@ -32,7 +32,7 @@ export default function ArticlePage({ slug, onNavigate }) {
       return;
     }
     
-    const canonicalUrl = `${siteConfig.domain}/${article.category}/${article.slug}`;
+    const canonicalUrl = article.canonicalUrl || `${siteConfig.domain}/${article.category}/${article.slug}`;
     updateMetaTags({
       title: `${article.title} — ${siteConfig.name}`,
       description: article.subtitle || article.excerpt,

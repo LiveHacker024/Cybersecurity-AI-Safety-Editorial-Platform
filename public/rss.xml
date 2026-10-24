@@ -5,8 +5,17 @@
   <link>https://cyberaiwatch.com</link>
   <description>Independent international editorial publication dedicated to cybersecurity journalism, AI safety research, vulnerability tracking, threat intelligence, and defensive security tutorials.</description>
   <language>en-us</language>
-  <lastBuildDate>Sun, 18 Oct 2026 12:32:23 GMT</lastBuildDate>
+  <lastBuildDate>Sat, 24 Oct 2026 17:24:09 GMT</lastBuildDate>
   <atom:link href="https://cyberaiwatch.com/rss.xml" rel="self" type="application/rss+xml" />
+  <item>
+    <title><![CDATA[PHP2Shell Explained: Critical PHP RCE Vulnerabilities, Affected Versions, and Security Fixes]]></title>
+    <link>https://cyberaiwatch.com/vulnerabilities/php2shell-php-vulnerability-fix-2026</link>
+    <guid isPermaLink="true">https://cyberaiwatch.com/vulnerabilities/php2shell-php-vulnerability-fix-2026</guid>
+    <description><![CDATA[A verified technical breakdown of the critical PHP remote code execution vulnerabilities (CVE-2026-109618, CVE-2026-109619, and CVE-2026-115560): root causes, affected runtime environments, emergency patch versions, defensive log auditing, and interim mitigations.]]></description>
+    <category>Vulnerabilities</category>
+    <author>Kunal Rajput</author>
+    <pubDate>Fri, 23 Oct 2026 18:30:00 GMT</pubDate>
+  </item>
   <item>
     <title><![CDATA[AI Agents Used in South Korean Bank Hacks: ARTEX, Claude Code & the New AI Cyber Threat]]></title>
     <link>https://cyberaiwatch.com/ai-security/ai-agents-south-korean-bank-hacks-artex-claude</link>

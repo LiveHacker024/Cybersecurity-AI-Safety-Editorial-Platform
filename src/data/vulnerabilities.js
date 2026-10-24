@@ -6,6 +6,52 @@
 
 export const vulnerabilitiesData = [
   {
+    cveId: "CVE-2026-109618",
+    name: "PHP Core RCE via Out-of-Memory (OOM) Memory Corruption (PHP2Shell)",
+    vendor: "The PHP Group",
+    product: "PHP Core Engine (Zend Runtime)",
+    affectedVersions: "PHP 5.4 through 8.5.11, 8.4.0 through 8.4.26, 8.3.0 through 8.3.35, 8.2.0 through 8.2.34",
+    fixedVersions: "PHP 8.5.12, 8.4.27, 8.3.36, 8.2.35 (PHP 8.6.0 RC4 for testing)",
+    severity: "CRITICAL",
+    cvss: 9.2,
+    attackVector: "Network (AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H)",
+    impact: "Unauthenticated Remote Code Execution during request allocation cleanup",
+    exploitationStatus: "PoC Demonstrated & Scanning Observed in Wild",
+    disclosureDate: "October 21, 2026",
+    vendorAdvisory: "https://www.php.net/archive/2026.php#2026-10-21-5",
+    mitigation: "Upgrade immediately to PHP 8.5.12, 8.4.27, 8.3.36, or 8.2.35. Interim mitigation: Set memory_limit=-1 via php_admin_value and enforce low post_max_size (8M/32M) at reverse proxy.",
+    detectionGuidance: "Inspect web server error logs for unexpected Out-of-Memory aborts, multipart payload anomalies, and repeated 500 errors. Verify worker processes for unexpected child shells.",
+    references: [
+      { name: "PHP Security Advisory 2026-10-21-5", url: "https://www.php.net/archive/2026.php#2026-10-21-5", type: "VENDOR" },
+      { name: "GitHub Advisory GHSA-w8hw-w9fx-j79w", url: "https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w", type: "OFFICIAL" },
+      { name: "Canadian Centre for Cyber Security AL26-026", url: "https://www.cyber.gc.ca/en/alerts-advisories/al26-026-critical-vulnerabilities-impacting-php-cve-2026-109618-cve-2026-109619", type: "GOVERNMENT" },
+      { name: "Cloudflare WAF Analysis", url: "https://blog.cloudflare.com/php-vulnerabilities-waf-protection/", type: "RESEARCH" }
+    ]
+  },
+  {
+    cveId: "CVE-2026-109619",
+    name: "PHP Core RCE via Stale Global State Use-After-Free (PHP2Shell)",
+    vendor: "The PHP Group",
+    product: "PHP Core Engine (Zend Runtime)",
+    affectedVersions: "PHP 5.4 through 8.5.11, 8.4.0 through 8.4.26, 8.3.0 through 8.3.35, 8.2.0 through 8.2.34",
+    fixedVersions: "PHP 8.5.12, 8.4.27, 8.3.36, 8.2.35",
+    severity: "CRITICAL",
+    cvss: 9.2,
+    attackVector: "Network (AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H)",
+    impact: "Unauthenticated Remote Code Execution & Sensitive Memory Disclosure across Worker Requests",
+    exploitationStatus: "PoC Demonstrated & Scanning Observed in Wild",
+    disclosureDate: "October 21, 2026",
+    vendorAdvisory: "https://www.php.net/archive/2026.php#2026-10-21-5",
+    mitigation: "Upgrade immediately to PHP 8.5.12, 8.4.27, 8.3.36, or 8.2.35. Interim mitigation: Set session.upload_progress.enabled=0 in php.ini and restart all workers; on PHP 8.5 set fatal_error_backtraces=0.",
+    detectionGuidance: "Audit logs for consecutive requests routed to the same worker process exhibiting fatal error cleanups followed by memory fault core dumps.",
+    references: [
+      { name: "PHP Security Advisory 2026-10-21-5", url: "https://www.php.net/archive/2026.php#2026-10-21-5", type: "VENDOR" },
+      { name: "GitHub Advisory GHSA-6wmf-4rv5-p3rp", url: "https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp", type: "OFFICIAL" },
+      { name: "Google Cloud Security GCP-2026-070", url: "https://cloud.google.com/blog/products/identity-security/responding-to-core-php-vulnerabilities-cve-2026-109618-cve-2026-109619", type: "RESEARCH" },
+      { name: "Unit 42 Threat Briefing", url: "https://unit42.paloaltonetworks.com/cve-2026-109618-cve-2026-109619/", type: "RESEARCH" }
+    ]
+  },
+  {
     cveId: "CVE-2026-104286",
     name: "Fortinet FortiMail IBE Path Traversal & File Write",
     vendor: "Fortinet",

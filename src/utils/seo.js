@@ -97,7 +97,7 @@ export function updateMetaTags({
 }
 
 export function generateArticleSchema(article) {
-  const articleUrl = `${PRODUCTION_DOMAIN}/${article.category}/${article.slug}`;
+  const articleUrl = article.canonicalUrl || `${PRODUCTION_DOMAIN}/${article.category}/${article.slug}`;
   const imageUrl = article.heroImage
     ? (article.heroImage.startsWith('http') ? article.heroImage : `${PRODUCTION_DOMAIN}${article.heroImage.startsWith('/') ? article.heroImage : '/' + article.heroImage}`)
     : `${PRODUCTION_DOMAIN}/assets/founder/founder-photo.png`;

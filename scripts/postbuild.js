@@ -76,9 +76,9 @@ function generateSitemap() {
   const articleRoutes = articlesData
     .filter(a => a.status === 'PUBLISHED')
     .map(a => ({
-      loc: `${DOMAIN}/${a.category}/${a.slug}`,
+      loc: a.canonicalUrl || `${DOMAIN}/${a.category}/${a.slug}`,
       changefreq: 'weekly',
-      priority: '0.8'
+      priority: '0.85'
     }));
 
   const securityTestingRoutes = allSecurityTestingVulnerabilities.map(v => ({
@@ -465,13 +465,13 @@ function run() {
       for (const art of articlesData) {
         if (art.status === 'PUBLISHED') {
           publishedArticleCount++;
-          const articleUrl = `${DOMAIN}/${art.category}/${art.slug}`;
+          const articleUrl = art.canonicalUrl || `${DOMAIN}/${art.category}/${art.slug}`;
           const schema = generateArticleSchema(art);
 
           const artHtml = renderHtmlForPage(baseHtml, {
             title: art.title,
             description: art.subtitle || art.excerpt,
-            url: `/${art.category}/${art.slug}`,
+            url: art.canonicalUrl || `/${art.category}/${art.slug}`,
             image: art.heroImage,
             type: 'article',
             author: art.author?.name || siteConfig.founder.name,
@@ -480,6 +480,9 @@ function run() {
 
           // Primary Category URL
           writeStaticRoute(`${art.category}/${art.slug}`, artHtml);
+
+          // Direct Slug URL (e.g. /slug/)
+          writeStaticRoute(art.slug, artHtml);
 
           // Route aliases to guarantee 200 on alternative entrypoints
           writeStaticRoute(`security-news/${art.slug}`, artHtml);
