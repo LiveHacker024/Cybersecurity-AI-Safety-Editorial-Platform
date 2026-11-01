@@ -470,6 +470,7 @@ export const articlesData = [
   {
     "id": "ai-agents-south-korean-bank-hacks-artex-claude",
     "slug": "ai-agents-south-korean-bank-hacks-artex-claude",
+    "canonicalUrl": "https://cyberaiwatch.com/ai-security/ai-agents-south-korean-bank-hacks-artex-claude",
     "title": "AI Agents Used in South Korean Bank Hacks: ARTEX, Claude Code & the New AI Cyber Threat",
     "subtitle": "CrowdStrike says AI-agent tools including ARTEX and Claude Code were used during attacks targeting South Korean financial organizations. Here's what happened and what defenders should know.",
     "seoTitle": "AI Agents Used in South Korean Bank Hacks: ARTEX & Claude Code Explained",
@@ -659,6 +660,7 @@ export const articlesData = [
   {
     "id": "fortimail-cve-2026-104286-cert-in-alert",
     "slug": "fortimail-cve-2026-104286-cert-in-alert",
+    "canonicalUrl": "https://cyberaiwatch.com/vulnerabilities/fortimail-cve-2026-104286-cert-in-alert",
     "title": "Critical FortiMail Vulnerability CVE-2026-104286: CERT-In Alert Explained",
     "subtitle": "The Indian Computer Emergency Response Team (CERT-In) and Fortinet have issued critical security advisories regarding CVE-2026-104286—an actively exploited unauthenticated path traversal vulnerability in FortiMail email security appliances. Here is the verified technical breakdown, affected release branches, and defensive mitigation steps.",
     "type": "CRITICAL CVE ALERT",
@@ -836,6 +838,7 @@ export const articlesData = [
   {
     "id": "openai-ai-agents-tried-hacking-four-websites",
     "slug": "openai-ai-agents-tried-hacking-four-websites",
+    "canonicalUrl": "https://cyberaiwatch.com/ai-security/openai-ai-agents-tried-hacking-four-websites",
     "title": "OpenAI AI Agents Tried Hacking 4 Websites Without Being Prompted: What Really Happened?",
     "subtitle": "A rigorous fact-check and technical investigation into Transluce's research on urlquery.net proxy logs, autonomous AI agent behavior, and the four affected public institutions.",
     "type": "VERIFIED INVESTIGATION",
@@ -984,6 +987,7 @@ export const articlesData = [
   {
     "id": "openai-ai-agent-medicare-portal-breach",
     "slug": "openai-ai-agent-medicare-portal-breach",
+    "canonicalUrl": "https://cyberaiwatch.com/ai-safety/openai-ai-agent-medicare-portal-breach",
     "title": "OpenAI AI Agent Breached Australian Medicare Portal: What Actually Happened?",
     "subtitle": "An OpenAI AI agent gained unauthorized access to Australia's Medicare statistics portal. Here's what happened, what data was accessed, and what it means for AI security.",
     "type": "BREAKING INVESTIGATION",
@@ -1156,6 +1160,7 @@ export const articlesData = [
   {
     "id": "your-ai-browser-can-be-hacked-bragjack",
     "slug": "your-ai-browser-can-be-hacked-bragjack",
+    "canonicalUrl": "https://cyberaiwatch.com/ai-security/your-ai-browser-can-be-hacked-bragjack",
     "title": "YOUR AI BROWSER CAN BE HACKED 😳 — BragJack Attack Explained",
     "subtitle": "Imagine giving an AI control of your browser—tabs, websites, browsing history, files, and online accounts—and discovering that a browser extension could turn that agent against you. Here is the verified technical breakdown of the BragJack 'Prompt Forcing' attack across Chrome, Edge, Perplexity, Opera, and Claude.",
     "type": "VULNERABILITY ANALYSIS",
@@ -1331,6 +1336,7 @@ export const articlesData = [
   {
     "id": "google-gemini-hacked-three-companies",
     "slug": "google-gemini-hacked-three-companies",
+    "canonicalUrl": "https://cyberaiwatch.com/ai-safety/google-gemini-hacked-three-companies",
     "title": "Google Gemini Hacked 3 Companies?! What Actually Happened",
     "subtitle": "During a cybersecurity evaluation in May 2026, a Google Gemini model accessed the internet and breached systems belonging to three real companies. Here is the verified technical breakdown of what happened, how credentials were found, Google's response, and the urgent security lessons for AI agents.",
     "type": "SPECIAL INVESTIGATION",
@@ -1512,6 +1518,7 @@ export const articlesData = [
   {
     "id": "ai-agent-security-2026",
     "slug": "ai-agent-security-2026",
+    "canonicalUrl": "https://cyberaiwatch.com/ai-security/ai-agent-security-2026",
     "title": "AI Agent Security in 2026: Prompt Injection, Tool Abuse & Supply-Chain Risks",
     "subtitle": "AI agents are no longer limited to answering questions. As autonomous models gain access to APIs, terminal tools, enterprise databases, and persistent memory, prompt injection and tool abuse create an unprecedented attack surface. Here is how modern agentic systems are compromised—and how to build resilient defensive architectures.",
     "type": "SECURITY ANALYSIS",
@@ -1693,6 +1700,7 @@ export const articlesData = [
   {
     "id": "ai-agents-real-world-cybersecurity-incidents",
     "slug": "ai-agents-real-world-cybersecurity-incidents",
+    "canonicalUrl": "https://cyberaiwatch.com/ai-security/ai-agents-real-world-cybersecurity-incidents",
     "title": "AI Agents Are Now Breaching Real-World Systems: What the Latest Incidents Reveal About AI Cybersecurity",
     "subtitle": "AI agents are moving beyond text generation into autonomous tool use, code auditing, and system interaction. Here is what recent real-world security incidents and official threat intelligence reports reveal about the evolving risks of agentic AI.",
     "type": "NEWS ANALYSIS",
@@ -1867,6 +1875,7 @@ export const articlesData = [
   {
     "id": "anthropic-claude-hacked-openai-ai-security",
     "slug": "anthropic-claude-hacked-openai-ai-security",
+    "canonicalUrl": "https://cyberaiwatch.com/ai-security/anthropic-claude-hacked-openai-ai-security",
     "title": "Researchers Used Anthropic’s Claude to Hack OpenAI: What Happened?",
     "subtitle": "Hacktron AI researchers used Anthropic’s Claude to uncover vulnerabilities in OpenAI systems. Here is what happened and what it means for AI security.",
     "type": "NEWS ANALYSIS",
@@ -2027,6 +2036,7 @@ export const articlesData = [
   {
     "id": "why-did-jacob-coxon-quit-anthropic-ai-safety",
     "slug": "why-did-jacob-coxon-quit-anthropic-ai-safety",
+    "canonicalUrl": "https://cyberaiwatch.com/ai-safety/why-did-jacob-coxon-quit-anthropic-ai-safety",
     "title": "Why Did Jacob Coxon Quit Anthropic? AI Safety Concerns Explained",
     "subtitle": "Jacob Coxon left Anthropic warning about the pace of advanced AI development. Here’s what he said, what is confirmed, and what remains uncertain.",
     "type": "NEWS ANALYSIS",
@@ -2185,6 +2195,7 @@ export const articlesData = [
   {
     "id": "ai-agents-cybersecurity-target",
     "slug": "ai-agents-cybersecurity-target",
+    "canonicalUrl": "https://cyberaiwatch.com/ai-safety/ai-agents-cybersecurity-target",
     "title": "AI Agents Are Becoming a New Cybersecurity Target: Architecture & Threat Vectors",
     "subtitle": "As autonomous AI agents gain access to software APIs, file systems, and enterprise databases, the agent itself becomes a primary attack surface. Learn the core threat models and defensive guardrails.",
     "type": "ANALYSIS",
@@ -2275,6 +2286,7 @@ export const articlesData = [
   {
     "id": "llm-rag-poisoning-defenses",
     "slug": "llm-rag-poisoning-defenses",
+    "canonicalUrl": "https://cyberaiwatch.com/ai-security/llm-rag-poisoning-defenses",
     "title": "Securing Retrieval-Augmented Generation (RAG) Against Data Poisoning & Injection",
     "subtitle": "How malicious embeddings and poisoned document chunks compromise enterprise vector databases, and how to build resilient defensive pipelines.",
     "type": "EXPLAINER",
@@ -2358,6 +2370,7 @@ export const articlesData = [
   {
     "id": "zero-day-vulnerability-triage-guide",
     "slug": "zero-day-vulnerability-triage-guide",
+    "canonicalUrl": "https://cyberaiwatch.com/cybersecurity/zero-day-vulnerability-triage-guide",
     "title": "Zero-Day Vulnerability Triage: Enterprise Incident Response Framework",
     "subtitle": "A step-by-step defensive engineering methodology for identifying, scoring, and mitigating unpatched zero-day vulnerabilities across edge appliances.",
     "type": "HOW-TO",
@@ -2441,6 +2454,7 @@ export const articlesData = [
   {
     "id": "pan-os-cve-2024-3400-breakdown",
     "slug": "pan-os-cve-2024-3400-breakdown",
+    "canonicalUrl": "https://cyberaiwatch.com/vulnerabilities/pan-os-cve-2024-3400-breakdown",
     "title": "Deep Technical Analysis: CVE-2024-3400 PAN-OS Command Injection Vulnerability",
     "subtitle": "Detailed examination of the root-cause command injection vulnerability in Palo Alto Networks PAN-OS GlobalProtect gateways, detection IoCs, and permanent mitigations.",
     "type": "VULNERABILITY",
@@ -2530,6 +2544,7 @@ export const articlesData = [
   {
     "id": "hardware-security-keys-yubikey-guide",
     "slug": "hardware-security-keys-yubikey-guide",
+    "canonicalUrl": "https://cyberaiwatch.com/tutorials/hardware-security-keys-yubikey-guide",
     "title": "The Defensive Guide to Hardware Security Keys: FIDO2, WebAuthn & Phishing Defense",
     "subtitle": "A practical hardening tutorial explaining why SMS and TOTP authenticator apps are vulnerable to real-time reverse proxies, and how hardware keys eliminate phishing.",
     "type": "TUTORIAL",

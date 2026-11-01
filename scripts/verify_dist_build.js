@@ -65,38 +65,37 @@ for (const cat of categoriesData) {
 }
 console.log('✓ All categories verified.');
 
-// 4. All 15 Articles
-console.log('\n4. Checking All 15 Articles & Metadata Injection...');
-for (const art of articlesData) {
-  if (art.status === 'PUBLISHED') {
-    const artFile = path.join(distDir, art.category, art.slug, 'index.html');
-    const artCleanFile = path.join(distDir, art.category, `${art.slug}.html`);
-    checkFile(artFile, art.title);
-    checkFile(artCleanFile, art.title);
+// 4. All Published Articles
+const publishedArticles = articlesData.filter(a => a.status === 'PUBLISHED');
+console.log(`\n4. Checking All ${publishedArticles.length} Articles & Metadata Injection...`);
+for (const art of publishedArticles) {
+  const artFile = path.join(distDir, art.category, art.slug, 'index.html');
+  const artCleanFile = path.join(distDir, art.category, `${art.slug}.html`);
+  checkFile(artFile, art.title);
+  checkFile(artCleanFile, art.title);
 
-    // Verify canonical tag matches exactly
-    const content = fs.readFileSync(artFile, 'utf8');
-    const expectedCanonical = art.canonicalUrl || `https://cyberaiwatch.com/${art.category}/${art.slug}`;
-    const canonicalTag = `<link rel="canonical" href="${expectedCanonical}" />`;
-    if (!content.includes(canonicalTag)) {
-      console.error(`✗ Missing canonical tag in ${art.slug}`);
-      errors++;
-    }
+  // Verify canonical tag matches exactly
+  const content = fs.readFileSync(artFile, 'utf8');
+  const expectedCanonical = art.canonicalUrl || `https://cyberaiwatch.com/${art.category}/${art.slug}`;
+  const canonicalTag = `<link rel="canonical" href="${expectedCanonical}" />`;
+  if (!content.includes(canonicalTag)) {
+    console.error(`✗ Missing canonical tag in ${art.slug}`);
+    errors++;
+  }
 
-    // Verify NewsArticle Schema
-    if (!content.includes('"@type": "NewsArticle"')) {
-      console.error(`✗ Missing NewsArticle schema in ${art.slug}`);
-      errors++;
-    }
+  // Verify NewsArticle Schema
+  if (!content.includes('"@type": "NewsArticle"')) {
+    console.error(`✗ Missing NewsArticle schema in ${art.slug}`);
+    errors++;
+  }
 
-    // Verify AdSense snippet
-    if (!content.includes('ca-pub-7672830782384308')) {
-      console.error(`✗ Missing AdSense snippet in ${art.slug}`);
-      errors++;
-    }
+  // Verify AdSense snippet
+  if (!content.includes('ca-pub-7672830782384308')) {
+    console.error(`✗ Missing AdSense snippet in ${art.slug}`);
+    errors++;
   }
 }
-console.log('✓ All 15 published articles verified with canonical tags, schema, and AdSense codes.');
+console.log(`✓ All ${publishedArticles.length} published articles verified with canonical tags, schema, and AdSense codes.`);
 
 // 5. Security Testing Hub & Samples
 console.log('\n5. Checking Security Testing Guides...');
