@@ -55,7 +55,7 @@ async function checkUrl(url, ua = userAgents[0].ua) {
       bodySnippet: body.slice(0, 500),
       bodyLength: body.length,
       hasAdSenseCode: body.includes('pagead2.googlesyndication.com') || body.includes('ca-pub-'),
-      hasPubId: body.includes('4302057692753259'),
+      hasPubId: body.includes('7672830782384308'),
       titleMatch: body.match(/<title>([^<]+)<\/title>/i)?.[1]
     };
   } catch (err) {
@@ -79,7 +79,7 @@ async function runAudit() {
       console.log(`  -> Server: ${result.headers['server'] || 'none'}, CF-Ray: ${result.headers['cf-ray'] || 'none'}, Location: ${result.headers['location'] || 'none'}`);
       console.log(`  -> Content-Type: ${result.headers['content-type'] || 'none'}, Size: ${result.bodyLength} bytes`);
       if (result.titleMatch) console.log(`  -> Title: "${result.titleMatch}"`);
-      if (result.hasAdSenseCode) console.log(`  -> AdSense snippet detected: YES (PubID 4302057692753259: ${result.hasPubId})`);
+      if (result.hasAdSenseCode) console.log(`  -> AdSense snippet detected: YES (PubID 7672830782384308: ${result.hasPubId})`);
     }
   }
 

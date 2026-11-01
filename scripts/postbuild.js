@@ -156,12 +156,12 @@ ${published.map(a => {
 
 // 4. Generate Ads TXT
 function generateAdsTxt() {
-  const clientId = process.env.VITE_ADSENSE_CLIENT_ID || process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-4302057692753259';
+  const clientId = process.env.VITE_ADSENSE_CLIENT_ID || process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-7672830782384308';
   if (clientId && clientId.startsWith('ca-pub-')) {
     const pubId = clientId.replace('ca-', '');
     return `google.com, ${pubId}, DIRECT, f08c47fec0942fa0\n`;
   }
-  return `google.com, pub-4302057692753259, DIRECT, f08c47fec0942fa0\n`;
+  return `google.com, pub-7672830782384308, DIRECT, f08c47fec0942fa0\n`;
 }
 
 /**

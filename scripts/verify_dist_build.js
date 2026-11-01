@@ -35,7 +35,7 @@ function checkFile(filePath, expectedSnippet = null) {
 console.log('1. Checking Core Root Files...');
 checkFile(path.join(distDir, 'index.html'), 'CyberAI Watch');
 checkFile(path.join(distDir, '404.html'), 'CyberAI Watch');
-checkFile(path.join(distDir, 'ads.txt'), 'pub-4302057692753259');
+checkFile(path.join(distDir, 'ads.txt'), 'pub-7672830782384308');
 checkFile(path.join(distDir, 'robots.txt'), 'sitemap.xml');
 checkFile(path.join(distDir, 'sitemap.xml'), 'https://cyberaiwatch.com/author/kunal-rajput');
 checkFile(path.join(distDir, 'rss.xml'), 'CyberAI Watch');
@@ -90,7 +90,7 @@ for (const art of articlesData) {
     }
 
     // Verify AdSense snippet
-    if (!content.includes('ca-pub-4302057692753259')) {
+    if (!content.includes('ca-pub-7672830782384308')) {
       console.error(`✗ Missing AdSense snippet in ${art.slug}`);
       errors++;
     }
