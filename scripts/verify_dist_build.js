@@ -35,7 +35,7 @@ function checkFile(filePath, expectedSnippet = null) {
 console.log('1. Checking Core Root Files...');
 checkFile(path.join(distDir, 'index.html'), 'CyberAI Watch');
 checkFile(path.join(distDir, '404.html'), 'CyberAI Watch');
-checkFile(path.join(distDir, 'ads.txt'), 'pub-7672830782384308');
+checkFile(path.join(distDir, 'ads.txt'), 'pub-4302057692753259');
 checkFile(path.join(distDir, 'robots.txt'), 'sitemap.xml');
 checkFile(path.join(distDir, 'sitemap.xml'), 'https://cyberaiwatch.com/author/kunal-rajput');
 checkFile(path.join(distDir, 'rss.xml'), 'CyberAI Watch');
@@ -54,6 +54,10 @@ checkFile(path.join(distDir, 'about', 'index.html'), 'About Kunal Rajput');
 checkFile(path.join(distDir, 'about.html'), 'About Kunal Rajput');
 checkFile(path.join(distDir, 'contact', 'index.html'), 'Contact');
 checkFile(path.join(distDir, 'contact.html'), 'Contact');
+checkFile(path.join(distDir, 'fact-checking-policy', 'index.html'), 'Fact-Checking');
+checkFile(path.join(distDir, 'fact-checking-policy.html'), 'Fact-Checking');
+checkFile(path.join(distDir, 'editorial-policy', 'index.html'), 'Editorial Policy');
+checkFile(path.join(distDir, 'correction-policy', 'index.html'), 'Correction');
 console.log('✓ Prerendered routes verified.');
 
 // 3. Categories
@@ -90,7 +94,7 @@ for (const art of publishedArticles) {
   }
 
   // Verify AdSense snippet
-  if (!content.includes('ca-pub-7672830782384308')) {
+  if (!content.includes('ca-pub-4302057692753259')) {
     console.error(`✗ Missing AdSense snippet in ${art.slug}`);
     errors++;
   }

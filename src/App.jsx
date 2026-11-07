@@ -131,16 +131,16 @@ export default function App() {
     }
 
     // 3. Legal & Editorial Policy Pages
-    if (cleanPath === '/about') {
+    if (cleanPath === '/about' || cleanPath === '/about-us') {
       return <AboutPage onNavigate={navigate} />;
     }
-    if (cleanPath === '/contact') {
+    if (cleanPath === '/contact' || cleanPath === '/contact-us') {
       return <ContactPage onNavigate={navigate} />;
     }
     if (cleanPath === '/privacy-policy') {
       return <LegalPage policyKey="privacyPolicy" onNavigate={navigate} />;
     }
-    if (cleanPath === '/terms') {
+    if (cleanPath === '/terms' || cleanPath === '/terms-and-conditions' || cleanPath === '/terms-of-service') {
       return <LegalPage policyKey="terms" onNavigate={navigate} />;
     }
     if (cleanPath === '/cookie-policy') {
@@ -152,7 +152,10 @@ export default function App() {
     if (cleanPath === '/editorial-policy' || cleanPath === '/editorial-standards') {
       return <LegalPage policyKey="editorialPolicy" onNavigate={navigate} />;
     }
-    if (cleanPath === '/correction-policy') {
+    if (cleanPath === '/fact-checking-policy' || cleanPath === '/fact-checking') {
+      return <LegalPage policyKey="factCheckingPolicy" onNavigate={navigate} />;
+    }
+    if (cleanPath === '/correction-policy' || cleanPath === '/corrections-policy') {
       return <LegalPage policyKey="correctionPolicy" onNavigate={navigate} />;
     }
     if (cleanPath === '/affiliate-disclosure') {

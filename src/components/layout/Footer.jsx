@@ -210,28 +210,34 @@ export default function Footer({ onNavigate }) {
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <li>
-                <button onClick={() => handleLinkClick('/editorial-policy')} className="footer-link">Editorial Standards & Fact-Check</button>
+                <button onClick={() => handleLinkClick('/about')} className="footer-link">About CyberAI Watch</button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/editorial-policy')} className="footer-link">Editorial Policy & Standards</button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/fact-checking-policy')} className="footer-link">Fact-Checking Policy</button>
               </li>
               <li>
                 <button onClick={() => handleLinkClick('/correction-policy')} className="footer-link">Correction & Retraction Policy</button>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('/disclaimer')} className="footer-link">Responsible Security Disclaimer</button>
-              </li>
-              <li>
                 <button onClick={() => handleLinkClick('/privacy-policy')} className="footer-link">Privacy Policy</button>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('/terms')} className="footer-link">Terms of Service</button>
+                <button onClick={() => handleLinkClick('/terms')} className="footer-link">Terms & Conditions</button>
+              </li>
+              <li>
+                <button onClick={() => handleLinkClick('/disclaimer')} className="footer-link">Responsible Security Disclaimer</button>
               </li>
               <li>
                 <button onClick={() => handleLinkClick('/cookie-policy')} className="footer-link">Cookie Policy</button>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('/advertising-policy')} className="footer-link">Advertising & Monetization</button>
+                <button onClick={() => handleLinkClick('/advertising-policy')} className="footer-link">Advertising Policy</button>
               </li>
               <li>
-                <button onClick={() => handleLinkClick('/contact')} className="footer-link">Contact & Vulnerability Disclosure</button>
+                <button onClick={() => handleLinkClick('/contact')} className="footer-link">Contact & Security Desk</button>
               </li>
             </ul>
           </div>

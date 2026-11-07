@@ -36,11 +36,6 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://cyberaiwatch.com/search</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://cyberaiwatch.com/trending</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -77,6 +72,11 @@
   </url>
   <url>
     <loc>https://cyberaiwatch.com/editorial-policy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://cyberaiwatch.com/fact-checking-policy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

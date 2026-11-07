@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Key, Shield, Send, CheckCircle2, MessageSquare, Copy, Check, ChevronRight } from 'lucide-react';
+import { Mail, Shield, Send, CheckCircle2, MessageSquare, ChevronRight } from 'lucide-react';
 import { founderData } from '../data/founder';
 import { siteConfig } from '../config/site';
 import { updateMetaTags, generateBreadcrumbSchema } from '../utils/seo';
@@ -13,13 +13,12 @@ export default function ContactPage({ onNavigate }) {
     message: ''
   });
   const [sent, setSent] = useState(false);
-  const [copiedPgp, setCopiedPgp] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     updateMetaTags({
       title: `Contact Editorial & Security Desk — ${siteConfig.name}`,
-      description: "Secure contact channel, editorial tips, vulnerability disclosures, correction requests, and PGP public key for CyberAI Watch.",
+      description: "Direct contact channel, editorial tips, vulnerability disclosures, and correction requests for CyberAI Watch.",
       schema: generateBreadcrumbSchema([
         { name: "Home", url: "/" },
         { name: "Contact Desk", url: "/contact" }
@@ -30,21 +29,6 @@ export default function ContactPage({ onNavigate }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSent(true);
-  };
-
-  const pgpKey = `-----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: OpenPGP.js v4.10.10
-Comment: https://cyberaiwatch.com/pgp
-
-mQGNBF+vL8wBDAC7/tK0mPqO7kL4vFk7L9Yp9J9...
-...[KUNAL RAJPUT SECURITY ENCRYPTED KEY]...
-=CyberAIWatch-PGP
------END PGP PUBLIC KEY BLOCK-----`;
-
-  const copyPgp = () => {
-    navigator.clipboard?.writeText(pgpKey);
-    setCopiedPgp(true);
-    setTimeout(() => setCopiedPgp(false), 2000);
   };
 
   return (
@@ -191,24 +175,17 @@ mQGNBF+vL8wBDAC7/tK0mPqO7kL4vFk7L9Yp9J9...
             )}
           </div>
 
-          {/* Right: Direct Coordinates & PGP Key */}
+          {/* Right: Direct Coordinates & Channels */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <div className="glass-panel" style={{ padding: '2rem' }}>
               <h3 className="font-heading" style={{ fontSize: '1.2rem', fontWeight: 700, color: '#ffffff', marginBottom: '1.25rem' }}>
                 Direct Coordinates
               </h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '0.9rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', fontSize: '0.9rem' }}>
                 <div>
-                  <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#64748b' }}>EDITORIAL CONTACT</div>
-                  <a href={`mailto:${founderData.email}`} style={{ color: '#00f0ff', textDecoration: 'none', fontWeight: 600 }}>
-                    {founderData.email}
-                  </a>
-                </div>
-
-                <div>
-                  <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#64748b' }}>VANIX TECHNOLOGY CONTACT</div>
-                  <a href={`tel:${founderData.vanixContact}`} style={{ color: '#38bdf8', textDecoration: 'none', fontWeight: 600 }}>
-                    {founderData.vanixContact}
+                  <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: '#64748b' }}>ACTIVE CONTACT &amp; EDITORIAL EMAIL</div>
+                  <a href="mailto:livehacker024@gmail.com" style={{ color: '#00f0ff', textDecoration: 'none', fontWeight: 600 }}>
+                    livehacker024@gmail.com
                   </a>
                 </div>
 
@@ -225,37 +202,11 @@ mQGNBF+vL8wBDAC7/tK0mPqO7kL4vFk7L9Yp9J9...
                     Kunal Rajput LinkedIn
                   </a>
                 </div>
-              </div>
-            </div>
 
-            <div className="glass-panel" style={{ padding: 'clamp(1.25rem, 3vw, 2rem)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#00f0ff', fontWeight: 700, fontSize: '0.9rem', fontFamily: 'var(--font-mono)' }}>
-                  <Key size={16} /> PGP PUBLIC KEY
+                <div style={{ paddingTop: '1rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)', fontSize: '0.825rem', color: '#94a3b8', lineHeight: 1.6 }}>
+                  For technical corrections, security disclosures, research collaboration, or editorial feedback, inquiries are reviewed directly by the editor.
                 </div>
-                <button
-                  onClick={copyPgp}
-                  style={{
-                    background: 'rgba(30, 41, 59, 0.8)',
-                    border: '1px solid #334155',
-                    color: copiedPgp ? '#34d399' : '#cbd5e1',
-                    padding: '0.25rem 0.6rem',
-                    borderRadius: '4px',
-                    fontSize: '0.75rem',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.3rem'
-                  }}
-                >
-                  {copiedPgp ? <Check size={12} /> : <Copy size={12} />}
-                  <span>{copiedPgp ? 'Copied' : 'Copy Key'}</span>
-                </button>
               </div>
-
-              <pre style={{ background: '#090e1a', padding: '1rem', borderRadius: '8px', fontSize: '0.72rem', color: '#94a3b8', overflowX: 'auto', border: '1px solid #1e293b', whiteSpace: 'pre-wrap', wordBreak: 'break-all', maxWidth: '100%' }}>
-                <code>{pgpKey}</code>
-              </pre>
             </div>
           </div>
         </div>

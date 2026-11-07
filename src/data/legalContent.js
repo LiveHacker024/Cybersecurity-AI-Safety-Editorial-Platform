@@ -40,25 +40,29 @@ In an era saturated with synthetic content and speculative claims, CyberAI Watch
     slug: "contact",
     title: "Contact Editorial & Security Desk",
     subtitle: "Inquiries, news tips, security disclosures, and editorial feedback.",
-    updatedAt: "September 15, 2026",
+    updatedAt: "November 5, 2026",
     sections: [
       {
         heading: "Editorial Inquiries & News Tips",
-        content: `For story submissions, technical corrections, research papers, or press briefings, contact our editorial desk directly at:
-- **Email:** editorial@cyberaiwatch.com
-- **Founder Direct:** livehacker024@gmail.com`
+        content: `For story submissions, technical inquiries, research papers, or press briefings, contact the editor directly:
+- **Direct Contact & Editorial:** livehacker024@gmail.com`
       },
       {
-        heading: "Vulnerability Disclosure & Security",
+        heading: "Corrections & Fact-Checking Reviews",
+        content: `If you have detected an error, inaccurate CVE reference, or require a technical revision:
+- **Corrections Contact:** livehacker024@gmail.com
+- **Review Process:** Correction requests are evaluated upon receipt, and verified modifications are published with explicit editorial correction notices.`
+      },
+      {
+        heading: "Vulnerability Disclosure & Responsible Security",
         content: `If you have discovered a security concern on CyberAI Watch or wish to coordinate a responsible vulnerability disclosure regarding external research:
-- **Security Inquiries:** security@cyberaiwatch.com
-- **PGP Encryption:** Available upon request for sensitive tips.`
+- **Security Contact:** livehacker024@gmail.com`
       },
       {
-        heading: "YouTube & Content Partnerships",
-        content: `For collaborations with HackWithKunal or video syndication inquiries:
-- **YouTube Channel:** [youtube.com/@HackWithKunal](https://www.youtube.com/@HackWithKunal)
-- **LinkedIn:** [linkedin.com/in/kunal-rajput-64b4002b4](https://www.linkedin.com/in/kunal-rajput-64b4002b4)`
+        heading: "Professional & Community Channels",
+        content: `Connect with the founder and educational channels:
+- **LinkedIn (Founder):** [linkedin.com/in/kunal-rajput-64b4002b4](https://www.linkedin.com/in/kunal-rajput-64b4002b4)
+- **YouTube Channel:** [youtube.com/@HackWithKunal](https://www.youtube.com/@HackWithKunal)`
       }
     ]
   },
@@ -95,7 +99,7 @@ In compliance with Google publisher requirements:
         heading: "4. Managing Your Privacy & Rights",
         content: `We honor the privacy rights of all readers. You have the right to request access to, correction of, or deletion of any personal data you have provided to us (such as your newsletter subscription).
 
-To submit a privacy inquiry or exercise your rights, contact our privacy desk at **editorial@cyberaiwatch.com** or **livehacker024@gmail.com**.`
+To submit a privacy inquiry or exercise your rights, contact us directly at **livehacker024@gmail.com**.`
       }
     ]
   },
@@ -180,7 +184,7 @@ We publish vulnerability details, exploit mechanics, and threat intelligence to 
     slug: "editorial-policy",
     title: "Editorial Policy & Standards",
     subtitle: "Our commitment to source verification, transparency, and claim categorization.",
-    updatedAt: "September 15, 2026",
+    updatedAt: "November 5, 2026",
     sections: [
       {
         heading: "1. Core Editorial Standards",
@@ -191,7 +195,7 @@ We publish vulnerability details, exploit mechanics, and threat intelligence to 
         content: `To ensure maximum transparency, our articles explicitly distinguish between different categories of information:
 - **CONFIRMED FACT:** Information independently verified by primary documentation, official vendor advisories, or CISA/NVD records.
 - **REPORTED CLAIM:** Statements made by third parties, victims, or threat actors that have not yet been independently substantiated.
-- **ANALYSIS:** Expert technical deduction, threat modeling, and contextual evaluation by our security team.
+- **ANALYSIS:** Expert technical deduction, threat modeling, and contextual evaluation by the author and editor.
 - **UNKNOWN / UNVERIFIED:** Emerging developments where critical technical data remains unresolved.`
       },
       {
@@ -201,23 +205,79 @@ We publish vulnerability details, exploit mechanics, and threat intelligence to 
     ]
   },
 
+  factCheckingPolicy: {
+    slug: "fact-checking-policy",
+    title: "Fact-Checking & Technical Verification Policy",
+    subtitle: "Our multi-tiered methodology for validating vulnerability records, cross-referencing CVE metrics, and eliminating synthetic misinformation.",
+    updatedAt: "November 5, 2026",
+    sections: [
+      {
+        heading: "1. Authoritative Source Hierarchy",
+        content: `Every technical claim, CVE identifier, CVSS score, and affected software version published on CyberAI Watch must be corroborated against authoritative primary documentation:
+- **Primary Vendor Security Bulletins:** Official advisories published by the affected vendor or project maintainers (e.g., PHP Group, Fortinet PSIRT, Google Security, Anthropic, OpenAI).
+- **National Vulnerability Registries:** Official records from the NIST National Vulnerability Database (NVD) and the MITRE CVE Program.
+- **Government Cyber Directives:** Binding alerts from CISA (including the Known Exploited Vulnerabilities catalog), CERT-In, and equivalent national CSIRTs.
+- **Academic & Peer-Reviewed Research:** Whitepapers and disclosures from recognized security conferences and institutional labs.`
+      },
+      {
+        heading: "2. Technical Claim Separation & Threat Nuance",
+        content: `Defenders require nuanced precision to prioritize remediation. Our fact-checking process strictly enforces three distinctions:
+- **Confirmed Vulnerability vs. Theoretical Risk:** We distinguish proof-of-concept laboratory demonstrations from vulnerabilities actively exploited in the wild.
+- **Independent Vulnerability Isolation:** We never combine distinct CVE records into generic or conflated narratives. Each vulnerability is analyzed with its specific root cause (e.g., CWE categorization), affected version matrices, and unique remediation path.
+- **Vendor Statements vs. Threat Actor Claims:** Unsubstantiated claims from ransomware extortion portals or dark web leak sites are labeled as **REPORTED CLAIM** or **UNKNOWN / UNVERIFIED** until forensically corroborated.`
+      },
+      {
+        heading: "3. Prohibition of Synthetic or AI-Fabricated Claims",
+        content: `CyberAI Watch prohibits the publication of unverified synthetic or AI-generated statements. While we investigate AI models and algorithmic systems, every vulnerability detail, code snippet, and diagnostic procedure is researched, authored, and verified through hands-on technical validation. We never invent CVE numbers, fake CVSS vectors, or fictional security incidents.`
+      },
+      {
+        heading: "4. Verification Workflow Prior to Publication",
+        content: `Before any investigative piece or security bulletin goes live:
+1. **Identifier Check:** All referenced CVEs are searched in authoritative databases to confirm status, scope, and accurate CVSS vectors.
+2. **Version Matrix Audit:** Affected and fixed version numbers are verified against official release notes and patch changelogs.
+3. **Mitigation Validation:** Defensive guidance, configuration directives (e.g., \`php.ini\`, firewall rules), and upgrade commands are reviewed for non-destructive execution in authorized environments.
+4. **Link Integrity:** All citations and references are tested to ensure they resolve to authoritative primary sources.`
+      },
+      {
+        heading: "5. How Readers Can Request Fact-Checking Reviews",
+        content: `We welcome scrutiny from the global security community, researchers, and software maintainers. If you believe any statement, CVE attribution, or technical detail on CyberAI Watch requires review:
+- **Email Editorial & Verification:** livehacker024@gmail.com
+- **Response Protocol:** Inquiries are evaluated upon receipt, and cross-referenced against authoritative primary sources.`
+      }
+    ]
+  },
+
   correctionPolicy: {
     slug: "correction-policy",
     title: "Correction & Retraction Policy",
     subtitle: "How we address technical updates, error reporting, and transparent revisions.",
-    updatedAt: "September 15, 2026",
+    updatedAt: "November 5, 2026",
     sections: [
       {
-        heading: "Commitment to Accuracy",
-        content: `When factual or technical errors occur, CyberAI Watch is committed to correcting them promptly and transparently. We do not silently rewrite articles to erase errors.`
+        heading: "1. Commitment to Technical Accuracy",
+        content: `When factual, technical, or analytical errors occur, CyberAI Watch is committed to correcting them promptly, visibly, and transparently. We do not silently overwrite text or erase errors. Maintaining trust with cybersecurity practitioners and readers requires open accountability.`
       },
       {
-        heading: "Reporting an Error",
-        content: `If you spot an error, misattributed CVE, or broken citation, please notify our editorial desk at corrections@cyberaiwatch.com or editorial@cyberaiwatch.com with the article URL and supporting documentation.`
+        heading: "2. How to Report an Error",
+        content: `If you discover an inaccurate CVE detail, wrong CVSS score, misattributed vulnerability, broken code snippet, or typographical error, please contact our editorial desk:
+- **Direct Contact Email:** livehacker024@gmail.com
+- **Required Details:** Please provide the article URL, the specific passage or claim in question, and citations to authoritative primary documentation (such as vendor PSIRT bulletins, NVD records, or CISA advisories).`
       },
       {
-        heading: "Correction Transparency",
-        content: `Significant corrections are appended with a timestamped editorial note at the top or bottom of the article detailing the date, the specific change made, and the reason for the update.`
+        heading: "3. Investigation & Resolution Workflow",
+        content: `1. **Receipt & Evaluation:** Reported errors are logged and evaluated against cited authoritative documentation.
+2. **Technical Re-Verification:** Founder & Editor-in-Chief Kunal Rajput independently cross-references the report against primary vendor PSIRT and vulnerability database records.
+3. **Correction Execution:** If the error is verified, the article is updated immediately with an explicit correction record.`
+      },
+      {
+        heading: "4. Transparency & Correction Notices",
+        content: `Corrections are categorized into two tiers:
+- **Substantive Corrections:** Changes to technical claims, CVE numbers, vulnerability mechanics, affected versions, or security guidance are marked with a prominent, timestamped **Editorial Correction Note** at the top or bottom of the article detailing the exact modification, the date of change, and the reason.
+- **Minor Typographical Fixes:** Spelling, grammatical corrections, and cosmetic layout improvements that do not alter technical meaning are updated directly without an editorial notice.`
+      },
+      {
+        heading: "5. Retractions & Archival Policy",
+        content: `In the rare event that a published article is determined to be fundamentally flawed or based on disproven allegations, CyberAI Watch will publish a formal Retraction Notice detailing the investigative failure while preserving the integrity of the archival record.`
       }
     ]
   },

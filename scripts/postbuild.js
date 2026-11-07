@@ -49,7 +49,6 @@ function generateSitemap() {
     { loc: `${DOMAIN}/security-testing/web-security`, changefreq: 'daily', priority: '0.85' },
     { loc: `${DOMAIN}/security-testing/mobile-security`, changefreq: 'daily', priority: '0.85' },
     { loc: `${DOMAIN}/vulnerabilities`, changefreq: 'daily', priority: '0.9' },
-    { loc: `${DOMAIN}/search`, changefreq: 'weekly', priority: '0.7' },
     { loc: `${DOMAIN}/trending`, changefreq: 'daily', priority: '0.8' },
     { loc: `${DOMAIN}/tools`, changefreq: 'weekly', priority: '0.8' },
     { loc: `${DOMAIN}/author/kunal-rajput`, changefreq: 'weekly', priority: '0.8' },
@@ -58,6 +57,7 @@ function generateSitemap() {
     { loc: `${DOMAIN}/about`, changefreq: 'monthly', priority: '0.7' },
     { loc: `${DOMAIN}/contact`, changefreq: 'monthly', priority: '0.6' },
     { loc: `${DOMAIN}/editorial-policy`, changefreq: 'monthly', priority: '0.6' },
+    { loc: `${DOMAIN}/fact-checking-policy`, changefreq: 'monthly', priority: '0.6' },
     { loc: `${DOMAIN}/correction-policy`, changefreq: 'monthly', priority: '0.5' },
     { loc: `${DOMAIN}/privacy-policy`, changefreq: 'monthly', priority: '0.5' },
     { loc: `${DOMAIN}/terms`, changefreq: 'monthly', priority: '0.5' },
@@ -108,6 +108,16 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /unsubscribe
+Disallow: /search
+
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /unsubscribe
+Disallow: /search
+
+User-agent: Mediapartners-Google
+Allow: /
 
 Sitemap: ${DOMAIN}/sitemap.xml
 `;
@@ -156,12 +166,12 @@ ${published.map(a => {
 
 // 4. Generate Ads TXT
 function generateAdsTxt() {
-  const clientId = process.env.VITE_ADSENSE_CLIENT_ID || process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-7672830782384308';
+  const clientId = process.env.VITE_ADSENSE_CLIENT_ID || process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-4302057692753259';
   if (clientId && clientId.startsWith('ca-pub-')) {
     const pubId = clientId.replace('ca-', '');
     return `google.com, ${pubId}, DIRECT, f08c47fec0942fa0\n`;
   }
-  return `google.com, pub-7672830782384308, DIRECT, f08c47fec0942fa0\n`;
+  return `google.com, pub-4302057692753259, DIRECT, f08c47fec0942fa0\n`;
 }
 
 /**
@@ -350,10 +360,22 @@ function run() {
           url: '/editorial-standards'
         },
         {
+          path: 'fact-checking-policy',
+          title: legalPolicies.factCheckingPolicy.title,
+          description: legalPolicies.factCheckingPolicy.subtitle,
+          url: '/fact-checking-policy'
+        },
+        {
           path: 'correction-policy',
           title: legalPolicies.correctionPolicy.title,
           description: legalPolicies.correctionPolicy.subtitle,
           url: '/correction-policy'
+        },
+        {
+          path: 'corrections-policy',
+          title: legalPolicies.correctionPolicy.title,
+          description: legalPolicies.correctionPolicy.subtitle,
+          url: '/corrections-policy'
         },
         {
           path: 'affiliate-disclosure',

@@ -3,5 +3,15 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /unsubscribe
+Disallow: /search
+
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /unsubscribe
+Disallow: /search
+
+User-agent: Mediapartners-Google
+Allow: /
 
 Sitemap: https://cyberaiwatch.com/sitemap.xml

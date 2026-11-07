@@ -180,11 +180,17 @@ export default function ArticlePage({ slug, onNavigate }) {
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', fontSize: '0.8rem', color: '#94a3b8' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', fontSize: '0.8rem', color: '#94a3b8', flexWrap: 'wrap' }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
                 <Calendar size={14} color="#00f0ff" />
-                {article.publishedAt}
+                Published: {article.publishedAt}
               </span>
+              {article.updatedAt && article.updatedAt !== article.publishedAt && (
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#38bdf8' }}>
+                  <Calendar size={14} color="#38bdf8" />
+                  Updated: {article.updatedAt}
+                </span>
+              )}
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
                 <Clock size={14} color="#00f0ff" />
                 {article.readingTime}
@@ -472,8 +478,8 @@ export default function ArticlePage({ slug, onNavigate }) {
                   <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
                     {article.author?.name}
                   </h4>
-                  <span style={{ fontSize: '0.65rem', padding: '0.1rem 0.35rem', borderRadius: '4px', background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', fontWeight: 700 }}>
-                    VERIFIED
+                  <span style={{ fontSize: '0.65rem', padding: '0.1rem 0.4rem', borderRadius: '4px', background: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                    EDITORIAL LEAD
                   </span>
                 </div>
                 <div style={{ fontSize: '0.8rem', color: '#00f0ff', fontFamily: 'var(--font-mono)', marginBottom: '0.5rem' }}>

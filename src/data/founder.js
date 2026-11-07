@@ -13,7 +13,7 @@ export const founderData = {
   aboutMe: "I am a dedicated cybersecurity practitioner, technologist, and digital researcher with a strong focus on defensive security, AI safety, and interactive web technologies. Through CyberAI Watch and HackWithKunal, I direct an independent international editorial publication committed to demystifying technical vulnerabilities, data privacy, and emerging AI threats through responsible, source-backed journalism and hands-on defensive tutorials.",
   shortBio: "Founder & Editor-in-Chief of CyberAI Watch and Creator of HackWithKunal. Specializing in defensive cybersecurity, AI safety analysis, and actionable digital security education.",
   location: "India",
-  email: "editorial@cyberaiwatch.com",
+  email: "livehacker024@gmail.com",
   contactEmail: "livehacker024@gmail.com",
   socials: {
     youtube: "https://www.youtube.com/@HackWithKunal",

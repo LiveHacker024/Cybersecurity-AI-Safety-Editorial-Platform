@@ -463,19 +463,19 @@ export default function AboutPage({ onNavigate }) {
           >
             <div style={{ padding: '1.25rem', background: 'rgba(15, 23, 42, 0.7)', borderRadius: '12px', border: '1px solid #1e293b' }}>
               <div style={{ fontSize: '0.75rem', color: '#64748b', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', marginBottom: '0.35rem' }}>
-                Editorial Email
+                Direct Contact &amp; Editorial
               </div>
-              <a href={`mailto:${founderData.email}`} style={{ color: '#00f0ff', fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none', wordBreak: 'break-all' }}>
-                {founderData.email}
+              <a href="mailto:livehacker024@gmail.com" style={{ color: '#00f0ff', fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none', wordBreak: 'break-all' }}>
+                livehacker024@gmail.com
               </a>
             </div>
 
             <div style={{ padding: '1.25rem', background: 'rgba(15, 23, 42, 0.7)', borderRadius: '12px', border: '1px solid #1e293b' }}>
               <div style={{ fontSize: '0.75rem', color: '#64748b', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', marginBottom: '0.35rem' }}>
-                VANIX Technology Contact
+                Educational Channel
               </div>
-              <a href={`tel:${founderData.vanixContact}`} style={{ color: '#38bdf8', fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <Phone size={14} /> {founderData.vanixContact}
+              <a href={founderData.socials.youtube} target="_blank" rel="noopener noreferrer" style={{ color: '#f87171', fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none', wordBreak: 'break-all', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <YoutubeIcon size={14} color="#ef4444" /> HackWithKunal YouTube
               </a>
             </div>
 

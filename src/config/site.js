@@ -33,7 +33,7 @@ export const siteConfig = {
     role: "Cybersecurity Professional & Security Researcher",
     avatar: "/assets/founder/founder-photo.png",
     bio: "Kunal Rajput is a cybersecurity practitioner, AI safety researcher, and the founder and editor-in-chief of CyberAI Watch. He leads independent research and technical journalism covering autonomous AI risks, prompt injection attack vectors, zero-day vulnerabilities, and practical defensive security engineering.",
-    email: "editorial@cyberaiwatch.com",
+    email: "livehacker024@gmail.com",
     contactEmail: "livehacker024@gmail.com",
     socials: {
       youtube: "https://www.youtube.com/@HackWithKunal",
@@ -66,14 +66,15 @@ export const siteConfig = {
   ],
 
   legalLinks: [
-    { label: "About", path: "/about" },
-    { label: "Contact", path: "/contact" },
+    { label: "About Us", path: "/about" },
+    { label: "Contact Us", path: "/contact" },
+    { label: "Editorial Policy", path: "/editorial-policy" },
+    { label: "Fact-Checking Policy", path: "/fact-checking-policy" },
+    { label: "Correction Policy", path: "/correction-policy" },
     { label: "Privacy Policy", path: "/privacy-policy" },
     { label: "Terms of Service", path: "/terms" },
     { label: "Cookie Policy", path: "/cookie-policy" },
     { label: "Disclaimer", path: "/disclaimer" },
-    { label: "Editorial Policy", path: "/editorial-policy" },
-    { label: "Correction Policy", path: "/correction-policy" },
     { label: "Affiliate Disclosure", path: "/affiliate-disclosure" },
     { label: "Advertising Policy", path: "/advertising-policy" }
   ]

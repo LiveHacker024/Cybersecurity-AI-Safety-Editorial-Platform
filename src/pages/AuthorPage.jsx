@@ -71,8 +71,8 @@ export default function AuthorPage({ onNavigate }) {
                 <h1 className="font-heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.2rem)', fontWeight: 900, color: '#ffffff', margin: 0 }}>
                   {founderData.name}
                 </h1>
-                <span style={{ padding: '0.15rem 0.5rem', borderRadius: '4px', background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', fontSize: '0.72rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
-                  VERIFIED EDITOR
+                <span style={{ padding: '0.15rem 0.55rem', borderRadius: '4px', background: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8', fontSize: '0.72rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                  FOUNDER & EDITOR-IN-CHIEF
                 </span>
               </div>
 

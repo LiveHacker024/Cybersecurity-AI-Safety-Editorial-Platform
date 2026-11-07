@@ -40,8 +40,8 @@ export default function FounderTrustSection({ onNavigate }) {
                 <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
                   {founder.name}
                 </h3>
-                <span style={{ padding: '0.1rem 0.4rem', borderRadius: '4px', background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', fontSize: '0.68rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
-                  VERIFIED AUTHOR
+                <span style={{ padding: '0.1rem 0.45rem', borderRadius: '4px', background: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8', fontSize: '0.68rem', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                  EDITORIAL LEAD
                 </span>
               </div>
               <div style={{ fontSize: '0.85rem', color: '#00f0ff', fontFamily: 'var(--font-mono)', marginBottom: '0.5rem' }}>
