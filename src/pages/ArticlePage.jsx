@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import DOMPurify from 'dompurify';
 import {
   Clock, Calendar, User, Share2, Bookmark, CheckCircle2,
   AlertTriangle, Shield, ArrowLeft, ChevronRight, Lock,
@@ -13,6 +14,19 @@ import SourceList from '../components/common/SourceList';
 import AdSlot from '../components/ads/AdSlot';
 import NewsletterBox from '../components/home/NewsletterBox';
 import { siteConfig } from '../config/site';
+
+function isSafeUrl(url) {
+  if (!url) return false;
+  const trimmed = url.trim();
+  if (trimmed.startsWith('//')) return false;
+  if (trimmed.startsWith('/') || trimmed.startsWith('#')) return true;
+  try {
+    const parsed = new URL(trimmed);
+    return parsed.protocol === 'https:' || parsed.protocol === 'http:' || parsed.protocol === 'mailto:';
+  } catch (e) {
+    return false;
+  }
+}
 
 export default function ArticlePage({ slug, onNavigate }) {
   const [copied, setCopied] = useState(false);
@@ -395,8 +409,11 @@ export default function ArticlePage({ slug, onNavigate }) {
                       });
                       html = html.replace(/^### (.*$)/gim, '<h3 style="font-size: clamp(1.2rem, 3vw, 1.35rem); color: #ffffff; margin: 2rem 0 1rem; font-weight: 800; scroll-margin-top: 100px;">$1</h3>');
                       html = html.replace(/^# (.*$)/gim, '<h1 style="font-size: clamp(1.6rem, 4vw, 2rem); color: #ffffff; margin: 2.5rem 0 1rem; font-weight: 900;">$1</h1>');
-                      // Markdown links [text](url)
-                      html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color: #00f0ff; text-decoration: underline; text-underline-offset: 3px; font-weight: 600;">$1</a>');
+                      // Markdown links [text](url) with strict protocol validation
+                      html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, rawUrl) => {
+                        const safeHref = isSafeUrl(rawUrl) ? rawUrl.trim() : '#';
+                        return `<a href="${safeHref}" style="color: #00f0ff; text-decoration: underline; text-underline-offset: 3px; font-weight: 600;">${linkText}</a>`;
+                      });
                       // Markdown bold and italics
                       html = html.replace(/\*\*(.*?)\*\*/gim, '<strong style="color: #ffffff; font-weight: 700;">$1</strong>');
                       html = html.replace(/\*(.*?)\*/gim, '<em>$1</em>');
@@ -406,7 +423,21 @@ export default function ArticlePage({ slug, onNavigate }) {
                       html = html.replace(/^\s*-\s+(.*$)/gim, '<li style="margin-bottom: 0.5rem; margin-left: 1.25rem; list-style-type: disc; color: #cbd5e1;">$1</li>');
                       html = html.replace(/```([\s\S]*?)```/gim, '<pre style="background: #0b0f19; border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 1.25rem; overflow-x: auto; font-family: var(--font-mono); font-size: 0.85rem; color: #38bdf8; margin: 1.75rem 0; max-width: 100%; white-space: pre-wrap; word-break: break-all;"><code>$1</code></pre>');
                       html = html.replace(/\n\n/gim, '<p style="margin-bottom: 1.5rem;"></p>');
-                      return html;
+
+                      // Strict DOMPurify Sanitization preserving safe formatting & styles
+                      const cleanHtml = typeof window !== 'undefined' && DOMPurify && typeof DOMPurify.sanitize === 'function'
+                        ? DOMPurify.sanitize(html, {
+                            ALLOWED_TAGS: [
+                              'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'strong', 'em', 'blockquote',
+                              'li', 'ul', 'ol', 'pre', 'code', 'a', 'hr', 'span', 'table', 'thead',
+                              'tbody', 'tr', 'th', 'td', 'div'
+                            ],
+                            ALLOWED_ATTR: ['href', 'style', 'id', 'class', 'target', 'rel', 'title'],
+                            ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto):|\/|#)/i
+                          })
+                        : html;
+
+                      return cleanHtml;
                     })()
                   }}
                 />

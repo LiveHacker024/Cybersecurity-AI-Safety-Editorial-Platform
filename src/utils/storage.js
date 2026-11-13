@@ -11,21 +11,7 @@ const CMS_VULNS_KEY = "cyberaiwatch_cms_vulns_v1";
 const CMS_SUBSCRIBERS_KEY = "cyberaiwatch_cms_subscribers_v1";
 
 export function getAllArticles() {
-  try {
-    const custom = localStorage.getItem(CMS_ARTICLES_KEY);
-    if (!custom) return articlesData;
-    const parsed = JSON.parse(custom);
-    // Combine base static articles with user created/updated CMS articles
-    const merged = [...parsed];
-    articlesData.forEach(base => {
-      if (!merged.some(m => m.slug === base.slug)) {
-        merged.push(base);
-      }
-    });
-    return merged;
-  } catch (e) {
-    return articlesData;
-  }
+  return articlesData;
 }
 
 export function saveArticle(article) {
@@ -58,20 +44,7 @@ export function deleteArticle(slug) {
 }
 
 export function getAllVulnerabilities() {
-  try {
-    const custom = localStorage.getItem(CMS_VULNS_KEY);
-    if (!custom) return vulnerabilitiesData;
-    const parsed = JSON.parse(custom);
-    const merged = [...parsed];
-    vulnerabilitiesData.forEach(base => {
-      if (!merged.some(m => m.cveId === base.cveId)) {
-        merged.push(base);
-      }
-    });
-    return merged;
-  } catch (e) {
-    return vulnerabilitiesData;
-  }
+  return vulnerabilitiesData;
 }
 
 export function saveVulnerability(vuln) {

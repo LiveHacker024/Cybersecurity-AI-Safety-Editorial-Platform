@@ -1,9 +1,23 @@
 import React, { useEffect } from 'react';
+import DOMPurify from 'dompurify';
 import { ShieldCheck, Calendar, ArrowLeft, ChevronRight, FileText, Lock, Mail, ExternalLink } from 'lucide-react';
 import { legalPolicies } from '../data/legalContent';
 import { updateMetaTags, generateBreadcrumbSchema } from '../utils/seo';
 import { recordPageView } from '../utils/analytics';
 import { siteConfig } from '../config/site';
+
+function isSafeUrl(url) {
+  if (!url) return false;
+  const trimmed = url.trim();
+  if (trimmed.startsWith('//')) return false;
+  if (trimmed.startsWith('/') || trimmed.startsWith('#')) return true;
+  try {
+    const parsed = new URL(trimmed);
+    return parsed.protocol === 'https:' || parsed.protocol === 'http:' || parsed.protocol === 'mailto:';
+  } catch (e) {
+    return false;
+  }
+}
 
 export default function LegalPage({ policyKey = "about", onNavigate }) {
   const policy = legalPolicies[policyKey] || legalPolicies.about;
@@ -94,11 +108,24 @@ export default function LegalPage({ policyKey = "about", onNavigate }) {
               <div
                 style={{ fontSize: '0.95rem', lineHeight: 1.75, color: '#cbd5e1' }}
                 dangerouslySetInnerHTML={{
-                  __html: sec.content
-                    .replace(/\*\*(.*?)\*\*/gim, '<strong style="color: #ffffff; font-weight: 700;">$1</strong>')
-                    .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: #00f0ff; text-decoration: underline;">$1</a>')
-                    .replace(/\n- (.*$)/gim, '<li style="margin-bottom: 0.4rem;">$1</li>')
-                    .replace(/\n\n/gim, '<p style="margin-bottom: 1.25rem;"></p>')
+                  __html: (() => {
+                    const rawHtml = sec.content
+                      .replace(/\*\*(.*?)\*\*/gim, '<strong style="color: #ffffff; font-weight: 700;">$1</strong>')
+                      .replace(/\[(.*?)\]\((.*?)\)/gim, (match, text, url) => {
+                        const safeHref = isSafeUrl(url) ? url.trim() : '#';
+                        return `<a href="${safeHref}" target="_blank" rel="noopener noreferrer" style="color: #00f0ff; text-decoration: underline;">${text}</a>`;
+                      })
+                      .replace(/\n- (.*$)/gim, '<li style="margin-bottom: 0.4rem;">$1</li>')
+                      .replace(/\n\n/gim, '<p style="margin-bottom: 1.25rem;"></p>');
+
+                    return typeof window !== 'undefined' && DOMPurify && typeof DOMPurify.sanitize === 'function'
+                      ? DOMPurify.sanitize(rawHtml, {
+                          ALLOWED_TAGS: ['h1', 'h2', 'h3', 'p', 'strong', 'em', 'blockquote', 'li', 'ul', 'ol', 'a', 'hr', 'span'],
+                          ALLOWED_ATTR: ['href', 'style', 'target', 'rel'],
+                          ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto):|\/|#)/i
+                        })
+                      : rawHtml;
+                  })()
                 }}
               />
             </div>

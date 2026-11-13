@@ -195,11 +195,6 @@ export default function Footer({ onNavigate }) {
                   Weekly Dispatch Newsletter
                 </button>
               </li>
-              <li>
-                <button onClick={() => handleLinkClick('/admin')} className="footer-link" style={{ opacity: 0.6 }}>
-                  Editorial CMS Access
-                </button>
-              </li>
             </ul>
           </div>
 

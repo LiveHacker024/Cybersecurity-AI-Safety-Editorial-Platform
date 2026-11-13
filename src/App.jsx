@@ -16,7 +16,6 @@ import YouTubePage from './pages/YouTubePage';
 import NewsletterPage from './pages/NewsletterPage';
 import UnsubscribePage from './pages/UnsubscribePage';
 import LegalPage from './pages/LegalPage';
-import AdminPage from './pages/AdminPage';
 import NotFoundPage from './pages/NotFoundPage';
 import SecurityToolsSuite from './components/tools/SecurityToolsSuite';
 import NewsletterBox from './components/home/NewsletterBox';
@@ -93,9 +92,6 @@ export default function App() {
     }
     if (cleanPath === '/unsubscribe') {
       return <UnsubscribePage onNavigate={navigate} />;
-    }
-    if (cleanPath === '/admin') {
-      return <AdminPage onNavigate={navigate} />;
     }
     if (cleanPath === '/tools') {
       return (
